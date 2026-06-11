@@ -1,0 +1,70 @@
+/* ============================================================
+   Deserto — Base element defaults
+   Light, opinionated reset that wires tokens to the document.
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  color: var(--text-strong);
+  line-height: var(--leading-tight);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--text-5xl); letter-spacing: var(--tracking-tight); }
+h2 { font-size: var(--text-3xl); letter-spacing: var(--tracking-tight); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* Small caps eyebrow utility used across the brand */
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--brand-accent-strong);
+}
+
+::selection {
+  background: var(--orange-200);
+  color: var(--wine-900);
+}
+
+:focus-visible {
+  outline: var(--border-width-thick) solid var(--focus-ring);
+  outline-offset: 2px;
+}

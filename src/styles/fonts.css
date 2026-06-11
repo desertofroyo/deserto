@@ -1,0 +1,86 @@
+/* ============================================================
+   Deserto — Webfonts
+   Anisette  → display / headlines / wordmark
+   Proxima Nova → primary UI + body text
+   Avenir → secondary / editorial body
+   (paths are absolute to /assets/fonts so every page resolves them)
+   ============================================================ */
+
+/* ---------- Anisette Std Petite (display) ---------- */
+@font-face {
+  font-family: "Anisette";
+  src: url("/assets/fonts/Anisette-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anisette";
+  src: url("/assets/fonts/Anisette-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anisette";
+  src: url("/assets/fonts/Anisette-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anisette";
+  src: url("/assets/fonts/Anisette-ExBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Proxima Nova (primary body / UI) ---------- */
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/assets/fonts/ProximaNova-Regular.woff") format("woff"),
+       url("/assets/fonts/ProximaNova-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/assets/fonts/ProximaNova-Bold.woff") format("woff"),
+       url("/assets/fonts/ProximaNova-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/assets/fonts/ProximaNova-Black.woff") format("woff"),
+       url("/assets/fonts/ProximaNova-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Avenir (secondary / editorial) ---------- */
+@font-face {
+  font-family: "Avenir";
+  src: url("/assets/fonts/Avenir-Book.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("/assets/fonts/Avenir-Heavy.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("/assets/fonts/Avenir-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}

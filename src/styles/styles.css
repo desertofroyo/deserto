@@ -1,0 +1,9 @@
+/* ============================================================
+   Deserto Design System — global entry point.
+   Import order matters: fonts → tokens → base.
+   ============================================================ */
+@import "./fonts.css";
+@import "./colors.css";
+@import "./typography.css";
+@import "./spacing.css";
+@import "./base.css";
