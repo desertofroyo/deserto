@@ -1,0 +1,23 @@
+<!-- @dsCard group="Brand" viewport="700x190" name="Clear space & don'ts" subtitle="Keep 1x of the isotype clear; never recolor or distort." -->
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;background:var(--surface-card);padding:18px 22px;font-family:"Proxima Nova";display:flex;gap:22px;align-items:center}
+  .clear{position:relative;padding:26px;border:1px dashed var(--border-strong);border-radius:12px;background:var(--cream-50)}
+  .clear img{height:50px;display:block}
+  .dont{display:flex;gap:14px}
+  .d{width:96px;height:96px;border-radius:12px;background:var(--cream-50);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1px solid var(--border-subtle)}
+  .d img{height:50px}
+  .d.skew img{transform:skewX(-18deg)}
+  .d.tint img{filter:hue-rotate(180deg) saturate(2)}
+  .d::after{content:"✕";position:absolute;top:4px;right:8px;color:var(--wine-600);font-weight:900;font-size:15px}
+  .cap{font-size:10px;color:var(--text-muted);text-align:center;margin-top:4px}
+  .col{display:flex;flex-direction:column}
+</style></head>
+<body>
+  <div class="col"><div class="clear"><img src="../../assets/logos/deserto-isotype.png"></div><div class="cap">Min. clear space = 1× isotype</div></div>
+  <div class="dont">
+    <div class="col"><div class="d skew"><img src="../../assets/logos/deserto-isotype.png"></div><div class="cap">No skew</div></div>
+    <div class="col"><div class="d tint"><img src="../../assets/logos/deserto-isotype.png"></div><div class="cap">No recolor</div></div>
+  </div>
+</body></html>

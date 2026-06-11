@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vite
+
+# the original design handoff bundle / download
+design_download.bin
+
+# Claude Code agent tooling (vendored skills / working output)
+.claude/
+.impeccable/

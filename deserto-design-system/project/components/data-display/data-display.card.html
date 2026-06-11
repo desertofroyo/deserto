@@ -1,0 +1,55 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Cards, badges, avatars & tags" subtitle="Content surfaces and the small labels that live on them" -->
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;background:var(--surface-page);padding:24px;font-family:var(--font-body)}
+  .wrap{display:flex;gap:22px;align-items:flex-start}
+  .col{display:flex;flex-direction:column;gap:14px}
+  .lbl{font-size:11px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const NS = window.DesertoDesignSystem_e4c2c1;
+  const { Card, Badge, Avatar, Tag, Button } = NS;
+  function Demo(){
+    const [sel,setSel]=React.useState("Mango");
+    const media = (<div style={{height:120,background:"linear-gradient(135deg,var(--orange-300),var(--wine-400))",display:"flex",alignItems:"flex-end",padding:10,gap:6}}>
+      <Badge tone="orange" variant="solid">New</Badge><Badge tone="olive" variant="solid">Vegan</Badge>
+    </div>);
+    return (<div className="wrap">
+      <div style={{width:260}}>
+        <Card media={media} interactive>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline"}}>
+            <h3 style={{margin:0,fontSize:"var(--text-xl)"}}>Mango Tango</h3>
+            <span style={{fontWeight:900,color:"var(--wine-700)"}}>$7.50</span>
+          </div>
+          <p style={{margin:"6px 0 14px",color:"var(--text-muted)",fontSize:"var(--text-sm)"}}>Mango froyo, granola &amp; fresh berries.</p>
+          <Button variant="accent" size="sm" fullWidth>Add to bag</Button>
+        </Card>
+      </div>
+      <div className="col">
+        <div><div className="lbl">Badges</div><div className="row" style={{marginTop:8}}>
+          <Badge tone="wine">280 cal</Badge><Badge tone="orange">New</Badge><Badge tone="olive">Vegan</Badge><Badge tone="coffee" variant="solid">Hot</Badge><Badge tone="neutral">Sold out</Badge>
+        </div></div>
+        <div><div className="lbl">Avatars</div><div className="row" style={{marginTop:8}}>
+          <Avatar name="Juan Smith" tone="wine"/><Avatar name="Ana Lopez" tone="orange"/><Avatar name="Kofi B" tone="olive"/><Avatar name="M" size={32} tone="coffee"/>
+        </div></div>
+        <div><div className="lbl">Tags / toppings</div><div className="row" style={{marginTop:8}}>
+          {["Mango","Berries","Granola","Honey"].map(t=>(
+            <Tag key={t} selected={sel===t} dotColor="var(--orange-500)" onClick={()=>setSel(t)}>{t}</Tag>
+          ))}
+          <Tag removable onRemove={()=>{}}>Oat milk</Tag>
+        </div></div>
+      </div>
+    </div>);
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body></html>

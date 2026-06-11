@@ -1,0 +1,50 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Buttons" subtitle="Pill actions — primary, accent, secondary, outline, ghost + icon buttons" -->
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;background:var(--surface-card);padding:24px;font-family:var(--font-body)}
+  .group{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+  .lbl{font-size:11px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;width:100%;margin-bottom:2px;font-weight:700}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Button, IconButton } = window.DesertoDesignSystem_e4c2c1;
+  const Ico = ({name, size=18}) => {
+    const ref = React.useRef(null);
+    React.useEffect(()=>{ if(ref.current){ ref.current.innerHTML=''; const el=document.createElement('i'); el.setAttribute('data-lucide',name); ref.current.appendChild(el); window.lucide.createIcons({attrs:{width:size,height:size}}); } },[name,size]);
+    return <span ref={ref} style={{display:'inline-flex'}} />;
+  };
+  function Demo(){
+    return (<div>
+      <div className="group"><span className="lbl">Variants</span>
+        <Button variant="primary">Order now</Button>
+        <Button variant="accent" iconRight={<Ico name="arrow-right" />}>Build your bowl</Button>
+        <Button variant="secondary">View menu</Button>
+        <Button variant="outline">Locations</Button>
+        <Button variant="ghost">Learn more</Button>
+      </div>
+      <div className="group"><span className="lbl">Sizes &amp; states</span>
+        <Button size="sm">Small</Button>
+        <Button size="md">Medium</Button>
+        <Button size="lg">Large</Button>
+        <Button disabled>Disabled</Button>
+      </div>
+      <div className="group"><span className="lbl">Icon buttons</span>
+        <IconButton aria-label="add" variant="accent"><Ico name="plus" size={20}/></IconButton>
+        <IconButton aria-label="fav" variant="soft"><Ico name="heart" size={20}/></IconButton>
+        <IconButton aria-label="bag" variant="primary"><Ico name="shopping-bag" size={20}/></IconButton>
+        <IconButton aria-label="more" variant="ghost"><Ico name="more-horizontal" size={20}/></IconButton>
+        <IconButton aria-label="share" variant="outline"><Ico name="share-2" size={20}/></IconButton>
+      </div>
+    </div>);
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body></html>

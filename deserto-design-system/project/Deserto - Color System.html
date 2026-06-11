@@ -1,0 +1,324 @@
+<!-- @startingPoint section="Brand" subtitle="The exact brand-book palette + every component rendered in it" viewport="1280x4200" -->
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deserto — Color System</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--surface-page);color:var(--text-body);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+  .page{max-width:1180px;margin:0 auto;padding:0 40px}
+  section{padding:64px 0}
+  .eyebrow{font-family:var(--font-body);font-weight:var(--fw-bold);font-size:var(--text-2xs);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--brand-accent-strong)}
+  h2.sec{font-family:var(--font-display);font-weight:700;font-size:var(--text-3xl);letter-spacing:var(--tracking-tight);color:var(--text-strong);margin:10px 0 6px;line-height:var(--leading-tight)}
+  .sec-sub{font-family:var(--font-editorial);font-size:var(--text-md);color:var(--text-muted);max-width:62ch;margin:0 0 36px;line-height:var(--leading-normal)}
+  .divider{height:1px;background:var(--border-default);border:0;margin:0}
+
+  /* ---- Masthead ---- */
+  .mast{background:var(--wine-700);color:var(--cream-50);padding:88px 0 80px}
+  .mast .page{display:flex;flex-direction:column;gap:0}
+  .mast .kicker{font-weight:var(--fw-bold);font-size:var(--text-2xs);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--orange-400)}
+  .mast h1{font-family:var(--font-display);font-weight:800;font-size:clamp(3rem,7vw,var(--text-6xl));line-height:.98;letter-spacing:var(--tracking-tight);margin:16px 0 0}
+  .mast p{font-family:var(--font-editorial);font-size:var(--text-lg);max-width:54ch;color:#F4DAD0;margin:22px 0 0;line-height:var(--leading-normal)}
+  .mast .strip{display:flex;margin-top:44px;border-radius:14px;overflow:hidden;height:54px;box-shadow:var(--shadow-lg)}
+  .mast .strip div{flex:1}
+
+  /* ---- The Nine ---- */
+  .nine{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .swatch{border-radius:18px;overflow:hidden;border:1px solid var(--border-default);background:var(--surface-card);box-shadow:var(--shadow-sm)}
+  .swatch .chip{height:148px;display:flex;flex-direction:column;justify-content:space-between;padding:18px 20px}
+  .swatch .nm{font-family:var(--font-display);font-weight:700;font-size:var(--text-xl);letter-spacing:.01em}
+  .swatch .role{font-size:var(--text-2xs);font-weight:var(--fw-bold);letter-spacing:var(--tracking-wide);text-transform:uppercase;opacity:.82}
+  .spec{padding:14px 20px 18px;display:grid;grid-template-columns:auto 1fr;gap:5px 14px;font-size:var(--text-xs)}
+  .spec dt{color:var(--text-faint);font-weight:var(--fw-bold);letter-spacing:.06em;text-transform:uppercase;font-size:var(--text-2xs)}
+  .spec dd{margin:0;color:var(--text-body);font-variant-numeric:tabular-nums;font-weight:600}
+  .spec dd.hex{color:var(--text-strong);font-weight:800}
+
+  /* ---- Wordmark bands ---- */
+  .bands{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-md);border:1px solid var(--border-default)}
+  .band{display:flex;align-items:center;gap:18px;padding:0 32px;height:74px}
+  .band .wm{font-family:var(--font-display);font-weight:800;font-size:var(--text-2xl);letter-spacing:.02em;line-height:1}
+  .band .iso{font-family:var(--font-display);font-weight:800;font-size:var(--text-2xl);transform:scaleX(-1);line-height:1;margin-right:-4px}
+  .band .hx{margin-left:auto;font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;opacity:.7;font-variant-numeric:tabular-nums}
+
+  /* ---- Seasonal ---- */
+  .seasons{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .season{background:var(--surface-card);border:1px solid var(--border-default);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .season .head{display:flex;align-items:baseline;justify-content:space-between;padding:16px 20px 12px}
+  .season .head .t{font-family:var(--font-display);font-weight:700;font-size:var(--text-xl);color:var(--text-strong)}
+  .season .head .s{font-size:var(--text-2xs);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint)}
+  .season .stk{display:flex;flex-direction:column}
+  .season .stk div{height:38px;display:flex;align-items:center;padding:0 18px;font-size:var(--text-2xs);font-weight:700;letter-spacing:.05em;font-variant-numeric:tabular-nums}
+
+  /* ---- Component showcase ---- */
+  .panel{background:var(--surface-card);border:1px solid var(--border-default);border-radius:20px;padding:30px 30px 32px;box-shadow:var(--shadow-sm)}
+  .panel + .panel{margin-top:22px}
+  .panel h3{font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);color:var(--text-strong);margin:0 0 4px}
+  .panel .ph{font-size:var(--text-sm);color:var(--text-muted);margin:0 0 22px;font-family:var(--font-editorial)}
+  .lbl{font-size:var(--text-2xs);color:var(--text-faint);letter-spacing:.1em;text-transform:uppercase;font-weight:var(--fw-bold);margin:0 0 10px}
+  .group{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .blocks{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:start}
+  .stack24{display:flex;flex-direction:column;gap:24px}
+  @media(max-width:900px){.nine,.seasons{grid-template-columns:1fr 1fr}.blocks{grid-template-columns:1fr}}
+  @media(max-width:620px){.nine,.seasons{grid-template-columns:1fr}}
+  footer{padding:48px 0 70px;color:var(--text-faint);font-size:var(--text-xs);font-family:var(--font-editorial)}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="page">
+    <span class="kicker">Deserto · Brand Book 2024 · Color 03</span>
+    <h1>The exact palette,<br>rendered in full.</h1>
+    <p>Nine official Pantone colors define Deserto — a warm, vibrant system. Below: every color to spec, then every component built in it.</p>
+    <div class="strip" id="strip"></div>
+  </div>
+</header>
+
+<main>
+  <section id="nine">
+    <div class="page">
+      <span class="eyebrow">The Nine</span>
+      <h2 class="sec">Official colors</h2>
+      <p class="sec-sub">Each color exactly as specified in the brand book — Pantone, CMYK, RGB and HEX. These are the source of truth; every token in the system resolves to them.</p>
+      <div class="nine" id="nine-grid"></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="bands">
+    <div class="page">
+      <span class="eyebrow">Color in use</span>
+      <h2 class="sec">Wordmark on color</h2>
+      <p class="sec-sub">The bold color-banding from the brand book — the wordmark sits confidently on every brand color.</p>
+      <div class="bands" id="band-stack"></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="seasonal">
+    <div class="page">
+      <span class="eyebrow">Expressive</span>
+      <h2 class="sec">Seasonal palettes</h2>
+      <p class="sec-sub">Three palettes rotate with the menu — drawn only from the nine exact colors.</p>
+      <div class="seasons" id="season-grid"></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="components">
+    <div class="page">
+      <span class="eyebrow">Everything, rendered</span>
+      <h2 class="sec">Components in the palette</h2>
+      <p class="sec-sub">The live component library, painted entirely from the brand-book colors — wine ink, orange pop, olive &amp; lime fresh, caramel warmth.</p>
+      <div id="root"></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="page">Deserto Design System — colors recalibrated to the official 2024 Brand Book (COLOR 03). Nine Pantone anchors · print max three inks.</div></footer>
+
+<script type="text/babel">
+const COLORS = [
+  {nm:"Coffee",   role:"Café · deep brown", pantone:"2320 C",     cmyk:"33 51 76 37", rgb:"113 72 38",  hex:"#714826", ink:"light"},
+  {nm:"Caramel",  role:"Café · sienna",     pantone:"7576 C",     cmyk:"16 54 88 11", rgb:"175 100 51", hex:"#AE6434", ink:"light"},
+  {nm:"Orange",   role:"Hero accent · pop", pantone:"3588 C",     cmyk:"0 41 100 0",  rgb:"255 148 37", hex:"#FF9425", ink:"dark"},
+  {nm:"Olive",    role:"Fresh · grounds",   pantone:"7762 C 90%", cmyk:"44 31 67 22", rgb:"106 112 75", hex:"#6A704B", ink:"light"},
+  {nm:"Lime",     role:"Fresh · pop",       pantone:"390 C 80%",  cmyk:"19 7 100 1",  rgb:"196 201 52", hex:"#C4C934", ink:"dark"},
+  {nm:"Pale Lime",role:"Fresh · soft",      pantone:"2288 C 65%", cmyk:"10 0 37 0",   rgb:"219 235 169",hex:"#DBEBA9", ink:"dark"},
+  {nm:"Wine",     role:"Primary · ink",     pantone:"3523 C",     cmyk:"31 70 59 35", rgb:"118 47 53",  hex:"#762F35", ink:"light"},
+  {nm:"Rose",     role:"Soft accent",       pantone:"2447 C",     cmyk:"16 50 35 11", rgb:"178 111 117",hex:"#B16E74", ink:"light"},
+  {nm:"Peach",    role:"Soft · cream",      pantone:"2437 C 60%", cmyk:"2 12 17 0",   rgb:"248 216 197",hex:"#F8D8C5", ink:"dark"},
+];
+const inkFor = c => c.ink==="dark" ? "var(--wine-900)" : "var(--cream-50)";
+
+// masthead strip
+document.getElementById('strip').innerHTML = COLORS.map(c=>`<div style="background:${c.hex}"></div>`).join('');
+
+// the nine
+document.getElementById('nine-grid').innerHTML = COLORS.map(c=>`
+  <div class="swatch">
+    <div class="chip" style="background:${c.hex};color:${c.ink==='dark'?'#3A171B':'#FBF1E8'}">
+      <span class="role">${c.role}</span>
+      <span class="nm">${c.nm}</span>
+    </div>
+    <dl class="spec">
+      <dt>Pantone</dt><dd>${c.pantone}</dd>
+      <dt>CMYK</dt><dd>${c.cmyk}</dd>
+      <dt>RGB</dt><dd>${c.rgb}</dd>
+      <dt>HEX</dt><dd class="hex">${c.hex}</dd>
+    </dl>
+  </div>`).join('');
+
+// wordmark bands
+document.getElementById('band-stack').innerHTML = COLORS.map(c=>{
+  const ink = c.ink==='dark' ? '#3A171B' : '#FBF1E8';
+  return `<div class="band" style="background:${c.hex};color:${ink}">
+    <span class="iso">)</span><span class="wm">DESERTO</span>
+    <span class="hx">${c.hex}</span>
+  </div>`;
+}).join('');
+
+// seasonal
+const SEASONS = [
+  {t:"Primavera", s:"Spring", rows:[["Lime","#C4C934"],["Pale Lime","#DBEBA9"],["Peach","#F8D8C5"],["Orange","#FF9425"],["Caramel","#AE6434"]]},
+  {t:"Verano",    s:"Summer", rows:[["Wine","#762F35"],["Olive","#6A704B"],["Lime","#C4C934"],["Pale Lime","#DBEBA9"],["Orange","#FF9425"]]},
+  {t:"Otoño",     s:"Autumn", rows:[["Wine","#762F35"],["Rose","#B16E74"],["Peach","#F8D8C5"],["Orange","#FF9425"],["Caramel","#AE6434"]]},
+];
+const lightHex = new Set(["#C4C934","#DBEBA9","#F8D8C5"]);
+document.getElementById('season-grid').innerHTML = SEASONS.map(se=>`
+  <div class="season">
+    <div class="head"><span class="t">${se.t}</span><span class="s">${se.s}</span></div>
+    <div class="stk">${se.rows.map(([n,h])=>`<div style="background:${h};color:${lightHex.has(h)?'#3A171B':'#FBF1E8'}">${h}</div>`).join('')}</div>
+  </div>`).join('');
+</script>
+
+<script type="text/babel">
+const NS = window.DesertoDesignSystem_e4c2c1;
+const { Button, IconButton, Badge, Avatar, Tag, Card, Input, Switch } = NS;
+
+const Ico = ({name, size=18}) => {
+  const ref = React.useRef(null);
+  React.useEffect(()=>{ if(ref.current){ ref.current.innerHTML=''; const el=document.createElement('i'); el.setAttribute('data-lucide',name); ref.current.appendChild(el); window.lucide.createIcons({attrs:{width:size,height:size}}); } },[name,size]);
+  return <span ref={ref} style={{display:'inline-flex'}} />;
+};
+
+function Showcase(){
+  const [sel,setSel]=React.useState("Mango");
+  const [a,setA]=React.useState(true);
+  const [b,setB]=React.useState(false);
+  const tones = ["wine","orange","olive","lime","caramel","coffee","rose","neutral"];
+  const media = (
+    <div style={{height:128,background:"linear-gradient(135deg,var(--orange-500),var(--rose-500))",display:"flex",alignItems:"flex-end",padding:12,gap:6}}>
+      <Badge tone="orange" variant="solid">New</Badge>
+      <Badge tone="olive" variant="solid">Vegan</Badge>
+    </div>
+  );
+
+  return (
+    <div className="stack24">
+      <div className="panel">
+        <h3>Buttons</h3>
+        <p className="ph">Wine primary · orange accent (the pop) · wine outline &amp; ghost. Pill-shaped, with the orange accent glow.</p>
+        <div style={{marginBottom:18}}>
+          <p className="lbl">Variants</p>
+          <div className="group">
+            <Button variant="primary">Order now</Button>
+            <Button variant="accent" iconRight={<Ico name="arrow-right" />}>Build your bowl</Button>
+            <Button variant="secondary">View menu</Button>
+            <Button variant="outline">Locations</Button>
+            <Button variant="ghost">Learn more</Button>
+          </div>
+        </div>
+        <div style={{marginBottom:18}}>
+          <p className="lbl">Sizes &amp; states</p>
+          <div className="group">
+            <Button size="sm">Small</Button>
+            <Button size="md">Medium</Button>
+            <Button size="lg">Large</Button>
+            <Button disabled>Disabled</Button>
+          </div>
+        </div>
+        <div>
+          <p className="lbl">Icon buttons</p>
+          <div className="group">
+            <IconButton aria-label="add" variant="accent"><Ico name="plus" size={20}/></IconButton>
+            <IconButton aria-label="fav" variant="soft"><Ico name="heart" size={20}/></IconButton>
+            <IconButton aria-label="bag" variant="primary"><Ico name="shopping-bag" size={20}/></IconButton>
+            <IconButton aria-label="more" variant="ghost"><Ico name="more-horizontal" size={20}/></IconButton>
+            <IconButton aria-label="share" variant="outline"><Ico name="share-2" size={20}/></IconButton>
+          </div>
+        </div>
+      </div>
+
+      <div className="blocks">
+        <div className="panel">
+          <h3>Badges &amp; avatars</h3>
+          <p className="ph">Every brand tone, soft and solid.</p>
+          <p className="lbl">Soft badges</p>
+          <div className="group" style={{marginBottom:18}}>
+            {tones.map(t=><Badge key={t} tone={t}>{t}</Badge>)}
+          </div>
+          <p className="lbl">Solid badges</p>
+          <div className="group" style={{marginBottom:18}}>
+            {tones.map(t=><Badge key={t} tone={t} variant="solid">{t}</Badge>)}
+          </div>
+          <p className="lbl">Avatars</p>
+          <div className="group">
+            <Avatar name="Juan Smith" tone="wine"/>
+            <Avatar name="Ana Lopez" tone="orange"/>
+            <Avatar name="Kofi B" tone="olive"/>
+            <Avatar name="Mia R" tone="rose"/>
+            <Avatar name="D" size={34} tone="caramel"/>
+          </div>
+        </div>
+
+        <div className="panel">
+          <h3>Tags &amp; toppings</h3>
+          <p className="ph">Selectable chips with the orange selection dot.</p>
+          <p className="lbl">Pick your toppings</p>
+          <div className="group" style={{marginBottom:18}}>
+            {["Mango","Berries","Granola","Honey","Coconut"].map(t=>(
+              <Tag key={t} selected={sel===t} dotColor="var(--orange-500)" onClick={()=>setSel(t)}>{t}</Tag>
+            ))}
+          </div>
+          <p className="lbl">Removable</p>
+          <div className="group">
+            <Tag removable onRemove={()=>{}}>Oat milk</Tag>
+            <Tag removable onRemove={()=>{}}>No nuts</Tag>
+          </div>
+        </div>
+      </div>
+
+      <div className="blocks">
+        <div className="panel">
+          <h3>Form fields</h3>
+          <p className="ph">Inputs with the orange focus ring, helper &amp; error states, plus switches.</p>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"16px 18px"}}>
+            <Input label="Your name" placeholder="Jane Foodie" />
+            <Input label="Email" placeholder="you@email.com" helperText="For your digital receipt." />
+            <Input label="Search the menu" placeholder="Try “mango”" leading={<span>⌕</span>} />
+            <Input label="Phone" defaultValue="123" error="Enter a valid number." />
+          </div>
+          <p className="lbl" style={{marginTop:22}}>Switches</p>
+          <div className="group">
+            <Switch checked={a} onChange={setA} label="Email receipts" />
+            <Switch checked={b} onChange={setB} label="Loyalty offers" />
+            <Switch checked={true} disabled label="Locked on" />
+          </div>
+        </div>
+
+        <div className="panel">
+          <h3>Product card</h3>
+          <p className="ph">Surfaces, badges &amp; the accent CTA together.</p>
+          <div style={{maxWidth:280}}>
+            <Card media={media} interactive>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline"}}>
+                <h4 style={{margin:0,fontSize:"var(--text-xl)",fontFamily:"var(--font-display)",color:"var(--text-strong)"}}>Mango Tango</h4>
+                <span style={{fontWeight:900,color:"var(--wine-700)"}}>$7.50</span>
+              </div>
+              <p style={{margin:"6px 0 14px",color:"var(--text-muted)",fontSize:"var(--text-sm)"}}>Mango froyo, granola &amp; fresh berries.</p>
+              <Button variant="accent" size="sm" fullWidth>Add to bag</Button>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Showcase/>);
+</script>
+
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#762F35"/><g><rect x="30" y="30" width="13" height="40" fill="#FF9425"/><rect x="44" y="30" width="13" height="40" fill="#C4C934"/><rect x="58" y="30" width="13" height="40" fill="#6A704B"/></g></svg>
+</template>
+</body></html>

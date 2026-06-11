@@ -1,0 +1,23 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Semantic roles" subtitle="How the palette maps to text, surfaces & feedback." -->
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;background:var(--surface-card);font-family:var(--font-body);padding:18px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .chip{height:62px;border-radius:10px;border:1px solid var(--border-default);display:flex;align-items:flex-end;padding:8px;font-size:11px;font-weight:700}
+  .row2{margin-top:10px}
+</style></head>
+<body>
+  <div class="grid">
+    <div class="chip" style="background:var(--surface-page);color:var(--text-body)">surface-page</div>
+    <div class="chip" style="background:var(--surface-card);color:var(--text-body)">surface-card</div>
+    <div class="chip" style="background:var(--surface-sunken);color:var(--text-body)">surface-sunken</div>
+    <div class="chip" style="background:var(--surface-inverse);color:var(--text-on-brand);border:none">surface-inverse</div>
+  </div>
+  <div class="grid row2">
+    <div class="chip" style="background:var(--surface-signature-soft);color:var(--olive-800)">signature-soft</div>
+    <div class="chip" style="background:var(--surface-accent-soft);color:var(--wine-900)">accent-soft</div>
+    <div class="chip" style="background:var(--surface-fresh-soft);color:var(--olive-800)">fresh-soft</div>
+    <div class="chip" style="background:var(--success);color:#fff;border:none">success</div>
+  </div>
+</body></html>
