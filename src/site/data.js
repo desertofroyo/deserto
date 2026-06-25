@@ -34,6 +34,16 @@ export const SITE = {
     { id: "otono", en: "Autumn", accent: "var(--caramel-500)", soft: "var(--peach-100)", hero: "cans-white-arches.jpg", heroPos: "center 50%" },
   ],
 
+  /* ---- Hero flavor carousel (auto-rotating froyo flavors) ---- */
+  heroFlavors: [
+    { name: "Premium Tarte", note: "Our self-serve original", img: "/assets/products/premium-tarte.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Taro", note: "Silky, nutty, purple", img: "/assets/products/taro.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Guava", note: "Bright tropical tang", img: "/assets/products/guava.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Salted Caramel", note: "Sweet with a kiss of salt", img: "/assets/products/salted-caramel.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Double Chocolate", note: "Deep cocoa, dairy-free", img: "/assets/products/vegan-double-chocolate.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Blueberry", note: "Fresh-picked flavor", img: "/assets/products/blueberry.jpg", tags: ["Vegan", "GF", "DF"] },
+  ],
+
   /* ---- "What we make" highlight cards (main page) ---- */
   highlights: [
     { slug: "froyo", name: "Self-Serve Froyo", desc: "Six rotating flavors at the swirl wall, with a bar of curated toppings.", img: "product-froyo-cup.jpg", pos: "center 55%" },

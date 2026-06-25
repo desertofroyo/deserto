@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../components/ds";
-
-const FROYO_CUTOUT = "/assets/froyo-cups-cutout.png";
+import { FlavorCarousel } from "./FlavorCarousel.jsx";
+import { SITE } from "./data.js";
 
 /* ---------------- Hero (peach, bold editorial) ----------------
-   Froyo cups burst out of the top of a wine disc, with rotated
-   diet labels and a giant uppercase headline ("…creamy bliss."). */
+   Giant uppercase headline beside an auto-rotating flavor carousel. */
 export function Hero({ onMenu }) {
+  const { heroFlavors } = SITE;
   return (
     <section id="top" style={{ background: "var(--peach-100)", position: "relative" }}>
       {/* soft decorative bloom */}
@@ -57,36 +57,9 @@ export function Hero({ onMenu }) {
           </div>
         </div>
 
-        {/* ---- Froyo on wine disc — cups burst out of the top ---- */}
-        <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", minHeight: 580, paddingTop: 100 }}>
-          <div style={{ position: "relative", width: 400, height: 400, flexShrink: 0 }}>
-            <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "var(--wine-700)", boxShadow: "0 28px 64px -12px rgba(58,12,20,0.55)" }} />
-            {/* diet labels */}
-            {[
-              { label: "Gluten Free", top: 22,  left: -24, rotate: -9 },
-              { label: "Dairy Free",  top: 300, left: -30, rotate:  7 },
-              { label: "Vegan",       top: 175, left: 348, rotate: -6 },
-            ].map(({ label, top, left, rotate }) => (
-              <div key={label} style={{
-                position: "absolute", top, left, transform: `rotate(${rotate}deg)`, zIndex: 3,
-                background: "var(--lime-500)", color: "var(--wine-900)", borderRadius: 999,
-                padding: "7px 15px", boxShadow: "var(--shadow-md)", whiteSpace: "nowrap",
-                fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", letterSpacing: ".01em",
-              }}>{label}</div>
-            ))}
-            {/* froyo cutout — centered on disc, bursts upward */}
-            <img src={FROYO_CUTOUT}
-              alt="Taro and Ristachio froyo cups"
-              style={{
-                position: "absolute",
-                left: "50%", bottom: 0,
-                transform: "translateX(-50%)",
-                width: 400, height: "auto",
-                filter: "drop-shadow(0 24px 32px rgba(58,12,20,0.45))",
-                zIndex: 2,
-                pointerEvents: "none",
-              }} />
-          </div>
+        {/* ---- Auto-rotating flavor carousel ---- */}
+        <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <FlavorCarousel flavors={heroFlavors} />
         </div>
       </div>
     </section>
