@@ -60,5 +60,5 @@ src/
 - Some catalog items (cookies, scones, cake jars, several tonics) have no source
   photo and fall back to a tinted swatch with a faded isotype, exactly as in the
   handoff. Drop real photos into `public/assets/images` to fill them in.
-- The original handoff bundle lives under `deserto-design-system/` for reference
+- The original handoff bundle lives under `reference/design-system/` for reference
   (chat transcripts, brand book, the HTML/JSX prototypes, the `SKILL.md`).
