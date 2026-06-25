@@ -34,20 +34,14 @@ export const SITE = {
     { id: "otono", en: "Autumn", accent: "var(--caramel-500)", soft: "var(--peach-100)", hero: "cans-white-arches.jpg", heroPos: "center 50%" },
   ],
 
-  /* ---- Hero carousel: signature tonic-can mockups, each on its own palette
-     band (cutout PNGs float on the changing color, brand color-blocking). ---- */
+  /* ---- Hero flavor carousel (auto-rotating froyo flavors) ---- */
   heroFlavors: [
-    /* Tonics — signature cans */
-    { name: "Strawberry Tonic", note: "Sparkling & berry-bright", img: "/assets/mockups/strawberry-tonic.png", band: "var(--rose-200)" },
-    { name: "Golden Peach Tonic", note: "Sun-ripened and mellow", img: "/assets/mockups/golden-peach-tonic.png", band: "var(--peach-200)" },
-    { name: "Kiwi Tonic", note: "Tart, green, refreshing", img: "/assets/mockups/kiwi-tonic.png", band: "var(--leaf-200)" },
-    { name: "Mango Tonic", note: "Tropical and juicy", img: "/assets/mockups/mango-tonic.png", band: "var(--orange-100)" },
-    { name: "Prickly Pear Tonic", note: "Desert-pink and floral", img: "/assets/mockups/prickly-pear-tonic.png", band: "var(--rose-300)" },
-    { name: "Blueberry Tonic", note: "Deep and a little tart", img: "/assets/mockups/blueberry-tonic.png", band: "var(--olive-200)" },
-    { name: "Pineapple Tonic", note: "Sweet-tart and golden", img: "/assets/mockups/pineapple-tonic.png", band: "var(--sand-200)" },
-    { name: "Raspberry Tonic", note: "Bright and tangy", img: "/assets/mockups/raspberry-tonic.png", band: "var(--rose-100)" },
-    /* Cake jar — clean product cutout */
-    { name: "Cake Jar", note: "Layered fresh to order", img: "/assets/mockups/cake-jar.png", band: "var(--caramel-200)" },
+    { name: "Premium Tarte", note: "Our self-serve original", img: "/assets/products/premium-tarte.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Taro", note: "Silky, nutty, purple", img: "/assets/products/taro.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Guava", note: "Bright tropical tang", img: "/assets/products/guava.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Salted Caramel", note: "Sweet with a kiss of salt", img: "/assets/products/salted-caramel.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Double Chocolate", note: "Deep cocoa, dairy-free", img: "/assets/products/vegan-double-chocolate.jpg", tags: ["Vegan", "GF", "DF"] },
+    { name: "Blueberry", note: "Fresh-picked flavor", img: "/assets/products/blueberry.jpg", tags: ["Vegan", "GF", "DF"] },
   ],
 
   /* ---- "What we make" highlight cards (main page) ---- */
