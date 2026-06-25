@@ -46,10 +46,7 @@ export const SITE = {
     { name: "Blueberry Tonic", note: "Deep and a little tart", img: "/assets/mockups/blueberry-tonic.png", band: "var(--olive-200)" },
     { name: "Pineapple Tonic", note: "Sweet-tart and golden", img: "/assets/mockups/pineapple-tonic.png", band: "var(--sand-200)" },
     { name: "Raspberry Tonic", note: "Bright and tangy", img: "/assets/mockups/raspberry-tonic.png", band: "var(--rose-100)" },
-    /* Pastries — scones & cake jars */
-    { name: "Blueberry Lemon Scone", note: "Buttery, berry, citrus", img: "/assets/mockups/blueberry-lemon-scone.png", band: "var(--leaf-100)" },
-    { name: "Vanilla Almond Scone", note: "Warm vanilla & toasted almond", img: "/assets/mockups/vanilla-almond-scone.png", band: "var(--caramel-100)" },
-    { name: "Red Velvet & Macadamia Scone", note: "Cocoa-kissed and nutty", img: "/assets/mockups/red-velvet-macadamia-scone.png", band: "var(--rose-200)" },
+    /* Cake jar — clean product cutout */
     { name: "Cake Jar", note: "Layered fresh to order", img: "/assets/mockups/cake-jar.png", band: "var(--caramel-200)" },
   ],
 
