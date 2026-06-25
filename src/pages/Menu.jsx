@@ -79,11 +79,8 @@ function ItemRow({ p }) {
           <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-md)", color: "var(--ink-900)" }}>{p.name}</span>
           {(p.tags || []).map((t) => (<Badge key={t} tone={tagTone[t] || "neutral"} variant="soft">{t}</Badge>))}
         </div>
-        {p.desc && <div style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.desc}</div>}
+        {p.desc && <div style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.45 }}>{p.desc}</div>}
       </div>
-      <span style={{ fontFamily: "var(--font-body)", fontWeight: 900, color: "var(--wine-700)", whiteSpace: "nowrap" }}>
-        {p.instore ? "By weight" : p.priceLg ? `$${p.price.toFixed(2)} / $${p.priceLg.toFixed(2)}` : `$${p.price.toFixed(2)}`}
-      </span>
       {p.instore && (
         <span style={{ flexShrink: 0, fontSize: "var(--text-xs)", fontWeight: 800, color: "var(--olive-700)", background: "var(--leaf-100)", borderRadius: 999, padding: "7px 12px", whiteSpace: "nowrap" }}>In store</span>
       )}
