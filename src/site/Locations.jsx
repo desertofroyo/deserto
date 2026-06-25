@@ -8,7 +8,7 @@ import { SITE } from "./data.js";
 export function Locations() {
   const { store } = SITE;
   return (
-    <section id="locations" style={{ background: "var(--peach-100)" }}>
+    <section id="locations" style={{ background: "var(--surface-page)" }}>
       <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
         <div style={{
           display: "grid", gridTemplateColumns: "1.1fr 0.9fr", alignItems: "stretch",
