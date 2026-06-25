@@ -9,9 +9,11 @@ const FROYO_CUTOUT = "/assets/froyo-cups-cutout.png";
    diet labels and a giant uppercase headline ("…creamy bliss."). */
 export function Hero({ onMenu }) {
   return (
-    <section id="top" style={{ background: "var(--rose-200)", position: "relative" }}>
-      {/* soft decorative bloom — echoes the café's dusty-mauve feature wall */}
-      <div style={{ position: "absolute", top: -120, left: -80, width: 320, height: 320, borderRadius: "50%", background: "var(--rose-300)", opacity: 0.55, filter: "blur(8px)" }} />
+    <section id="top" style={{ background: "var(--rose-500)", position: "relative" }}>
+      {/* The café's dusty-mauve feature wall is the backdrop; the green hero
+         letters sit on it exactly as in the shop. Soft lighter bloom echoes
+         the warm peach backlighting behind the sign. */}
+      <div style={{ position: "absolute", top: -120, left: -80, width: 320, height: 320, borderRadius: "50%", background: "var(--rose-300)", opacity: 0.45, filter: "blur(48px)" }} />
       <div style={{
         position: "relative", maxWidth: "var(--container-xl)", margin: "0 auto",
         padding: "var(--space-8) var(--space-6)",
