@@ -6,13 +6,10 @@ import { MenuSection } from "../site/Menu.jsx";
 import { Story } from "../site/Story.jsx";
 import { Locations } from "../site/Locations.jsx";
 import { Footer } from "../site/Footer.jsx";
-import { readBagCount } from "../lib/bag.js";
 
-/* Deserto marketing home — the bag count is read from the shared
-   localStorage bag that the order page writes to. */
+/* Deserto marketing home — browse the menu here, order via a delivery partner. */
 export default function Home() {
   const menuRef = React.useRef(null);
-  const [bagCount] = React.useState(readBagCount);
 
   const scrollTo = (id) => {
     if (id === "top") return window.scrollTo({ top: 0, behavior: "smooth" });
@@ -22,7 +19,7 @@ export default function Home() {
 
   return (
     <div style={{ background: "var(--peach-100)", minHeight: "100vh" }}>
-      <Header bag={bagCount} onNav={scrollTo} />
+      <Header onNav={scrollTo} />
       <Hero onMenu={() => scrollTo("menu")} />
       <Marquee />
       <MenuSection sectionRef={menuRef} />

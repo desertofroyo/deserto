@@ -43,10 +43,10 @@ export function Locations() {
                 Get directions
                 <Icon name="map-pin" size={16} color="var(--cream-50)" />
               </a>
-              <Link to="/order" style={{
+              <Link to="/menu" style={{
                 borderRadius: 999, padding: "14px 26px", border: "2px solid var(--wine-700)", color: "var(--wine-700)",
                 fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center",
-              }}>Order pickup</Link>
+              }}>View menu &amp; order</Link>
             </div>
           </div>
         </div>

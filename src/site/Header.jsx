@@ -6,7 +6,7 @@ import { SITE } from "./data.js";
 const LOGO = "/assets/logos/deserto-logo-full.png";
 
 /* ---------------- Header (light / cream, sticky, blurred) ---------------- */
-export function Header({ bag, onNav }) {
+export function Header({ onNav }) {
   const { nav } = SITE;
   return (
     <header style={{
@@ -28,23 +28,12 @@ export function Header({ bag, onNav }) {
           ))}
         </nav>
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
-          <button aria-label="Search" style={{ border: "none", background: "transparent", cursor: "pointer", display: "inline-flex", padding: 6 }}><Icon name="search" color="var(--wine-700)" /></button>
-          <Link aria-label="Bag" to="/order" style={{ position: "relative", display: "inline-flex", padding: 6 }}>
-            <Icon name="shopping-bag" color="var(--wine-700)" />
-            {bag > 0 && (
-              <span key={bag} style={{
-                position: "absolute", top: -2, right: -4, minWidth: 18, height: 18, padding: "0 4px",
-                background: "var(--orange-500)", color: "var(--wine-900)", borderRadius: 999,
-                fontSize: 11, fontWeight: 900, display: "flex", alignItems: "center", justifyContent: "center",
-                fontFamily: "var(--font-body)", animation: "popIn .35s var(--ease-out-expo)",
-              }}>{bag}</span>
-            )}
-          </Link>
-          <Link to="/order" className="btn-wine" style={{
+          <Link to="/menu" className="nav-link" style={{ fontWeight: 600, fontSize: "var(--text-sm)", color: "var(--ink-700)", whiteSpace: "nowrap" }}>View menu</Link>
+          <Link to="/menu" className="btn-wine" style={{
             borderRadius: 999, padding: "11px 22px", flexShrink: 0, whiteSpace: "nowrap",
             background: "var(--wine-700)", color: "var(--cream-50)", fontFamily: "var(--font-body)", fontWeight: 800,
             fontSize: "var(--text-sm)",
-          }}>Order now</Link>
+          }}>Order delivery</Link>
         </div>
       </div>
     </header>

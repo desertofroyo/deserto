@@ -52,12 +52,12 @@ export function Hero({ onMenu }) {
           </p>
 
           <div style={{ display: "flex", gap: "var(--space-3)", marginTop: "var(--space-6)" }}>
-            <Link to="/order" className="btn-wine" style={{
+            <Link to="/menu" className="btn-wine" style={{
               borderRadius: 999, padding: "16px 30px",
               background: "var(--wine-700)", color: "var(--cream-50)", fontFamily: "var(--font-body)", fontWeight: 800,
               fontSize: "var(--text-md)", display: "inline-flex", alignItems: "center", gap: 10, boxShadow: "var(--shadow-md)",
             }}>
-              Order now
+              View menu
               <Icon name="arrow-right" size={20} color="var(--cream-50)" />
             </Link>
             <button onClick={onMenu} style={{

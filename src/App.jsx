@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home.jsx";
-import Order from "./pages/Order.jsx";
+import Menu from "./pages/Menu.jsx";
 import AppDemo from "./pages/AppDemo.jsx";
 import Mockups from "./pages/Mockups.jsx";
 
@@ -18,7 +18,9 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/menu" element={<Menu />} />
+        {/* legacy /order links now land on the view-only menu */}
+        <Route path="/order" element={<Menu />} />
         <Route path="/app" element={<AppDemo />} />
         <Route path="/mockups" element={<Mockups />} />
       </Routes>
