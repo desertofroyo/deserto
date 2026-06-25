@@ -17,10 +17,8 @@ export const SITE = {
      order through a delivery partner (or call / walk in). REPLACE the url of
      each partner below with Deserto's real store page on that platform. */
   delivery: [
-    { name: "DoorDash",  url: "https://www.doordash.com/",  brand: "#FF3008", fg: "#fff" },
-    { name: "Uber Eats", url: "https://www.ubereats.com/",  brand: "#06C167", fg: "#fff" },
-    { name: "Postmates", url: "https://postmates.com/",     brand: "#0E0E0E", fg: "#fff" },
-    { name: "Grubhub",   url: "https://www.grubhub.com/",   brand: "#E04A28", fg: "#fff" },
+    { name: "DoorDash", url: "https://www.doordash.com/", brand: "#FF3008", fg: "#fff" },
+    { name: "Grubhub",  url: "https://www.grubhub.com/",  brand: "#E04A28", fg: "#fff" },
   ],
 
   nav: [
