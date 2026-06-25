@@ -9,9 +9,9 @@ const FROYO_CUTOUT = "/assets/froyo-cups-cutout.png";
    diet labels and a giant uppercase headline ("…creamy bliss."). */
 export function Hero({ onMenu }) {
   return (
-    <section id="top" style={{ background: "var(--rose-200)", position: "relative" }}>
-      {/* soft decorative bloom — echoes the café's dusty-mauve feature wall */}
-      <div style={{ position: "absolute", top: -120, left: -80, width: 320, height: 320, borderRadius: "50%", background: "var(--rose-300)", opacity: 0.55, filter: "blur(8px)" }} />
+    <section id="top" style={{ background: "var(--peach-100)", position: "relative" }}>
+      {/* soft decorative bloom */}
+      <div style={{ position: "absolute", top: -120, left: -80, width: 320, height: 320, borderRadius: "50%", background: "var(--peach-200)", opacity: 0.5, filter: "blur(8px)" }} />
       <div style={{
         position: "relative", maxWidth: "var(--container-xl)", margin: "0 auto",
         padding: "var(--space-8) var(--space-6)",
@@ -25,24 +25,13 @@ export function Hero({ onMenu }) {
             padding: "8px 18px", borderRadius: 999,
           }}>Open daily 10–10 · River Rd, Tucson</span>
 
-          {/* The café's hero sign: green dimensional letters on the mauve wall.
-             The burgundy wordmark (header logo) stays the constant — this big
-             headline is the green signage, exactly as in the shop. */}
           <h1 style={{
             fontFamily: "var(--font-display)", fontWeight: 800, textTransform: "uppercase",
             fontSize: "clamp(56px, 6.4vw, 104px)", lineHeight: 0.9, letterSpacing: "-0.01em",
-            margin: "var(--space-5) 0 0", color: "var(--olive-600)",
-            textShadow: "1px 1px 0 var(--olive-700), 2px 3px 0 var(--olive-800), 3px 5px 7px rgba(46,50,32,0.45)",
+            margin: "var(--space-5) 0 0", color: "var(--wine-700)",
           }}>
-            Where coffee<br />meets creamy<br />bliss.
+            Where coffee<br />meets creamy<br /><span style={{ color: "var(--orange-500)" }}>bliss.</span>
           </h1>
-
-          {/* Orange is reserved for the "Frozen Yogurt & Café" tagline — never the wordmark */}
-          <p style={{
-            fontFamily: "var(--font-display)", fontWeight: 800, textTransform: "uppercase",
-            letterSpacing: ".09em", fontSize: "var(--text-md)", color: "var(--orange-500)",
-            margin: "var(--space-4) 0 0",
-          }}>Frozen Yogurt &amp; Café</p>
 
           <p style={{
             fontFamily: "var(--font-editorial)", fontSize: "var(--text-lg)", color: "var(--ink-700)",
