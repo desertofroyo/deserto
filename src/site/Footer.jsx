@@ -13,7 +13,7 @@ export function Footer() {
           <img src={LOGO} alt="Deserto" style={{ height: 46, filter: "brightness(0) invert(1)", opacity: 0.92 }} />
           <p style={{ marginTop: 16, color: "var(--ink-300)", fontSize: "var(--text-sm)", maxWidth: 260, fontFamily: "var(--font-editorial)" }}>Where coffee meets creamy bliss. 5635 E River Rd, Unit 101 — Tucson, Arizona.</p>
         </div>
-        {[["Menu", ["Frozen Yogurt", "Tonics", "Coffee", "Pastries"]], ["Deserto", ["Our story", "Visit us", "Order online"]]].map(([h, items]) => (
+        {[["Menu", ["Frozen Yogurt", "Tonics", "Coffee", "Pastries"]], ["Deserto", ["Our story", "Visit us", "Order delivery"]]].map(([h, items]) => (
           <div key={h}>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, color: "var(--cream-50)", marginBottom: 14, fontSize: "var(--text-sm)", letterSpacing: ".04em" }}>{h}</div>
             {items.map((i) => (<div key={i} style={{ color: "var(--ink-300)", fontSize: "var(--text-sm)", marginBottom: 9 }}>{i}</div>))}

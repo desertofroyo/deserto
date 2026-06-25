@@ -15,14 +15,14 @@ export function MenuSection({ sectionRef }) {
             <span className="eyebrow" style={{ color: "var(--wine-500)" }}>The menu</span>
             <h2 style={{ fontSize: "var(--text-4xl)", margin: "8px 0 0", color: "var(--wine-700)" }}>What we make</h2>
           </div>
-          <Link to="/order" className="nav-link" style={{ fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)", color: "var(--wine-700)", display: "inline-flex", alignItems: "center", gap: 7 }}>
-            See the full menu & order
+          <Link to="/menu" className="nav-link" style={{ fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)", color: "var(--wine-700)", display: "inline-flex", alignItems: "center", gap: 7 }}>
+            See the full menu
             <Icon name="arrow-right" size={17} color="var(--wine-700)" />
           </Link>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "var(--space-5)", marginTop: "var(--space-7)" }}>
           {highlights.map((h, i) => (
-            <Link key={h.slug} to={"/order?tab=" + h.slug} className="season-card" style={{
+            <Link key={h.slug} to={"/menu#" + h.slug} className="season-card" style={{
               display: "block", background: "var(--white)", borderRadius: "var(--radius-xl)", overflow: "hidden",
               boxShadow: "var(--shadow-sm)", border: "1px solid var(--border-default)",
               animation: `fadeUp .4s ${i * 0.05}s var(--ease-out, ease) both`,
@@ -34,7 +34,7 @@ export function MenuSection({ sectionRef }) {
                 <h3 style={{ margin: 0, fontSize: "var(--text-lg)", color: "var(--ink-900)" }}>{h.name}</h3>
                 <p style={{ margin: "6px 0 12px", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.5 }}>{h.desc}</p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontWeight: 800, color: "var(--wine-700)", fontFamily: "var(--font-body)", fontSize: "var(--text-sm)" }}>Order</span>
+                  <span style={{ fontWeight: 800, color: "var(--wine-700)", fontFamily: "var(--font-body)", fontSize: "var(--text-sm)" }}>View</span>
                   <span style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--orange-500)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
                     <Icon name="arrow-right" size={16} color="var(--wine-900)" />
                   </span>
