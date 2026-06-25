@@ -8,7 +8,7 @@ import { SITE } from "./data.js";
 export function MenuSection({ sectionRef }) {
   const { highlights } = SITE;
   return (
-    <section id="menu" ref={sectionRef} style={{ background: "var(--surface-sunken)" }}>
+    <section id="menu" ref={sectionRef} style={{ background: "var(--leaf-100)" }}>
       <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
           <div>

@@ -10,3 +10,9 @@ design_download.bin
 # Claude Code agent tooling (vendored skills / working output)
 .claude/
 .impeccable/
+
+# This repo is now the single source of truth for Deserto — the iCloud master
+# vault was removed, so ALL assets (raw photos, study shots, fonts, prototype
+# images) are committed here and backed up via the git remote. Nothing heavy is
+# git-ignored anymore except build output and OS cruft.
+.DS_Store
