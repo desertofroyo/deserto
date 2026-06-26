@@ -66,24 +66,31 @@ function OrderBar() {
   );
 }
 
-/* ---------- One menu row (view-only) ---------- */
-function ItemRow({ p }) {
+/* ---------- One menu card (view-only, photo-forward) ---------- */
+function ItemCard({ p }) {
   const tagTone = { Vegan: "olive", GF: "caramel", DF: "mauve", New: "orange" };
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "12px var(--space-5)", borderTop: "1px solid var(--border-subtle)" }}>
-      <div style={{ width: 56, height: 56, borderRadius: "var(--radius-md)", overflow: "hidden", flexShrink: 0 }}>
+    <div className="menu-card" style={{
+      display: "flex", flexDirection: "column", background: "var(--white)", borderRadius: "var(--radius-xl)",
+      border: "1px solid var(--border-default)", boxShadow: "var(--shadow-sm)", overflow: "hidden",
+    }}>
+      {/* full-bleed square photo */}
+      <div style={{ position: "relative", aspectRatio: "1 / 1", overflow: "hidden" }}>
         <Photo src={p.img} pos={p.pos || "center"} tint={p.tint || "var(--peach-100)"} label={p.name} height="100%" />
+        {p.instore && (
+          <span style={{ position: "absolute", top: 10, left: 10, fontSize: "var(--text-xs)", fontWeight: 800, color: "var(--olive-700)", background: "var(--leaf-100)", borderRadius: 999, padding: "6px 11px", whiteSpace: "nowrap", boxShadow: "var(--shadow-sm)" }}>In store</span>
+        )}
       </div>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-          <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-md)", color: "var(--ink-900)" }}>{p.name}</span>
-          {(p.tags || []).map((t) => (<Badge key={t} tone={tagTone[t] || "neutral"} variant="soft">{t}</Badge>))}
-        </div>
-        {p.desc && <div style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.45 }}>{p.desc}</div>}
+      {/* name · badges · description */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "var(--space-4)" }}>
+        <h3 style={{ margin: 0, fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-md)", color: "var(--ink-900)", lineHeight: 1.1 }}>{p.name}</h3>
+        {(p.tags || []).length > 0 && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
+            {p.tags.map((t) => (<Badge key={t} tone={tagTone[t] || "neutral"} variant="soft">{t}</Badge>))}
+          </div>
+        )}
+        {p.desc && <p style={{ margin: "10px 0 0", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.45 }}>{p.desc}</p>}
       </div>
-      {p.instore && (
-        <span style={{ flexShrink: 0, fontSize: "var(--text-xs)", fontWeight: 800, color: "var(--olive-700)", background: "var(--leaf-100)", borderRadius: 999, padding: "7px 12px", whiteSpace: "nowrap" }}>In store</span>
-      )}
     </div>
   );
 }
@@ -141,12 +148,16 @@ export default function Menu() {
             const groups = [...new Set(list.map((p) => p.group))];
             return (
               <section key={c.slug} data-slug={c.slug} ref={(el) => { sectionRefs.current[c.slug] = el; }} style={{ scrollMarginTop: 128 }}>
-                <h2 style={{ fontSize: "var(--text-2xl)", margin: "0 0 var(--space-3)", color: "var(--wine-700)" }}>{c.name}</h2>
-                <div style={{ background: "var(--white)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-sm)", overflow: "hidden", paddingBottom: 6 }}>
+                <h2 style={{ fontSize: "var(--text-2xl)", margin: "0 0 var(--space-4)", color: "var(--wine-700)" }}>{c.name}</h2>
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
                   {groups.map((g) => (
                     <div key={g}>
-                      <div style={{ padding: "16px var(--space-5) 6px", fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", color: "var(--ink-400)", textTransform: "uppercase", letterSpacing: ".05em" }}>{g}</div>
-                      {list.filter((p) => p.group === g).map((p) => (<ItemRow key={p.id} p={p} />))}
+                      {groups.length > 1 && (
+                        <div style={{ margin: "0 0 var(--space-3)", fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", color: "var(--ink-400)", textTransform: "uppercase", letterSpacing: ".05em" }}>{g}</div>
+                      )}
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "var(--space-5)" }}>
+                        {list.filter((p) => p.group === g).map((p) => (<ItemCard key={p.id} p={p} />))}
+                      </div>
                     </div>
                   ))}
                 </div>

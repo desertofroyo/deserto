@@ -5,7 +5,7 @@ import { Photo, Arch } from "./parts.jsx";
 export function Story() {
   return (
     <section id="story" style={{ background: "var(--wine-700)", color: "var(--cream-50)", overflow: "hidden" }}>
-      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)", display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "var(--space-8)", alignItems: "center" }}>
+      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)", display: "grid", gridTemplateColumns: "0.92fr 1.08fr", gap: "var(--space-8)", alignItems: "center" }}>
         <div>
           <span className="eyebrow" style={{ color: "var(--lime-400)" }}>Our story</span>
           <h2 style={{ fontSize: "var(--text-5xl)", margin: "12px 0 0", lineHeight: 0.98, color: "var(--cream-50)" }}>
@@ -17,7 +17,7 @@ export function Story() {
           </p>
         </div>
         <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
-          <Arch style={{ width: 360, height: 460, boxShadow: "var(--shadow-lg)", border: "10px solid rgba(255,255,255,0.10)" }}>
+          <Arch style={{ width: "100%", maxWidth: 460, height: 560, boxShadow: "var(--shadow-lg)", border: "12px solid rgba(255,255,255,0.10)" }}>
             <Photo src="interior-froyo-arches.jpg" pos="center" label="Our café" height="100%" />
           </Arch>
         </div>

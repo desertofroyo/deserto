@@ -11,11 +11,11 @@ export function Locations() {
     <section id="locations" style={{ background: "var(--surface-page)" }}>
       <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
         <div style={{
-          display: "grid", gridTemplateColumns: "1.1fr 0.9fr", alignItems: "stretch",
+          display: "grid", gridTemplateColumns: "1.35fr 0.85fr", alignItems: "stretch",
           background: "var(--white)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-2xl)",
           boxShadow: "var(--shadow-md)", overflow: "hidden",
         }}>
-          <div style={{ minHeight: 380 }}>
+          <div style={{ minHeight: 480 }}>
             <Photo src={store.img} pos="center" label={store.name} height="100%" />
           </div>
           <div style={{ padding: "var(--space-7)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
