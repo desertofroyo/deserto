@@ -34,6 +34,16 @@ body { margin: 0; }
 .season-card { transition: transform .2s var(--ease-out, ease); }
 .season-card:hover { transform: translateY(-4px); }
 
+/* Bold color-block category tiles */
+.tile-card { transition: transform .22s var(--ease-out, ease), box-shadow .22s var(--ease-out, ease); }
+.tile-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.tile-card .tile-arrow { transition: transform .22s var(--ease-out, ease); }
+.tile-card:hover .tile-arrow { transform: translateX(3px); }
+
+/* Menu page — photo-forward product cards */
+.menu-card { transition: transform .18s var(--ease-out, ease), box-shadow .18s var(--ease-out, ease); }
+.menu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
 /* Round add-to-bag button */
 .order-add { transition: transform .14s var(--ease-out, ease), background .14s ease; }
 .order-add:hover { transform: scale(1.08); }
