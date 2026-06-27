@@ -143,9 +143,9 @@ body { margin: 0; }
 
 /* ---- Hero: tighten + make text readable over the photo on phones ---- */
 @media (max-width: 760px) {
-  .r-hero-inner { min-height: 500px !important; }
+  .r-hero-inner { min-height: 340px !important; }
   .r-hero-text { max-width: 100% !important; }
-  .r-hero-h1 { font-size: clamp(40px, 11vw, 62px) !important; }
+  .r-hero-h1 { font-size: clamp(38px, 10vw, 56px) !important; }
   .r-hero-scrim {
     background: linear-gradient(180deg, rgba(252,238,228,0.96) 0%, rgba(252,238,228,0.8) 36%, rgba(252,238,228,0.32) 66%, rgba(252,238,228,0) 100%) !important;
   }
