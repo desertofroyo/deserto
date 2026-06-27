@@ -34,14 +34,20 @@ export const SITE = {
     { id: "otono", en: "Autumn", accent: "var(--caramel-500)", soft: "var(--peach-100)", hero: "cans-white-arches.jpg", heroPos: "center 50%" },
   ],
 
-  /* ---- Hero flavor carousel (auto-rotating froyo flavors) ---- */
-  heroFlavors: [
-    { name: "Premium Tarte", note: "Our self-serve original", img: "/assets/products/premium-tarte.jpg", tags: ["Vegan", "GF", "DF"] },
-    { name: "Taro", note: "Silky, nutty, purple", img: "/assets/products/taro.jpg", tags: ["Vegan", "GF", "DF"] },
-    { name: "Guava", note: "Bright tropical tang", img: "/assets/products/guava.jpg", tags: ["Vegan", "GF", "DF"] },
-    { name: "Salted Caramel", note: "Sweet with a kiss of salt", img: "/assets/products/salted-caramel.jpg", tags: ["Vegan", "GF", "DF"] },
-    { name: "Double Chocolate", note: "Deep cocoa, dairy-free", img: "/assets/products/vegan-double-chocolate.jpg", tags: ["Vegan", "GF", "DF"] },
-    { name: "Blueberry", note: "Fresh-picked flavor", img: "/assets/products/blueberry.jpg", tags: ["Vegan", "GF", "DF"] },
+  /* ---- Hero product carousel (cutout product trios over the café interior) ---- */
+  heroProducts: [
+    { name: "Cake Jars", note: "Layered froyo, crumble & fruit", img: "/assets/products/hero-cakejars.png", tags: ["Layered", "New"] },
+    { name: "Fruit Tonics", note: "Sparkling fruit, in our signature cans", img: "/assets/products/hero-tonics.png", tags: ["Sparkling", "Real fruit"] },
+    { name: "Café Coffee", note: "Cold brew, lattes & more — hot or iced", img: "/assets/products/hero-coffee.png", tags: ["Espresso", "Iced"] },
+  ],
+
+  /* ---- "Our story" gallery carousel (wine section, arch frame) ---- */
+  storyGallery: [
+    { img: "hero-cafe-interior.jpg",     caption: "Our River Road flagship" },
+    { img: "interior-froyo-arches.jpg",  caption: "Arches & soft desert light" },
+    { img: "cans-white-arches.jpg",      caption: "Tonics in our signature cans" },
+    { img: "strawberry-hand.jpg",        caption: "Fresh fruit, every day" },
+    { img: "tulips-drinks.jpg",          caption: "Coffee, blooms & good company" },
   ],
 
   /* ---- "What we make" highlight cards (main page) ---- */

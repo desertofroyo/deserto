@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../components/ds";
-import { Photo } from "./parts.jsx";
+import { Photo, useReveal } from "./parts.jsx";
 import { SITE } from "./data.js";
 
 /* Per-category color block — saturated brand bands, Yogen-Früz-style.
@@ -17,27 +17,27 @@ const TILE = {
 /* "What we make" — four bold color-block category cards linking to the menu. */
 export function MenuSection({ sectionRef }) {
   const { highlights } = SITE;
+  const reveal = useReveal();
   return (
     <section id="menu" ref={sectionRef} style={{ background: "var(--leaf-100)" }}>
-      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
+      <div ref={reveal} style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
           <div>
             <span className="eyebrow" style={{ color: "var(--wine-500)" }}>The menu</span>
             <h2 style={{ fontSize: "var(--text-4xl)", margin: "8px 0 0", color: "var(--wine-700)" }}>What we make</h2>
           </div>
-          <Link to="/menu" className="nav-link" style={{ fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)", color: "var(--wine-700)", display: "inline-flex", alignItems: "center", gap: 7 }}>
+          <Link to="/menu" className="nav-link" style={{ fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)", color: "var(--wine-700)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 7 }}>
             See the full menu
             <Icon name="arrow-right" size={17} color="var(--wine-700)" />
           </Link>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "var(--space-5)", marginTop: "var(--space-7)" }}>
+        <div className="r-tiles" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "var(--space-5)", marginTop: "var(--space-7)" }}>
           {highlights.map((h, i) => {
             const t = TILE[h.slug] || TILE.froyo;
             return (
-              <Link key={h.slug} to={"/menu#" + h.slug} className="tile-card" style={{
+              <Link key={h.slug} to={"/menu#" + h.slug} className="tile-card stagger-item" style={{
                 display: "flex", flexDirection: "column", borderRadius: "var(--radius-2xl)", overflow: "hidden",
-                background: t.band, boxShadow: "var(--shadow-md)",
-                animation: `fadeUp .4s ${i * 0.05}s var(--ease-out, ease) both`,
+                background: t.band, boxShadow: "var(--shadow-md)", "--i": i,
               }}>
                 {/* product photo fills the top, generously sized */}
                 <div style={{ height: 230, overflow: "hidden" }}>

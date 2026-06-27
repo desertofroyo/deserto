@@ -1,22 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../components/ds";
-import { Photo } from "./parts.jsx";
 import { SITE } from "./data.js";
+import { useReveal } from "./parts.jsx";
 
 /* Visit us — the one real store (River & Craycroft, Tucson). */
 export function Locations() {
   const { store } = SITE;
+  const reveal = useReveal();
   return (
     <section id="locations" style={{ background: "var(--surface-page)" }}>
-      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
-        <div style={{
+      <div ref={reveal} style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
+        <div className="r-split" style={{
           display: "grid", gridTemplateColumns: "1.35fr 0.85fr", alignItems: "stretch",
           background: "var(--white)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-2xl)",
           boxShadow: "var(--shadow-md)", overflow: "hidden",
         }}>
-          <div style={{ minHeight: 480 }}>
-            <Photo src={store.img} pos="center" label={store.name} height="100%" />
+          <div className="r-map" style={{ minHeight: 480, position: "relative" }}>
+            <iframe
+              title={`Map to ${store.name}`}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(store.addr + ", " + store.city)}&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, display: "block" }}
+            />
           </div>
           <div style={{ padding: "var(--space-7)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <span className="eyebrow" style={{ color: "var(--wine-500)" }}>Visit us</span>
