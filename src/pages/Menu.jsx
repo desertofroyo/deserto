@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Badge, Icon } from "../components/ds";
-import { Photo, Chip } from "../site/parts.jsx";
+import { Photo } from "../site/parts.jsx";
 import { SITE } from "../site/data.js";
 
 const LOGO = "/assets/logos/deserto-logo-full.png";
@@ -11,15 +11,17 @@ function MenuHeader() {
   const { store } = SITE;
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(252,238,228,0.9)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--border-default)" }}>
-      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "0 var(--space-6)", height: 70, display: "flex", alignItems: "center", gap: "var(--space-5)" }}>
+      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "0 var(--space-6)", height: 70, display: "flex", alignItems: "center", gap: "var(--space-4)" }}>
+        <Link to="/" aria-label="Back to site" title="Back to site" className="menu-back" style={{
+          display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+          width: 34, height: 34, borderRadius: "50%", color: "var(--ink-400)",
+        }}>
+          <Icon name="arrow-left" size={18} color="currentColor" />
+        </Link>
         <Link to="/" style={{ display: "flex", alignItems: "center" }}>
           <img src={LOGO} alt="Deserto — Frozen Yogurt & Café" style={{ height: 48, width: "auto", display: "block" }} />
         </Link>
-        <Link to="/" className="nav-link" style={{ fontWeight: 700, fontSize: "var(--text-sm)", color: "var(--ink-700)", display: "inline-flex", alignItems: "center", gap: 6 }}>
-          <Icon name="arrow-left" size={15} color="var(--ink-700)" />
-          Back to site
-        </Link>
-        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 10, fontSize: "var(--text-sm)", color: "var(--ink-500)" }}>
+        <div className="hide-sm" style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 10, fontSize: "var(--text-sm)", color: "var(--ink-500)" }}>
           <Icon name="map-pin" size={15} color="var(--wine-500)" />
           <span>{store.addr} · {store.hours}</span>
         </div>
@@ -67,12 +69,12 @@ function OrderBar() {
 }
 
 /* ---------- One menu card (view-only, photo-forward) ---------- */
-function ItemCard({ p }) {
+function ItemCard({ p, i = 0 }) {
   const tagTone = { Vegan: "olive", GF: "caramel", DF: "mauve", New: "orange" };
   return (
-    <div className="menu-card" style={{
+    <div className="menu-card stagger-item" style={{
       display: "flex", flexDirection: "column", background: "var(--white)", borderRadius: "var(--radius-xl)",
-      border: "1px solid var(--border-default)", boxShadow: "var(--shadow-sm)", overflow: "hidden",
+      border: "1px solid var(--border-default)", boxShadow: "var(--shadow-sm)", overflow: "hidden", "--i": i,
     }}>
       {/* full-bleed square photo */}
       <div style={{ position: "relative", aspectRatio: "1 / 1", overflow: "hidden" }}>
@@ -116,6 +118,16 @@ export default function Menu() {
     return () => obs.disconnect();
   }, []);
 
+  // Reveal each category (and stagger its cards) as it scrolls into view
+  React.useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }),
+      { threshold: 0.08, rootMargin: "0px 0px -6% 0px" }
+    );
+    Object.values(sectionRefs.current).forEach((el) => el && io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   // Deep link (#coffee) jumps to that category section
   React.useEffect(() => {
     const slug = window.location.hash.replace("#", "");
@@ -128,7 +140,7 @@ export default function Menu() {
   return (
     <div style={{ background: "var(--peach-100)", minHeight: "100vh" }}>
       <MenuHeader />
-      <main style={{ maxWidth: "var(--container-lg, 980px)", margin: "0 auto", padding: "var(--space-7) var(--space-6) var(--space-9)" }}>
+      <main style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-7) var(--space-6) var(--space-9)" }}>
         <div style={{ marginBottom: "var(--space-5)" }}>
           <span className="eyebrow" style={{ color: "var(--wine-500)" }}>The menu</span>
           <h1 style={{ fontSize: "var(--text-4xl)", margin: "8px 0 0", color: "var(--wine-700)" }}>What we make</h1>
@@ -136,18 +148,28 @@ export default function Menu() {
 
         <OrderBar />
 
-        {/* sticky jump-nav */}
-        <nav style={{ position: "sticky", top: 70, zIndex: 40, background: "var(--peach-100)", margin: "var(--space-6) 0 var(--space-5)", padding: "10px 0", display: "flex", gap: 8, flexWrap: "wrap", borderBottom: "1px solid var(--border-default)" }}>
-          {categories.map((c) => (<Chip key={c.slug} on={activeCat === c.slug} onClick={() => scrollToCat(c.slug)}>{c.name}</Chip>))}
-        </nav>
+        {/* two-column layout: sticky category rail on the left, scrolling menu on the right */}
+        <div className="menu-layout" style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: "var(--space-7)", marginTop: "var(--space-6)", alignItems: "start" }}>
+          {/* sticky side tabs */}
+          <nav className="menu-rail" style={{ position: "sticky", top: 90, display: "flex", flexDirection: "column", gap: 4 }}>
+            {categories.map((c) => (
+              <button key={c.slug} onClick={() => scrollToCat(c.slug)} aria-current={activeCat === c.slug} style={{
+                cursor: "pointer", textAlign: "left", borderRadius: "var(--radius-md)", padding: "11px 16px",
+                border: "none", background: activeCat === c.slug ? "var(--wine-700)" : "transparent",
+                color: activeCat === c.slug ? "var(--cream-50)" : "var(--ink-700)",
+                fontFamily: "var(--font-body)", fontWeight: activeCat === c.slug ? 800 : 700, fontSize: "var(--text-md)",
+                transition: "all .16s var(--ease-out, ease)",
+              }}>{c.name}</button>
+            ))}
+          </nav>
 
-        {/* every category, stacked — the whole menu visible in one scroll */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-7)" }}>
+          {/* every category, stacked — the whole menu visible in one scroll */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", minWidth: 0 }}>
           {categories.map((c) => {
             const list = products.filter((p) => p.cat === c.slug);
             const groups = [...new Set(list.map((p) => p.group))];
             return (
-              <section key={c.slug} data-slug={c.slug} ref={(el) => { sectionRefs.current[c.slug] = el; }} style={{ scrollMarginTop: 128 }}>
+              <section key={c.slug} data-slug={c.slug} className="reveal" ref={(el) => { sectionRefs.current[c.slug] = el; }} style={{ scrollMarginTop: 128 }}>
                 <h2 style={{ fontSize: "var(--text-2xl)", margin: "0 0 var(--space-4)", color: "var(--wine-700)" }}>{c.name}</h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
                   {groups.map((g) => (
@@ -156,7 +178,7 @@ export default function Menu() {
                         <div style={{ margin: "0 0 var(--space-3)", fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", color: "var(--ink-400)", textTransform: "uppercase", letterSpacing: ".05em" }}>{g}</div>
                       )}
                       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "var(--space-5)" }}>
-                        {list.filter((p) => p.group === g).map((p) => (<ItemCard key={p.id} p={p} />))}
+                        {list.filter((p) => p.group === g).map((p, idx) => (<ItemCard key={p.id} p={p} i={idx} />))}
                       </div>
                     </div>
                   ))}
@@ -169,6 +191,7 @@ export default function Menu() {
               </section>
             );
           })}
+          </div>
         </div>
 
         {/* order again at the bottom of the menu */}

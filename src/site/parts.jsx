@@ -21,6 +21,27 @@ export function Photo({ src, tint = "var(--peach-100)", label, height = "100%", 
   );
 }
 
+/* ---------- useReveal — fade + rise an element into view on scroll ----------
+   Returns a ref; attach it to any element to make it (and any .stagger-item
+   children) animate in once, the first time it enters the viewport. */
+export function useReveal(options = {}) {
+  const ref = React.useRef(null);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.classList.add("reveal");
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { el.classList.add("in"); io.unobserve(el); }
+      }),
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px", ...options }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
 /* ---------- Arch — the café's signature arched silhouette ---------- */
 export function Arch({ children, radius = "50% 50% 0 0 / 38% 38% 0 0", style = {}, ...rest }) {
   return (
