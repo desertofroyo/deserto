@@ -1,0 +1,214 @@
+[
+  {
+    "id": "fy-selfserve",
+    "cat": "froyo",
+    "group": "",
+    "name": "Self-Serve Frozen Yogurt",
+    "desc": "Build your own at the swirl wall — seasonal rotating flavors and a full toppings bar. Made your way, in the shop.",
+    "instore": true,
+    "img": "macro-swirl.jpg"
+  },
+  {
+    "id": "tonic-house",
+    "cat": "tonics",
+    "group": "",
+    "name": "House Tonics",
+    "desc": "Sparkling fruit tonics in our signature cans — refreshing seasonal flavors that rotate through the year. Ask about today's lineup.",
+    "tags": [
+      "Seasonal"
+    ],
+    "img": "/assets/products/strawberry-tonic.jpg",
+    "tint": "var(--rose-200)"
+  },
+  {
+    "id": "c-esp1",
+    "cat": "coffee",
+    "group": "Hot",
+    "name": "Espresso · Single",
+    "tint": "var(--caramel-100)"
+  },
+  {
+    "id": "c-esp2",
+    "cat": "coffee",
+    "group": "Hot",
+    "name": "Espresso · Double",
+    "tint": "var(--caramel-200)"
+  },
+  {
+    "id": "c-capp",
+    "cat": "coffee",
+    "group": "Hot",
+    "name": "Cappuccino",
+    "img": "/assets/products/cappuccino.jpg",
+    "tint": "var(--peach-100)"
+  },
+  {
+    "id": "c-latte",
+    "cat": "coffee",
+    "group": "Hot",
+    "name": "Hot Latte",
+    "img": "/assets/products/hot-latte.jpg",
+    "tint": "var(--caramel-100)"
+  },
+  {
+    "id": "c-macch",
+    "cat": "coffee",
+    "group": "Hot",
+    "name": "Hot Macchiato",
+    "img": "/assets/products/hot-macchiato.jpg",
+    "tint": "var(--caramel-100)"
+  },
+  {
+    "id": "c-chai",
+    "cat": "coffee",
+    "group": "Hot",
+    "name": "Hot Chai Latte",
+    "tint": "var(--peach-200)"
+  },
+  {
+    "id": "c-amer",
+    "cat": "coffee",
+    "group": "Hot",
+    "name": "Americano",
+    "img": "/assets/products/americano.jpg",
+    "tint": "var(--sand-200)"
+  },
+  {
+    "id": "c-ilatte",
+    "cat": "coffee",
+    "group": "Iced",
+    "name": "Iced Latte",
+    "img": "/assets/products/iced-latte.jpg",
+    "tint": "var(--caramel-100)"
+  },
+  {
+    "id": "c-iamer",
+    "cat": "coffee",
+    "group": "Iced",
+    "name": "Iced Americano",
+    "img": "/assets/products/iced-americano.jpg",
+    "tint": "var(--caramel-100)"
+  },
+  {
+    "id": "c-imacch",
+    "cat": "coffee",
+    "group": "Iced",
+    "name": "Iced Macchiato",
+    "img": "/assets/products/iced-macchiato.jpg",
+    "tint": "var(--caramel-200)"
+  },
+  {
+    "id": "c-ichai",
+    "cat": "coffee",
+    "group": "Iced",
+    "name": "Iced Chai Latte",
+    "img": "/assets/products/iced-chai-latte.jpg",
+    "tint": "var(--sand-200)"
+  },
+  {
+    "id": "p-redv",
+    "cat": "pastries",
+    "group": "Cookies NYC",
+    "name": "Red Velvet & White Chocolate",
+    "img": "/assets/products/red-velvet-and-white-chocolate.jpg",
+    "tint": "var(--rose-100)"
+  },
+  {
+    "id": "p-ccw",
+    "cat": "pastries",
+    "group": "Cookies NYC",
+    "name": "Chocolate Chip & Walnut",
+    "img": "/assets/products/chocolate-chip-and-walnut.jpg",
+    "tint": "var(--caramel-100)"
+  },
+  {
+    "id": "p-dcw",
+    "cat": "pastries",
+    "group": "Cookies NYC",
+    "name": "Double Chocolate & Walnut",
+    "tint": "var(--caramel-200)"
+  },
+  {
+    "id": "p-matcha",
+    "cat": "pastries",
+    "group": "Cookies NYC",
+    "name": "Matcha Chocolate Chip",
+    "tint": "var(--leaf-100)"
+  },
+  {
+    "id": "p-macad",
+    "cat": "pastries",
+    "group": "Cookies NYC",
+    "name": "White Chocolate Macadamia",
+    "img": "/assets/products/white-chocolate-macadamia.jpg",
+    "tint": "var(--peach-100)"
+  },
+  {
+    "id": "p-vanilla",
+    "cat": "pastries",
+    "group": "Scones",
+    "name": "Vanilla Almond Scone",
+    "img": "/assets/products/vanilla-almond.jpg",
+    "tint": "var(--sand-200)"
+  },
+  {
+    "id": "p-bluelem",
+    "cat": "pastries",
+    "group": "Scones",
+    "name": "Blueberry Lemon Scone",
+    "img": "/assets/products/blueberry-lemon.jpg",
+    "tint": "var(--rose-200)"
+  },
+  {
+    "id": "p-nutella",
+    "cat": "pastries",
+    "group": "Cake jars",
+    "name": "Chocolate Nutella Jar",
+    "tint": "var(--caramel-200)"
+  },
+  {
+    "id": "p-gansito",
+    "cat": "pastries",
+    "group": "Cake jars",
+    "name": "Gansito Cake Jar",
+    "img": "/assets/products/gansito-cake-jar.jpg",
+    "tint": "var(--rose-100)"
+  },
+  {
+    "id": "p-oreo",
+    "cat": "pastries",
+    "group": "Cake jars",
+    "name": "Oreo Cake Jar",
+    "img": "/assets/products/oreo-cake-jar.jpg",
+    "tint": "var(--sand-200)"
+  },
+  {
+    "id": "p-dot",
+    "cat": "pastries",
+    "group": "Cake jars",
+    "name": "Dot Cake",
+    "tint": "var(--peach-200)"
+  },
+  {
+    "id": "x-fiji",
+    "cat": "extras",
+    "group": "Drinks",
+    "name": "Fiji Water",
+    "tint": "var(--leaf-100)"
+  },
+  {
+    "id": "x-cstraw",
+    "cat": "extras",
+    "group": "DiLuna candles",
+    "name": "Strawberry Guava Candle",
+    "img": "guava-diluna.jpg",
+    "pos": "center 40%"
+  },
+  {
+    "id": "x-ccafe",
+    "cat": "extras",
+    "group": "DiLuna candles",
+    "name": "Cafecito Candle",
+    "tint": "var(--caramel-100)"
+  }
+]

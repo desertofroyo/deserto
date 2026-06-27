@@ -5,7 +5,10 @@
   "type": "module",
   "description": "Deserto Frozen Yogurt & Café — marketing site, online ordering, and mobile app, built on the Deserto design system.",
   "scripts": {
+    "menu": "node scripts/build-menu.mjs",
+    "predev": "node scripts/build-menu.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/build-menu.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },

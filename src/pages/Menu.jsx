@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { Badge, Icon } from "../components/ds";
 import { Photo } from "../site/parts.jsx";
 import { SITE } from "../site/data.js";
+// Menu items are generated at build time from the owner's Google Sheet
+// (scripts/build-menu.mjs), falling back to the seed catalog in data.js.
+import MENU_PRODUCTS from "../site/menu.products.json";
 
 const LOGO = "/assets/logos/deserto-logo-full.png";
 
@@ -99,7 +102,8 @@ function ItemCard({ p, i = 0 }) {
 
 /* ---------- Menu page (view the menu, order via a partner) ---------- */
 export default function Menu() {
-  const { categories, products } = SITE;
+  const { categories } = SITE;
+  const products = MENU_PRODUCTS;
   const [activeCat, setActiveCat] = React.useState(categories[0].slug);
   const sectionRefs = React.useRef({});
 
@@ -185,7 +189,7 @@ export default function Menu() {
                 </div>
                 {c.slug === "froyo" && (
                   <p style={{ fontSize: "var(--text-sm)", color: "var(--ink-500)", margin: "12px 4px 0", fontFamily: "var(--font-editorial)" }}>
-                    The full self-serve experience — swirl wall, toppings bar, made your way — happens in the shop. For delivery, grab a cone or a 32 oz take-home tub.
+                    The full self-serve experience — swirl wall, toppings bar, flavors made your way — happens in the shop. Flavors rotate with the seasons, so swing by to see what's churning.
                   </p>
                 )}
               </section>
