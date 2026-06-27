@@ -13,7 +13,7 @@ export function Photo({ src, tint = "var(--peach-100)", label, height = "100%", 
       overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", ...style,
     }}>
       {src ? (
-        <img src={src[0] === "/" ? src : IMG + src} alt={label || ""} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos }} />
+        <img src={src[0] === "/" || /^https?:\/\//.test(src) ? src : IMG + src} alt={label || ""} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos }} />
       ) : (
         <img src={ISO} alt="" style={{ height: "38%", opacity: 0.14, filter: "saturate(0.6)" }} />
       )}

@@ -1,5 +1,8 @@
 /* Deserto website — content model.
-   SOURCE OF TRUTH: the real store's Toast online-ordering menu (June 2026)
+   The menu catalog below is the SEED / fallback for the menu page. At build
+   time, scripts/build-menu.mjs swaps it for the owner's Google Sheet (when
+   MENU_SHEET_CSV_URL is set) and writes src/site/menu.products.json, which the
+   menu page reads. Prices are intentionally omitted everywhere.
    Deserto Frozen Yogurt & Café · 5635 E River Rd Unit 101, Tucson, AZ 85750 */
 export const SITE = {
   store: {
@@ -66,59 +69,45 @@ export const SITE = {
     { slug: "pastries", name: "Pastries" },
     { slug: "extras", name: "Extras" },
   ],
-  /* `img` paths beginning with "/assets/products/" are the store's official
-     Toast catalog photos (scraped from their live menu); plain filenames are
-     editorial/lifestyle shots in /assets/images/. `tint` is the load-fallback. */
+  /* `img` paths beginning with "/assets/products/" are catalog photos in
+     /public/assets/products/; plain filenames are editorial/lifestyle shots in
+     /assets/images/. `tint` is the colored load-fallback when there's no photo.
+     Froyo flavors and tonic flavors rotate seasonally, so the menu deliberately
+     shows the self-serve concept and a single house-tonics entry rather than a
+     fixed flavor list the owner would have to keep correcting. */
   products: [
-    /* --- Frozen Yogurt --- */
-    { id: "fy-weight", cat: "froyo", group: "Self-serve · in the shop", name: "Self-Serve Frozen Yogurt", desc: "Build it at the swirl wall — flavors rotate monthly.", price: 0.89, instore: true, img: "macro-swirl.jpg" },
-    { id: "fy-waffle", cat: "froyo", group: "Cones", name: "Froyo with Waffle Cone", price: 6.0, img: "cone-twotone.jpg", pos: "center 30%" },
-    { id: "fy-cake", cat: "froyo", group: "Cones", name: "Froyo with Cake Cone", price: 4.5, tint: "var(--peach-200)" },
-    { id: "fy-cone-w", cat: "froyo", group: "Cones", name: "Extra Waffle Cone", price: 2.0, tint: "var(--caramel-100)" },
-    { id: "fy-cone-c", cat: "froyo", group: "Cones", name: "Extra Cake Cone", price: 1.5, tint: "var(--sand-200)" },
-    { id: "th-tarte", cat: "froyo", group: "Take-home 32 oz", name: "Premium Tarte", desc: "32 oz of our self-serve original.", price: 29.0, tags: ["Vegan", "GF", "DF"], img: "/assets/products/premium-tarte.jpg", tint: "var(--peach-100)" },
-    { id: "th-guava", cat: "froyo", group: "Take-home 32 oz", name: "Guava", price: 29.0, tags: ["Vegan", "GF", "DF"], img: "/assets/products/guava.jpg", tint: "var(--rose-100)" },
-    { id: "th-choc", cat: "froyo", group: "Take-home 32 oz", name: "Vegan Double Chocolate", price: 29.0, tags: ["Vegan", "GF", "DF"], img: "/assets/products/vegan-double-chocolate.jpg", tint: "var(--caramel-200)" },
-    { id: "th-caramel", cat: "froyo", group: "Take-home 32 oz", name: "Salted Caramel", price: 29.0, tags: ["Vegan", "GF", "DF"], img: "/assets/products/salted-caramel.jpg", tint: "var(--caramel-100)" },
-    { id: "th-taro", cat: "froyo", group: "Take-home 32 oz", name: "Taro", price: 29.0, tags: ["Vegan", "GF", "DF"], img: "/assets/products/taro.jpg", tint: "var(--rose-200)" },
-    { id: "th-blue", cat: "froyo", group: "Take-home 32 oz", name: "Blueberry", price: 29.0, tags: ["Vegan", "GF", "DF"], img: "/assets/products/blueberry.jpg", tint: "var(--rose-200)" },
-    /* --- Tonics (two sizes: 16 oz / 24 oz) --- */
-    { id: "t-straw", cat: "tonics", group: "House tonics", name: "Strawberry Tonic", price: 5.99, priceLg: 7.99, plus: true, img: "/assets/products/strawberry-tonic.jpg", tint: "var(--rose-200)" },
-    { id: "t-peach", cat: "tonics", group: "House tonics", name: "Golden Peach Tonic", price: 5.99, priceLg: 7.99, plus: true, img: "/assets/products/golden-peach-tonic.jpg", tint: "var(--peach-200)" },
-    { id: "t-prickly", cat: "tonics", group: "House tonics", name: "Prickly Pear Tonic", price: 5.99, priceLg: 7.99, plus: true, img: "/assets/products/prickly-pear-tonic.jpg", tint: "var(--rose-100)" },
-    { id: "t-mango", cat: "tonics", group: "House tonics", name: "Mango Tonic", price: 5.99, priceLg: 7.99, plus: true, img: "/assets/products/mango-tonic.jpg", tint: "var(--orange-100)" },
-    { id: "t-blue", cat: "tonics", group: "House tonics", name: "Blueberry Tonic", price: 5.99, priceLg: 7.99, plus: true, img: "/assets/products/blueberry-tonic.jpg", tint: "var(--rose-200)" },
-    { id: "t-kiwi", cat: "tonics", group: "House tonics", name: "Kiwi Tonic", price: 5.99, priceLg: 7.99, plus: true, img: "/assets/products/kiwi-tonic.jpg", tint: "var(--leaf-100)" },
-    { id: "t-rasp", cat: "tonics", group: "House tonics", name: "Raspberry Tonic", price: 5.99, priceLg: 7.99, plus: true, img: "/assets/products/raspberry-tonic.jpg", tint: "var(--rose-100)" },
-    { id: "t-pine", cat: "tonics", group: "House tonics", name: "Pineapple Tonic", price: 5.99, priceLg: 7.99, plus: true, img: "/assets/products/pineapple-tonic.jpg", tint: "var(--orange-100)" },
+    /* --- Frozen Yogurt — self-serve only (flavors rotate seasonally) --- */
+    { id: "fy-selfserve", cat: "froyo", group: "", name: "Self-Serve Frozen Yogurt", desc: "Build your own at the swirl wall — seasonal rotating flavors and a full toppings bar. Made your way, in the shop.", instore: true, img: "macro-swirl.jpg" },
+    /* --- Tonics — one house entry (seasonal flavors; recipe kept in-house) --- */
+    { id: "tonic-house", cat: "tonics", group: "", name: "House Tonics", desc: "Sparkling fruit tonics in our signature cans — refreshing seasonal flavors that rotate through the year. Ask about today's lineup.", tags: ["Seasonal"], img: "/assets/products/strawberry-tonic.jpg", tint: "var(--rose-200)" },
     /* --- Coffee --- */
-    { id: "c-esp1", cat: "coffee", group: "Hot", name: "Espresso · Single", price: 1.0, tint: "var(--caramel-100)" },
-    { id: "c-esp2", cat: "coffee", group: "Hot", name: "Espresso · Double", price: 3.65, tint: "var(--caramel-200)" },
-    { id: "c-capp", cat: "coffee", group: "Hot", name: "Cappuccino", price: 5.75, priceLg: 6.5, plus: true, img: "/assets/products/cappuccino.jpg", tint: "var(--peach-100)" },
-    { id: "c-latte", cat: "coffee", group: "Hot", name: "Hot Latte", price: 5.75, priceLg: 6.5, plus: true, img: "/assets/products/hot-latte.jpg", tint: "var(--caramel-100)" },
-    { id: "c-macch", cat: "coffee", group: "Hot", name: "Hot Macchiato", price: 5.5, priceLg: 6.25, plus: true, img: "/assets/products/hot-macchiato.jpg", tint: "var(--caramel-100)" },
-    { id: "c-chai", cat: "coffee", group: "Hot", name: "Hot Chai Latte", price: 4.95, priceLg: 6.95, plus: true, tint: "var(--peach-200)" },
-    { id: "c-amer", cat: "coffee", group: "Hot", name: "Americano", price: 4.75, priceLg: 5.5, plus: true, img: "/assets/products/americano.jpg", tint: "var(--sand-200)" },
-    { id: "c-ilatte", cat: "coffee", group: "Iced", name: "Iced Latte", price: 5.95, priceLg: 6.95, plus: true, img: "/assets/products/iced-latte.jpg", tint: "var(--caramel-100)" },
-    { id: "c-iamer", cat: "coffee", group: "Iced", name: "Iced Americano", price: 5.25, priceLg: 5.95, plus: true, img: "/assets/products/iced-americano.jpg", tint: "var(--caramel-100)" },
-    { id: "c-imacch", cat: "coffee", group: "Iced", name: "Iced Macchiato", price: 5.75, priceLg: 7.25, plus: true, img: "/assets/products/iced-macchiato.jpg", tint: "var(--caramel-200)" },
-    { id: "c-ichai", cat: "coffee", group: "Iced", name: "Iced Chai Latte", price: 6.65, priceLg: 7.99, plus: true, img: "/assets/products/iced-chai-latte.jpg", tint: "var(--sand-200)" },
+    { id: "c-esp1", cat: "coffee", group: "Hot", name: "Espresso · Single", tint: "var(--caramel-100)" },
+    { id: "c-esp2", cat: "coffee", group: "Hot", name: "Espresso · Double", tint: "var(--caramel-200)" },
+    { id: "c-capp", cat: "coffee", group: "Hot", name: "Cappuccino", img: "/assets/products/cappuccino.jpg", tint: "var(--peach-100)" },
+    { id: "c-latte", cat: "coffee", group: "Hot", name: "Hot Latte", img: "/assets/products/hot-latte.jpg", tint: "var(--caramel-100)" },
+    { id: "c-macch", cat: "coffee", group: "Hot", name: "Hot Macchiato", img: "/assets/products/hot-macchiato.jpg", tint: "var(--caramel-100)" },
+    { id: "c-chai", cat: "coffee", group: "Hot", name: "Hot Chai Latte", tint: "var(--peach-200)" },
+    { id: "c-amer", cat: "coffee", group: "Hot", name: "Americano", img: "/assets/products/americano.jpg", tint: "var(--sand-200)" },
+    { id: "c-ilatte", cat: "coffee", group: "Iced", name: "Iced Latte", img: "/assets/products/iced-latte.jpg", tint: "var(--caramel-100)" },
+    { id: "c-iamer", cat: "coffee", group: "Iced", name: "Iced Americano", img: "/assets/products/iced-americano.jpg", tint: "var(--caramel-100)" },
+    { id: "c-imacch", cat: "coffee", group: "Iced", name: "Iced Macchiato", img: "/assets/products/iced-macchiato.jpg", tint: "var(--caramel-200)" },
+    { id: "c-ichai", cat: "coffee", group: "Iced", name: "Iced Chai Latte", img: "/assets/products/iced-chai-latte.jpg", tint: "var(--sand-200)" },
     /* --- Pastries --- */
-    { id: "p-redv", cat: "pastries", group: "Cookies NYC", name: "Red Velvet & White Chocolate", price: 5.99, img: "/assets/products/red-velvet-and-white-chocolate.jpg", tint: "var(--rose-100)" },
-    { id: "p-ccw", cat: "pastries", group: "Cookies NYC", name: "Chocolate Chip & Walnut", price: 5.99, img: "/assets/products/chocolate-chip-and-walnut.jpg", tint: "var(--caramel-100)" },
-    { id: "p-dcw", cat: "pastries", group: "Cookies NYC", name: "Double Chocolate & Walnut", price: 5.99, tint: "var(--caramel-200)" },
-    { id: "p-matcha", cat: "pastries", group: "Cookies NYC", name: "Matcha Chocolate Chip", price: 5.99, tint: "var(--leaf-100)" },
-    { id: "p-macad", cat: "pastries", group: "Cookies NYC", name: "White Chocolate Macadamia", price: 5.99, img: "/assets/products/white-chocolate-macadamia.jpg", tint: "var(--peach-100)" },
-    { id: "p-vanilla", cat: "pastries", group: "Scones", name: "Vanilla Almond Scone", price: 4.99, img: "/assets/products/vanilla-almond.jpg", tint: "var(--sand-200)" },
-    { id: "p-bluelem", cat: "pastries", group: "Scones", name: "Blueberry Lemon Scone", price: 4.99, img: "/assets/products/blueberry-lemon.jpg", tint: "var(--rose-200)" },
-    { id: "p-nutella", cat: "pastries", group: "Cake jars", name: "Chocolate Nutella Jar", price: 6.25, tint: "var(--caramel-200)" },
-    { id: "p-gansito", cat: "pastries", group: "Cake jars", name: "Gansito Cake Jar", price: 6.25, img: "/assets/products/gansito-cake-jar.jpg", tint: "var(--rose-100)" },
-    { id: "p-oreo", cat: "pastries", group: "Cake jars", name: "Oreo Cake Jar", price: 6.25, img: "/assets/products/oreo-cake-jar.jpg", tint: "var(--sand-200)" },
-    { id: "p-dot", cat: "pastries", group: "Cake jars", name: "Dot Cake", price: 6.25, tint: "var(--peach-200)" },
+    { id: "p-redv", cat: "pastries", group: "Cookies NYC", name: "Red Velvet & White Chocolate", img: "/assets/products/red-velvet-and-white-chocolate.jpg", tint: "var(--rose-100)" },
+    { id: "p-ccw", cat: "pastries", group: "Cookies NYC", name: "Chocolate Chip & Walnut", img: "/assets/products/chocolate-chip-and-walnut.jpg", tint: "var(--caramel-100)" },
+    { id: "p-dcw", cat: "pastries", group: "Cookies NYC", name: "Double Chocolate & Walnut", tint: "var(--caramel-200)" },
+    { id: "p-matcha", cat: "pastries", group: "Cookies NYC", name: "Matcha Chocolate Chip", tint: "var(--leaf-100)" },
+    { id: "p-macad", cat: "pastries", group: "Cookies NYC", name: "White Chocolate Macadamia", img: "/assets/products/white-chocolate-macadamia.jpg", tint: "var(--peach-100)" },
+    { id: "p-vanilla", cat: "pastries", group: "Scones", name: "Vanilla Almond Scone", img: "/assets/products/vanilla-almond.jpg", tint: "var(--sand-200)" },
+    { id: "p-bluelem", cat: "pastries", group: "Scones", name: "Blueberry Lemon Scone", img: "/assets/products/blueberry-lemon.jpg", tint: "var(--rose-200)" },
+    { id: "p-nutella", cat: "pastries", group: "Cake jars", name: "Chocolate Nutella Jar", tint: "var(--caramel-200)" },
+    { id: "p-gansito", cat: "pastries", group: "Cake jars", name: "Gansito Cake Jar", img: "/assets/products/gansito-cake-jar.jpg", tint: "var(--rose-100)" },
+    { id: "p-oreo", cat: "pastries", group: "Cake jars", name: "Oreo Cake Jar", img: "/assets/products/oreo-cake-jar.jpg", tint: "var(--sand-200)" },
+    { id: "p-dot", cat: "pastries", group: "Cake jars", name: "Dot Cake", tint: "var(--peach-200)" },
     /* --- Extras --- */
-    { id: "x-fiji", cat: "extras", group: "Drinks", name: "Fiji Water", price: 4.5, tint: "var(--leaf-100)" },
-    { id: "x-cstraw", cat: "extras", group: "DiLuna candles", name: "Strawberry Guava Candle", price: 8.5, img: "guava-diluna.jpg", pos: "center 40%" },
-    { id: "x-ccafe", cat: "extras", group: "DiLuna candles", name: "Cafecito Candle", price: 8.5, tint: "var(--caramel-100)" },
+    { id: "x-fiji", cat: "extras", group: "Drinks", name: "Fiji Water", tint: "var(--leaf-100)" },
+    { id: "x-cstraw", cat: "extras", group: "DiLuna candles", name: "Strawberry Guava Candle", img: "guava-diluna.jpg", pos: "center 40%" },
+    { id: "x-ccafe", cat: "extras", group: "DiLuna candles", name: "Cafecito Candle", tint: "var(--caramel-100)" },
   ],
 
   personality: [
