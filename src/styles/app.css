@@ -354,13 +354,20 @@ body { margin: 0; }
   .r-footer-bottom { flex-direction: column !important; gap: 10px; text-align: center; }
 }
 
+/* Hero promo copy fades up on each slide change (re-mounts via key={i}).
+   Disabled under prefers-reduced-motion by the global rule below. */
+.r-hero-promo { animation: fadeUp 0.6s var(--ease-out, ease) both; }
+
 /* ---- Hero: tighten + make text readable over the photo on phones ---- */
 @media (max-width: 760px) {
-  .r-hero-inner { min-height: 340px !important; }
+  .r-hero-inner { min-height: 420px !important; }
   .r-hero-text { max-width: 100% !important; }
   .r-hero-h1 { font-size: clamp(38px, 10vw, 56px) !important; }
+  /* On phones the box is narrow, so the desktop rightward shift pushes the
+     product off-frame — drop the shift and center the product instead. */
+  .r-hero-img { transform: none !important; object-position: center 45% !important; }
   .r-hero-scrim {
-    background: linear-gradient(180deg, rgba(252,238,228,0.97) 0%, rgba(252,238,228,0.93) 48%, rgba(252,238,228,0.84) 72%, rgba(252,238,228,0.55) 89%, rgba(252,238,228,0.12) 100%) !important;
+    background: linear-gradient(180deg, rgba(252,238,228,0.96) 0%, rgba(252,238,228,0.88) 34%, rgba(252,238,228,0.7) 55%, rgba(252,238,228,0.35) 72%, rgba(252,238,228,0.08) 88%, rgba(252,238,228,0) 100%) !important;
   }
 }
 
