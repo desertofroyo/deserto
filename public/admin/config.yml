@@ -1,0 +1,171 @@
+# Sveltia CMS configuration for Deserto.
+# Docs / setup: docs/CMS-SETUP.md
+#
+# IMPORTANT: replace YOUR-SITE.netlify.app below with the real site address once
+# you know it (and again when the custom domain is attached). It must match the
+# site the CMS is served from, and the GitHub OAuth app's callback URL.
+
+backend:
+  name: github
+  repo: ZahraaSadeqProd/deserto
+  branch: main
+  # GitHub login is handled by our own Netlify functions (no third-party needed):
+  base_url: https://YOUR-SITE.netlify.app
+  auth_endpoint: .netlify/functions/auth
+
+# Uploaded images are committed here and served from /assets/uploads/...
+media_folder: "public/assets/uploads"
+public_folder: "/assets/uploads"
+
+# Friendlier UI copy
+site_url: https://YOUR-SITE.netlify.app
+display_url: https://YOUR-SITE.netlify.app
+publish_mode: simple
+
+collections:
+  # ----------------------------------------------------------------- HOME PAGE
+  - name: home
+    label: "Home page"
+    description: "The big rotating banner, the 'What we make' cards, and the story gallery."
+    files:
+      - name: hero
+        label: "Hero — rotating banner"
+        file: "content/hero.json"
+        icon: home
+        fields:
+          - label: "Slides"
+            name: slides
+            widget: list
+            label_singular: "slide"
+            summary: "{{fields.eyebrow}} — {{fields.title}} {{fields.accent}}"
+            fields:
+              - { label: "Product image (transparent PNG works best)", name: cut, widget: image }
+              - { label: "Image description (for screen readers)", name: alt, widget: string }
+              - { label: "Eyebrow (small label above the headline)", name: eyebrow, widget: string }
+              - { label: "Headline — line 1", name: title, widget: string }
+              - { label: "Headline — line 2 (colored accent)", name: accent, widget: string }
+              - { label: "Subtext", name: sub, widget: text }
+              - { label: "Button label", name: ctaLabel, widget: string }
+              - { label: "Button link", name: ctaTo, widget: string, hint: "Where the button goes, e.g. /menu#froyo" }
+
+      - name: highlights
+        label: "What we make (cards)"
+        file: "content/highlights.json"
+        icon: grid_view
+        fields:
+          - label: "Cards"
+            name: items
+            widget: list
+            label_singular: "card"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Name", name: name, widget: string }
+              - { label: "Image (transparent PNG works best)", name: img, widget: image }
+              - { label: "Links to", name: to, widget: string, hint: "e.g. /menu#froyo" }
+              - { label: "Slug (internal id — leave as is)", name: slug, widget: string }
+
+      - name: story
+        label: "Our story gallery"
+        file: "content/story.json"
+        icon: photo_library
+        fields:
+          - label: "Gallery photos"
+            name: gallery
+            widget: list
+            label_singular: "photo"
+            summary: "{{fields.caption}}"
+            fields:
+              - { label: "Photo", name: img, widget: image }
+              - { label: "Caption", name: caption, widget: string }
+
+  # --------------------------------------------------------------------- MENU
+  - name: menu
+    label: "Menu items"
+    description: "Everything on the menu page — froyo, tonics, coffee, pastries, extras."
+    files:
+      - name: menu
+        label: "Menu items"
+        file: "content/menu.json"
+        icon: restaurant_menu
+        fields:
+          - label: "Items"
+            name: items
+            widget: list
+            label_singular: "item"
+            summary: "{{fields.name}}  ·  {{fields.cat}}"
+            fields:
+              - { label: "Name", name: name, widget: string }
+              - label: "Category"
+                name: cat
+                widget: select
+                options:
+                  - { label: "Frozen Yogurt", value: froyo }
+                  - { label: "Tonics", value: tonics }
+                  - { label: "Coffee", value: coffee }
+                  - { label: "Pastries", value: pastries }
+                  - { label: "Extras", value: extras }
+              - { label: "Group / sub-heading", name: group, widget: string, required: false, hint: "e.g. Hot, Iced, Cookies NYC. Leave blank for none." }
+              - { label: "Description", name: desc, widget: text, required: false }
+              - { label: "Photo", name: img, widget: image, required: false }
+              - { label: "Tags", name: tags, widget: list, required: false, hint: "e.g. Vegan, GF, New — one per line" }
+              - { label: "In-store only", name: instore, widget: boolean, required: false, default: false }
+              - { label: "Calories", name: cal, widget: number, required: false, value_type: int, min: 0 }
+              - { label: "Contains (allergens)", name: allergens, widget: list, required: false, hint: "e.g. Dairy, Wheat, Nuts — one per line" }
+              - label: "Nutrition (grams)"
+                name: macros
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { label: "Fat", name: fat, widget: number, required: false, min: 0 }
+                  - { label: "Carbs", name: carbs, widget: number, required: false, min: 0 }
+                  - { label: "Protein", name: protein, widget: number, required: false, min: 0 }
+              - { label: "Internal id", name: id, widget: string, required: false, hint: "Leave blank for new items." }
+              - { label: "Fallback tile color", name: tint, widget: string, required: false, hint: "Advanced — leave blank to use the category default." }
+              - { label: "Photo focus position", name: pos, widget: string, required: false, hint: "Advanced — e.g. 'center 40%'." }
+
+  # ----------------------------------------------------------------- SETTINGS
+  - name: settings
+    label: "Store details"
+    description: "Address, hours, phone, delivery partners, and menu categories."
+    files:
+      - name: site
+        label: "Store details"
+        file: "content/site.json"
+        icon: store
+        fields:
+          - label: "Store"
+            name: store
+            widget: object
+            fields:
+              - { label: "Name", name: name, widget: string }
+              - { label: "Street address", name: addr, widget: string }
+              - { label: "City / State / ZIP", name: city, widget: string }
+              - { label: "Phone", name: phone, widget: string }
+              - { label: "Hours", name: hours, widget: string }
+              - { label: "Google Maps link", name: maps, widget: string }
+              - { label: "Interior photo", name: img, widget: image, required: false }
+          - label: "Delivery partners"
+            name: delivery
+            widget: list
+            label_singular: "partner"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Name", name: name, widget: string }
+              - { label: "Order URL", name: url, widget: string }
+              - { label: "Brand color", name: brand, widget: string, hint: "e.g. #FF3008" }
+              - { label: "Text color", name: fg, widget: string, hint: "e.g. #fff" }
+
+      - name: categories
+        label: "Menu categories (advanced)"
+        file: "content/categories.json"
+        icon: category
+        fields:
+          - label: "Categories"
+            name: items
+            widget: list
+            label_singular: "category"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Name", name: name, widget: string }
+              - { label: "Slug (internal id — leave as is)", name: slug, widget: string }

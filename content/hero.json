@@ -1,0 +1,34 @@
+{
+  "slides": [
+    {
+      "cut": "/assets/products/froyo-cutout-v2.png",
+      "alt": "A Deserto frozen yogurt cup topped with berries, granola and caramel",
+      "eyebrow": "Self-serve froyo",
+      "title": "Pile it",
+      "accent": "high.",
+      "sub": "Frozen yogurt your way — swirl it, stack the toppings, zero limits.",
+      "ctaLabel": "Build yours",
+      "ctaTo": "/menu#froyo"
+    },
+    {
+      "cut": "/assets/products/hero-tonics.png",
+      "alt": "Three Deserto fruit tonics in our signature cans",
+      "eyebrow": "Signature tonics",
+      "title": "Sip something",
+      "accent": "bright.",
+      "sub": "Sparkling fruit tonics in our signature cans, made fresh every day.",
+      "ctaLabel": "See the tonics",
+      "ctaTo": "/menu#tonics"
+    },
+    {
+      "cut": "/assets/products/hero-cakejars.png",
+      "alt": "Three Deserto layered cake jars with berries and chocolate",
+      "eyebrow": "Cake jars",
+      "title": "Layered to",
+      "accent": "love.",
+      "sub": "Cream, crumb and berries — dessert, stacked in a jar.",
+      "ctaLabel": "Order a jar",
+      "ctaTo": "/menu#pastries"
+    }
+  ]
+}

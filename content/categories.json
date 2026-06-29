@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "slug": "froyo",
+      "name": "Frozen Yogurt"
+    },
+    {
+      "slug": "tonics",
+      "name": "Tonics"
+    },
+    {
+      "slug": "coffee",
+      "name": "Coffee"
+    },
+    {
+      "slug": "pastries",
+      "name": "Pastries"
+    },
+    {
+      "slug": "extras",
+      "name": "Extras"
+    }
+  ]
+}
