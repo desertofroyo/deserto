@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Icon } from "../components/ds";
 import { IMG, useReveal } from "./parts.jsx";
 import { SITE } from "./data.js";
 
@@ -32,6 +33,17 @@ export function MenuSection({ sectionRef }) {
               <span className="showcase-link">View menu</span>
             </Link>
           ))}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "var(--space-8)" }}>
+          <Link to="/menu" className="btn-wine" style={{
+            borderRadius: 999, padding: "15px 32px", background: "var(--wine-700)", color: "var(--cream-50)",
+            fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)",
+            display: "inline-flex", alignItems: "center", gap: 10, boxShadow: "var(--shadow-md)",
+          }}>
+            View full menu
+            <Icon name="arrow-right" size={18} color="var(--cream-50)" />
+          </Link>
         </div>
       </div>
     </section>

@@ -3,9 +3,7 @@ import { Badge, Icon } from "../components/ds";
 import { Header } from "../site/Header.jsx";
 import { Photo, Arch } from "../site/parts.jsx";
 import { SITE } from "../site/data.js";
-// Menu items are generated at build time from the owner's Google Sheet
-// (scripts/build-menu.mjs), falling back to the seed catalog in data.js.
-import MENU_PRODUCTS from "../site/menu.products.json";
+// Menu items are owner-editable via the CMS (content/menu.json → SITE.products).
 
 /* Per-category icon used for headers and for the photoless item chips. */
 const CAT_ICON = { froyo: "ice-cream-bowl", tonics: "cup-soda", coffee: "coffee", pastries: "cookie", extras: "gift" };
@@ -183,7 +181,7 @@ function CafeCategory({ cat, list }) {
           {g && <div className="mlist-grouplabel">{g}</div>}
           <div className="mlist-grid">
             {list.filter((p) => p.group === g).map((p, idx) => (
-              <MenuRow key={p.id} p={p} cat={cat} i={idx} />
+              <MenuRow key={p.id || `${p.name}-${idx}`} p={p} cat={cat} i={idx} />
             ))}
           </div>
         </div>
@@ -195,7 +193,7 @@ function CafeCategory({ cat, list }) {
 /* ---------- Menu page (view the menu, order via a partner) ---------- */
 export default function Menu() {
   const { categories } = SITE;
-  const products = MENU_PRODUCTS;
+  const products = SITE.products;
   const [activeCat, setActiveCat] = React.useState(categories[0].slug);
   const sectionRefs = React.useRef({});
 

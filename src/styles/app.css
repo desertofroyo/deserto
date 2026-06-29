@@ -347,6 +347,11 @@ body { margin: 0; }
   .r-map { min-height: 300px !important; }
 }
 
+/* ---- Footer links + socials ---- */
+.r-footer a[href]:hover { color: var(--cream-50); }
+.r-social-btn { transition: background .2s ease, transform .2s ease; }
+.r-social-btn:hover { background: rgba(255,255,255,0.22) !important; transform: translateY(-1px); }
+
 /* ---- Footer: 4 cols -> 2 -> 1 ---- */
 @media (max-width: 820px) { .r-footer { grid-template-columns: 1fr 1fr !important; } }
 @media (max-width: 520px) {
@@ -358,16 +363,36 @@ body { margin: 0; }
    Disabled under prefers-reduced-motion by the global rule below. */
 .r-hero-promo { animation: fadeUp 0.6s var(--ease-out, ease) both; }
 
-/* ---- Hero: tighten + make text readable over the photo on phones ---- */
+/* Hero photo: feather the right edge into the peach backdrop so it never
+   hard-cuts against the max-width margin. The fade starts at 85% — past the
+   centered product — so the product itself stays crisp, only the empty edge
+   dissolves. (The left edge is handled by the color scrim + headline column.) */
+.r-hero-img {
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 85%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 85%, transparent 100%);
+}
+
+/* ---- Hero on phones: copy on top, photo full-bleed behind with a top fade ----
+   The box is too narrow to sit the product beside the text, so the photo stage
+   goes full-width behind the copy and the scrim becomes a top-weighted veil that
+   keeps the headline readable. The right-edge blur is dropped (no side band). */
 @media (max-width: 760px) {
-  .r-hero-inner { min-height: 420px !important; }
+  .r-hero-inner {
+    min-height: auto !important;
+    align-items: flex-start !important;
+    padding: var(--space-8) var(--space-6) 280px !important;
+  }
   .r-hero-text { max-width: 100% !important; }
   .r-hero-h1 { font-size: clamp(38px, 10vw, 56px) !important; }
-  /* On phones the box is narrow, so the desktop rightward shift pushes the
-     product off-frame — drop the shift and center the product instead. */
-  .r-hero-img { transform: none !important; object-position: center 45% !important; }
+  .r-hero-stage { width: 100% !important; }
+  .r-hero-img {
+    object-position: center 40% !important;
+    /* full-bleed behind the copy on phones — no side feather, the top scrim does the work */
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
   .r-hero-scrim {
-    background: linear-gradient(180deg, rgba(252,238,228,0.96) 0%, rgba(252,238,228,0.88) 34%, rgba(252,238,228,0.7) 55%, rgba(252,238,228,0.35) 72%, rgba(252,238,228,0.08) 88%, rgba(252,238,228,0) 100%) !important;
+    background: linear-gradient(180deg, rgba(252,238,228,0.96) 0%, rgba(252,238,228,0.86) 40%, rgba(252,238,228,0.45) 66%, rgba(252,238,228,0.1) 86%, rgba(252,238,228,0) 100%) !important;
   }
 }
 

@@ -1,11 +1,12 @@
 # Netlify configuration for the Deserto site.
 [build]
-  command = "npm run build"   # runs "prebuild" (scripts/build-menu.mjs) first, then vite build
+  command = "npm run build"   # vite build (content is bundled from /content/*.json)
   publish = "dist"
-  functions = "netlify/functions"
+  functions = "netlify/functions"   # GitHub OAuth for the Sveltia CMS (auth + callback)
 
-# SPA routing: serve the app for any path so deep links (/menu, /publish) work
-# on refresh. Real files (assets, functions) are served before this catch-all.
+# SPA routing: serve the app for any path so deep links (/menu) work on refresh.
+# Real files (the /admin CMS, assets, functions) are served before this catch-all
+# because the rewrite is not forced, so existing files win.
 [[redirects]]
   from = "/*"
   to = "/index.html"

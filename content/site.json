@@ -1,0 +1,37 @@
+{
+  "store": {
+    "name": "Deserto Frozen Yogurt & Café",
+    "addr": "5635 E River Rd, Unit 101",
+    "city": "Tucson, AZ 85750",
+    "phone": "(520) 981-1029",
+    "hours": "Open daily · 10 AM – 10 PM",
+    "maps": "https://www.google.com/maps/search/?api=1&query=5635%20E%20River%20Rd%20Unit%20101%2C%20Tucson%2C%20AZ%2085750",
+    "img": "interior-froyo-arches.jpg"
+  },
+  "delivery": [
+    {
+      "name": "DoorDash",
+      "url": "https://www.doordash.com/store/deserto-frozen-yogurt-&-caf%C3%A9-tucson-43227879/107768949/?pickup=true",
+      "brand": "#FF3008",
+      "fg": "#fff"
+    },
+    {
+      "name": "Grubhub",
+      "url": "https://www.grubhub.com/restaurant/deserto-frozen-yogurt--cafe-5635-e-river-rd-tucson/14287624",
+      "brand": "#E04A28",
+      "fg": "#fff"
+    }
+  ],
+  "social": [
+    {
+      "name": "Instagram",
+      "icon": "instagram",
+      "url": "https://www.instagram.com/deserto.frozenyogurt/?hl=en"
+    },
+    {
+      "name": "Facebook",
+      "icon": "facebook",
+      "url": "https://www.facebook.com/61577031538659/photos/"
+    }
+  ]
+}
