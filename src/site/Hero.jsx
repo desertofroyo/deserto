@@ -7,7 +7,7 @@ const ROTATE_MS = 5500;
 // The sliver this opens on the left falls under the (solid-peach) scrim, so it's unseen.
 // Per-slide so each product can be framed independently.
 const SLIDES = [
-  { src: "/assets/images/hero-froyo-scene.jpg",  alt: "A Deserto frozen yogurt cup topped with berries, granola and caramel", pos: "center 50%", shift: "13%" },
+  { src: "/assets/images/hero-froyo-scene.jpg",  alt: "A Deserto frozen yogurt cup topped with berries, granola and caramel", pos: "center 50%", shift: "0%" },
   { src: "/assets/images/hero-tonics-scene.jpg", alt: "Three Deserto fruit tonics on the café counter, arches glowing behind", pos: "right 52%", shift: "13%" },
   { src: "/assets/images/hero-cakejars-scene.jpg", alt: "Three Deserto layered cake jars on the café counter with berries and chocolate", pos: "center 50%", shift: "13%" },
 ];
@@ -17,7 +17,7 @@ const SLIDES = [
    behind a fixed left column (headline, copy, buttons). The images are
    right-anchored so the product always stays in frame; a left-weighted scrim
    (top-weighted on phones) keeps the headline readable. */
-export function Hero({ onMenu }) {
+export function Hero({ onVisit }) {
   const [i, setI] = React.useState(0);
   const [paused, setPaused] = React.useState(false);
   const n = SLIDES.length;
@@ -102,11 +102,14 @@ export function Hero({ onMenu }) {
               View menu
               <Icon name="arrow-right" size={18} color="var(--cream-50)" />
             </Link>
-            <button onClick={onMenu} style={{
+            <button onClick={onVisit} style={{
               cursor: "pointer", borderRadius: 999, padding: "13px 26px", background: "rgba(255,255,255,0.55)",
               border: "2px solid var(--wine-700)", color: "var(--wine-700)", fontFamily: "var(--font-body)",
-              fontWeight: 800, fontSize: "var(--text-sm)",
-            }}>See the menu</button>
+              fontWeight: 800, fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center", gap: 9,
+            }}>
+              Visit us
+              <Icon name="map-pin" size={17} color="var(--wine-700)" />
+            </button>
           </div>
 
           {/* carousel dots */}

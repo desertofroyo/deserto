@@ -3,7 +3,7 @@ import React from "react";
 /* Deserto website — primitives, season theme engine, kinetic marquee. */
 
 export const IMG = "/assets/images/";
-export const ISO = "/assets/logos/deserto-isotype.png";
+export const ISO = "/assets/logos/deserto-mark.svg";
 
 /* ---------- Photo — real café photography w/ graceful fallback ---------- */
 export function Photo({ src, tint = "var(--peach-100)", label, height = "100%", radius = 0, pos = "center", style = {} }) {

@@ -15,9 +15,11 @@
     "name": "House Tonics",
     "desc": "Sparkling fruit tonics in our signature cans — refreshing seasonal flavors that rotate through the year. Ask about today's lineup.",
     "tags": [
-      "Seasonal"
+      "Seasonal",
+      "Vegan",
+      "GF"
     ],
-    "img": "/assets/products/strawberry-tonic.jpg",
+    "img": "/assets/products/tonic-raspberry.jpg",
     "tint": "var(--rose-200)"
   },
   {
@@ -25,6 +27,11 @@
     "cat": "coffee",
     "group": "Hot",
     "name": "Espresso · Single",
+    "tags": [
+      "Vegan",
+      "GF"
+    ],
+    "cal": 5,
     "tint": "var(--caramel-100)"
   },
   {
@@ -32,6 +39,11 @@
     "cat": "coffee",
     "group": "Hot",
     "name": "Espresso · Double",
+    "tags": [
+      "Vegan",
+      "GF"
+    ],
+    "cal": 10,
     "tint": "var(--caramel-200)"
   },
   {
@@ -40,6 +52,10 @@
     "group": "Hot",
     "name": "Cappuccino",
     "img": "/assets/products/cappuccino.jpg",
+    "allergens": [
+      "Dairy"
+    ],
+    "cal": 130,
     "tint": "var(--peach-100)"
   },
   {
@@ -48,6 +64,10 @@
     "group": "Hot",
     "name": "Hot Latte",
     "img": "/assets/products/hot-latte.jpg",
+    "allergens": [
+      "Dairy"
+    ],
+    "cal": 190,
     "tint": "var(--caramel-100)"
   },
   {
@@ -56,6 +76,10 @@
     "group": "Hot",
     "name": "Hot Macchiato",
     "img": "/assets/products/hot-macchiato.jpg",
+    "allergens": [
+      "Dairy"
+    ],
+    "cal": 20,
     "tint": "var(--caramel-100)"
   },
   {
@@ -63,6 +87,10 @@
     "cat": "coffee",
     "group": "Hot",
     "name": "Hot Chai Latte",
+    "allergens": [
+      "Dairy"
+    ],
+    "cal": 240,
     "tint": "var(--peach-200)"
   },
   {
@@ -71,6 +99,11 @@
     "group": "Hot",
     "name": "Americano",
     "img": "/assets/products/americano.jpg",
+    "tags": [
+      "Vegan",
+      "GF"
+    ],
+    "cal": 15,
     "tint": "var(--sand-200)"
   },
   {
@@ -79,6 +112,10 @@
     "group": "Iced",
     "name": "Iced Latte",
     "img": "/assets/products/iced-latte.jpg",
+    "allergens": [
+      "Dairy"
+    ],
+    "cal": 180,
     "tint": "var(--caramel-100)"
   },
   {
@@ -87,6 +124,11 @@
     "group": "Iced",
     "name": "Iced Americano",
     "img": "/assets/products/iced-americano.jpg",
+    "tags": [
+      "Vegan",
+      "GF"
+    ],
+    "cal": 15,
     "tint": "var(--caramel-100)"
   },
   {
@@ -95,6 +137,10 @@
     "group": "Iced",
     "name": "Iced Macchiato",
     "img": "/assets/products/iced-macchiato.jpg",
+    "allergens": [
+      "Dairy"
+    ],
+    "cal": 25,
     "tint": "var(--caramel-200)"
   },
   {
@@ -103,6 +149,10 @@
     "group": "Iced",
     "name": "Iced Chai Latte",
     "img": "/assets/products/iced-chai-latte.jpg",
+    "allergens": [
+      "Dairy"
+    ],
+    "cal": 230,
     "tint": "var(--sand-200)"
   },
   {
@@ -111,6 +161,18 @@
     "group": "Cookies NYC",
     "name": "Red Velvet & White Chocolate",
     "img": "/assets/products/red-velvet-and-white-chocolate.jpg",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Soy"
+    ],
+    "cal": 600,
+    "macros": {
+      "fat": 30,
+      "carbs": 76,
+      "protein": 7
+    },
     "tint": "var(--rose-100)"
   },
   {
@@ -119,6 +181,19 @@
     "group": "Cookies NYC",
     "name": "Chocolate Chip & Walnut",
     "img": "/assets/products/chocolate-chip-and-walnut.jpg",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Nuts",
+      "Soy"
+    ],
+    "cal": 620,
+    "macros": {
+      "fat": 33,
+      "carbs": 74,
+      "protein": 8
+    },
     "tint": "var(--caramel-100)"
   },
   {
@@ -126,6 +201,19 @@
     "cat": "pastries",
     "group": "Cookies NYC",
     "name": "Double Chocolate & Walnut",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Nuts",
+      "Soy"
+    ],
+    "cal": 640,
+    "macros": {
+      "fat": 34,
+      "carbs": 76,
+      "protein": 9
+    },
     "tint": "var(--caramel-200)"
   },
   {
@@ -133,6 +221,18 @@
     "cat": "pastries",
     "group": "Cookies NYC",
     "name": "Matcha Chocolate Chip",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Soy"
+    ],
+    "cal": 590,
+    "macros": {
+      "fat": 29,
+      "carbs": 75,
+      "protein": 7
+    },
     "tint": "var(--leaf-100)"
   },
   {
@@ -141,6 +241,19 @@
     "group": "Cookies NYC",
     "name": "White Chocolate Macadamia",
     "img": "/assets/products/white-chocolate-macadamia.jpg",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Nuts",
+      "Soy"
+    ],
+    "cal": 620,
+    "macros": {
+      "fat": 34,
+      "carbs": 73,
+      "protein": 7
+    },
     "tint": "var(--peach-100)"
   },
   {
@@ -149,6 +262,18 @@
     "group": "Scones",
     "name": "Vanilla Almond Scone",
     "img": "/assets/products/vanilla-almond.jpg",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Nuts"
+    ],
+    "cal": 430,
+    "macros": {
+      "fat": 22,
+      "carbs": 52,
+      "protein": 7
+    },
     "tint": "var(--sand-200)"
   },
   {
@@ -157,6 +282,17 @@
     "group": "Scones",
     "name": "Blueberry Lemon Scone",
     "img": "/assets/products/blueberry-lemon.jpg",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs"
+    ],
+    "cal": 410,
+    "macros": {
+      "fat": 19,
+      "carbs": 55,
+      "protein": 6
+    },
     "tint": "var(--rose-200)"
   },
   {
@@ -164,6 +300,19 @@
     "cat": "pastries",
     "group": "Cake jars",
     "name": "Chocolate Nutella Jar",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Nuts",
+      "Soy"
+    ],
+    "cal": 540,
+    "macros": {
+      "fat": 28,
+      "carbs": 66,
+      "protein": 8
+    },
     "tint": "var(--caramel-200)"
   },
   {
@@ -172,6 +321,18 @@
     "group": "Cake jars",
     "name": "Gansito Cake Jar",
     "img": "/assets/products/gansito-cake-jar.jpg",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Soy"
+    ],
+    "cal": 500,
+    "macros": {
+      "fat": 24,
+      "carbs": 64,
+      "protein": 6
+    },
     "tint": "var(--rose-100)"
   },
   {
@@ -180,6 +341,17 @@
     "group": "Cake jars",
     "name": "Oreo Cake Jar",
     "img": "/assets/products/oreo-cake-jar.jpg",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Soy"
+    ],
+    "cal": 520,
+    "macros": {
+      "fat": 25,
+      "carbs": 68,
+      "protein": 5
+    },
     "tint": "var(--sand-200)"
   },
   {
@@ -187,6 +359,18 @@
     "cat": "pastries",
     "group": "Cake jars",
     "name": "Dot Cake",
+    "allergens": [
+      "Wheat",
+      "Dairy",
+      "Eggs",
+      "Soy"
+    ],
+    "cal": 470,
+    "macros": {
+      "fat": 22,
+      "carbs": 62,
+      "protein": 5
+    },
     "tint": "var(--peach-200)"
   },
   {
@@ -194,6 +378,11 @@
     "cat": "extras",
     "group": "Drinks",
     "name": "Fiji Water",
+    "tags": [
+      "Vegan",
+      "GF"
+    ],
+    "cal": 0,
     "tint": "var(--leaf-100)"
   },
   {

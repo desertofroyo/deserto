@@ -17,10 +17,16 @@ export default function Home() {
     if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 66, behavior: "smooth" });
   };
 
+  // Arriving from another route as /#section — jump to that section once mounted.
+  React.useEffect(() => {
+    const id = window.location.hash.replace("#", "");
+    if (id) requestAnimationFrame(() => scrollTo(id));
+  }, []);
+
   return (
     <div style={{ background: "var(--peach-100)", minHeight: "100vh" }}>
       <Header onNav={scrollTo} />
-      <Hero onMenu={() => scrollTo("menu")} />
+      <Hero onVisit={() => scrollTo("locations")} />
       <Marquee />
       <MenuSection sectionRef={menuRef} />
       <Story />

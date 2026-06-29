@@ -38,14 +38,24 @@ body { margin: 0; }
 /* Slow ken-burns drift on the composed hero scene. */
 .hero-kenburns { animation: kenburns 18s ease-in-out infinite alternate; transform-origin: 80% 55%; }
 
-/* Animated underline nav links */
-.nav-link { position: relative; transition: color .16s ease; cursor: pointer; text-decoration: none; }
-.nav-link::after {
-  content: ""; position: absolute; left: 0; right: 100%; bottom: -5px;
-  height: 2px; background: var(--orange-500); transition: right .22s ease;
+/* Animated underline nav links — the underline settles in on hover and stays
+   put on the active section/route (a settled hover, not a separate style). */
+.nav-link {
+  position: relative; cursor: pointer; text-decoration: none;
+  font-weight: 600; font-size: var(--text-sm); letter-spacing: .01em; white-space: nowrap;
+  color: var(--ink-700); transition: color .18s var(--ease-out, ease);
 }
-.nav-link:hover { color: var(--wine-700); }
-.nav-link:hover::after { right: 0; }
+.nav-link::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -6px;
+  height: 2px; border-radius: 2px; background: var(--orange-500);
+  transition: right .26s var(--ease-out-expo, ease);
+}
+.nav-link:hover, .nav-link.active { color: var(--wine-700); }
+.nav-link:hover::after, .nav-link.active::after { right: 0; }
+.nav-link.active { font-weight: 700; }
+.nav-link:focus-visible, .hdr-logo:focus-visible, .hdr-cta:focus-visible, .hdr-toggle:focus-visible {
+  outline: 2px solid var(--orange-500); outline-offset: 2px; border-radius: 6px;
+}
 
 /* Wine button hover/press */
 .btn-wine { transition: background .16s ease, transform .12s ease; }
@@ -62,9 +72,61 @@ body { margin: 0; }
 .tile-card .tile-arrow { transition: transform .22s var(--ease-out, ease); }
 .tile-card:hover .tile-arrow { transform: translateX(3px); }
 
+/* "What we make" arch windows — the photo lifts and zooms gently inside the
+   arch; the CTA arrow slides. The arch frame itself is the structure, so there's
+   no card chrome to crowd the section. */
+/* ---- "What we make" showcase: floating cutout products ------------------
+   Each category is a cutout product shot floating on the sand section, with
+   its name and one "View menu" link beneath. Generous whitespace, centered,
+   no frames. */
+.showcase {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-8); /* more horizontal air between products */
+  margin: var(--space-9) auto 0;
+  max-width: 1120px;
+}
+.showcase-item {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  text-decoration: none; padding: 0 var(--space-3);
+}
+.showcase-photo {
+  height: 232px; width: 100%;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.showcase-photo img {
+  max-height: 100%; max-width: 86%; width: auto; object-fit: contain;
+  border-radius: 14px; /* softens any non-cutout placeholder; transparent PNGs unaffected */
+  filter: drop-shadow(0 12px 16px rgba(42,29,17,0.15));
+  transition: transform .42s var(--ease-out-expo, ease);
+  will-change: transform;
+}
+.showcase-item:hover .showcase-photo img { transform: translateY(-9px) scale(1.035); }
+.showcase-name {
+  margin: var(--space-4) 0 0;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: var(--text-xl); letter-spacing: -0.01em; line-height: 1.05; color: var(--wine-700);
+  text-wrap: balance;
+}
+.showcase-link {
+  position: relative; margin-top: 9px;
+  font-family: var(--font-body); font-weight: 700; font-size: var(--text-sm); color: var(--wine-700);
+}
+.showcase-link::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -3px; height: 1.5px;
+  background: currentColor; transition: right .28s var(--ease-out-expo, ease);
+}
+.showcase-item:hover .showcase-link::after { right: 0; }
+
+@media (max-width: 900px) {
+  .showcase { grid-template-columns: repeat(2, 1fr); gap: var(--space-7) var(--space-6); }
+}
+@media (max-width: 460px) {
+  .showcase { grid-template-columns: 1fr; }
+  .showcase-photo { height: 220px; }
+}
+
 /* Menu page — subtle back-to-site affordance */
-.menu-back { transition: color .16s var(--ease-out, ease), background .16s var(--ease-out, ease); }
-.menu-back:hover { color: var(--wine-700); background: var(--peach-200); }
 
 /* Menu page — photo-forward product cards */
 .menu-card { transition: transform .18s var(--ease-out, ease), box-shadow .18s var(--ease-out, ease); }
@@ -74,12 +136,88 @@ body { margin: 0; }
 @media (max-width: 760px) {
   .menu-layout { grid-template-columns: 1fr !important; }
   .menu-rail {
-    position: sticky; top: 70px; z-index: 40;
+    position: sticky; top: 74px; z-index: 40;
     flex-direction: row !important; overflow-x: auto; gap: 8px !important;
     background: var(--peach-100); padding: 8px 0;
     border-bottom: 1px solid var(--border-default);
   }
   .menu-rail button { white-space: nowrap; }
+}
+
+/* ============================================================
+   Menu page redesign — sticky category nav, feature blocks (the
+   froyo & tonics experiences), and the café menu list.
+   ============================================================ */
+
+/* sticky category strip, sits directly under the (74px) site header */
+.menu-cats {
+  position: sticky; top: 74px; z-index: 45;
+  background: rgba(252, 238, 228, 0.92); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--border-default);
+}
+.menu-cats-inner {
+  max-width: var(--container-xl); margin: 0 auto;
+  padding: 10px var(--space-6); display: flex; gap: 8px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.menu-cats-inner::-webkit-scrollbar { display: none; }
+.menu-cat-pill {
+  display: inline-flex; align-items: center; gap: 7px; flex-shrink: 0;
+  border: 1px solid var(--border-default); background: var(--white); color: var(--ink-700);
+  cursor: pointer; border-radius: 999px; padding: 8px 15px;
+  font-family: var(--font-body); font-weight: 700; font-size: var(--text-sm);
+  white-space: nowrap; transition: color .16s var(--ease-out, ease), background .16s var(--ease-out, ease), border-color .16s var(--ease-out, ease);
+}
+.menu-cat-pill:hover { border-color: var(--wine-400); color: var(--wine-700); }
+.menu-cat-pill.on { background: var(--wine-700); border-color: var(--wine-700); color: var(--cream-50); }
+
+/* feature block — two-column, photography-led, alternating sides */
+.mfeat { display: grid; grid-template-columns: 1.04fr 1fr; align-items: stretch; }
+.mfeat-media { padding: clamp(16px, 2vw, 26px); }
+.mfeat-media > * { height: clamp(280px, 33vw, 410px); }
+.mfeat-body { padding: clamp(24px, 3vw, 48px); display: flex; flex-direction: column; justify-content: center; }
+@media (max-width: 820px) {
+  .mfeat, .mfeat-rev { grid-template-columns: 1fr; }
+  .mfeat-media { order: -1; }              /* photo on top when stacked */
+  .mfeat-media > * { height: 256px; }
+}
+
+/* café menu list — one panel per category */
+.mlist-panel {
+  background: var(--white); border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
+  padding: clamp(18px, 2.4vw, 30px);
+  display: flex; flex-direction: column; gap: var(--space-6);
+}
+.mlist-grouplabel {
+  font-family: var(--font-display); font-weight: 800; font-size: var(--text-sm);
+  color: var(--caramel-600); text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: var(--space-4); padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle);
+}
+.mlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); gap: 8px 22px; }
+.mrow {
+  display: flex; align-items: flex-start; gap: 14px; padding: 10px 8px; border-radius: var(--radius-md);
+  transition: background .16s var(--ease-out, ease);
+}
+.mrow:hover { background: var(--peach-100); }
+.mrow-thumb {
+  flex-shrink: 0; width: 54px; height: 54px; border-radius: 14px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.mrow-name {
+  font-family: var(--font-display); font-weight: 800; font-size: var(--text-md);
+  color: var(--ink-900); line-height: 1.18;
+}
+.mrow-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+/* Calorie / macro line — quiet but legible, in the brand wine. */
+.mrow-nutri {
+  margin-top: 5px; font-family: var(--font-body); font-weight: 700;
+  font-size: var(--text-xs); letter-spacing: .01em; color: var(--wine-600, var(--wine-700));
+}
+/* "Contains …" allergen line — readable safety info, not a faint afterthought. */
+.mrow-allergens {
+  margin-top: 3px; font-size: var(--text-xs); line-height: 1.4; color: var(--ink-600, var(--ink-700));
 }
 
 /* Round add-to-bag button */
@@ -101,8 +239,43 @@ body { margin: 0; }
    these collapse them for tablet / phone (override inline w/ !important).
    ============================================================ */
 
-/* ---- Header: desktop nav swaps to a hamburger + dropdown on mobile ---- */
-.hdr-toggle { display: none; }
+/* ---- Header: frosted desert-glass nav ----
+   Transparent over the hero; frosts into a peach-cream bar on scroll (or when
+   the mobile sheet is open). Only background/border/shadow transition — the
+   height is constant, so there's no layout thrash on scroll. */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(252, 238, 228, 0);
+  border-bottom: 1px solid transparent;
+  transition: background .32s var(--ease-out-expo, ease), border-color .32s var(--ease-out-expo, ease),
+              box-shadow .32s var(--ease-out-expo, ease), backdrop-filter .32s var(--ease-out-expo, ease);
+}
+.site-header.scrolled {
+  background: rgba(252, 238, 228, 0.82);
+  backdrop-filter: blur(14px) saturate(1.08);
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+  border-bottom-color: var(--border-default);
+  box-shadow: var(--shadow-md);
+}
+.site-header-inner {
+  max-width: var(--container-xl); margin: 0 auto; padding: 0 var(--space-6); height: 74px;
+  display: flex; align-items: center; gap: var(--space-6);
+}
+.hdr-logo { display: inline-flex; align-items: center; flex-shrink: 0; }
+.hdr-logo img { height: 48px; width: auto; display: block; transition: transform .22s var(--ease-out, ease); }
+.hdr-logo:hover img { transform: scale(1.035); }
+.hdr-nav { display: flex; gap: var(--space-5); margin-left: var(--space-4); }
+.hdr-actions { margin-left: auto; display: flex; align-items: center; gap: var(--space-3); }
+.hdr-cta {
+  border-radius: 999px; padding: 11px 22px; flex-shrink: 0; white-space: nowrap;
+  background: var(--wine-700); color: var(--cream-50);
+  font-family: var(--font-body); font-weight: 800; font-size: var(--text-sm);
+}
+
+.hdr-toggle {
+  display: none; width: 42px; height: 42px; border: none; background: transparent;
+  cursor: pointer; padding: 0; flex-shrink: 0; border-radius: 999px;
+}
 .hb { position: relative; width: 22px; height: 16px; display: inline-block; }
 .hb span {
   position: absolute; left: 0; width: 100%; height: 2.5px; border-radius: 2px;
@@ -114,18 +287,58 @@ body { margin: 0; }
 .hb.open span:nth-child(1) { top: 7px; transform: rotate(45deg); }
 .hb.open span:nth-child(2) { opacity: 0; }
 .hb.open span:nth-child(3) { top: 7px; transform: rotate(-45deg); }
+
+/* mobile sheet — links stagger in; base state is visible so reduced-motion
+   (which kills the animation) never leaves the sheet blank. */
+.hdr-mobile-panel {
+  border-top: 1px solid var(--border-default);
+  padding: var(--space-3) var(--space-6) var(--space-5);
+  display: flex; flex-direction: column;
+}
+.hdr-m-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 15px 2px; font-family: var(--font-body); font-weight: 700; font-size: var(--text-md);
+  color: var(--ink-700); text-decoration: none; border-bottom: 1px solid var(--border-subtle, var(--border-default));
+}
+.hdr-m-item:active { color: var(--wine-700); }
+.hdr-m-cta {
+  margin-top: var(--space-4); text-align: center; border-radius: 999px; padding: 14px 22px;
+  background: var(--wine-700); color: var(--cream-50);
+  font-family: var(--font-body); font-weight: 800; font-size: var(--text-md); text-decoration: none;
+}
+.hdr-m-meta {
+  display: flex; align-items: center; gap: 8px; margin: var(--space-4) 0 0;
+  font-size: var(--text-sm); color: var(--ink-500); font-family: var(--font-editorial);
+}
+.hdr-m-item, .hdr-m-cta, .hdr-m-meta {
+  animation: hdrSheetIn .42s var(--ease-out-expo, ease) both;
+  animation-delay: calc(var(--d, 0) * 45ms);
+}
+@keyframes hdrSheetIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
 @media (max-width: 860px) {
-  .hdr-nav, .hdr-viewmenu { display: none !important; }
+  .hdr-nav { display: none !important; }
   .hdr-toggle { display: inline-flex !important; align-items: center; justify-content: center; }
 }
 @media (min-width: 861px) { .hdr-mobile-panel { display: none !important; } }
+/* On phones the standalone CTA would crowd out the toggle — fold it into the
+   sheet (which carries its own "Order delivery" button) and keep header clean.
+   The full logo lockup is wide, so trim its height and tighten the gutters to
+   guarantee the toggle stays on-screen down to a 320px viewport. */
+@media (max-width: 600px) {
+  .hdr-cta { display: none !important; }
+  .site-header-inner { gap: var(--space-3); padding: 0 var(--space-4); }
+  .hdr-logo { min-width: 0; }
+  .hdr-logo img { height: 40px; max-width: 100%; }
+}
 
 /* hide secondary bits on phones */
 @media (max-width: 600px) { .hide-sm { display: none !important; } }
 
 /* ---- Home category tiles: 4 -> 2 -> 1 ---- */
-@media (max-width: 900px) { .r-tiles { grid-template-columns: repeat(2, 1fr) !important; } }
-@media (max-width: 560px) { .r-tiles { grid-template-columns: 1fr !important; } }
 
 /* ---- Two-column splits (Story, Visit us) stack on tablet down ---- */
 @media (max-width: 860px) {
@@ -147,7 +360,7 @@ body { margin: 0; }
   .r-hero-text { max-width: 100% !important; }
   .r-hero-h1 { font-size: clamp(38px, 10vw, 56px) !important; }
   .r-hero-scrim {
-    background: linear-gradient(180deg, rgba(252,238,228,0.96) 0%, rgba(252,238,228,0.8) 36%, rgba(252,238,228,0.32) 66%, rgba(252,238,228,0) 100%) !important;
+    background: linear-gradient(180deg, rgba(252,238,228,0.97) 0%, rgba(252,238,228,0.93) 48%, rgba(252,238,228,0.84) 72%, rgba(252,238,228,0.55) 89%, rgba(252,238,228,0.12) 100%) !important;
   }
 }
 
