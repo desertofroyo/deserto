@@ -12,13 +12,20 @@
  *
  * SHEET COLUMNS (header row, any order, case-insensitive):
  *   Category | Group | Name | Description | Tags | Photo | InStoreOnly
+ *   | Calories | Allergens | Fat | Carbs | Protein
  *     Category    one of: Frozen Yogurt, Tonics, Coffee, Pastries, Extras
  *     Group       optional sub-heading (e.g. "Hot", "Iced", "Cookies")
  *     Name        required — the row is skipped if this is blank
  *     Description optional one-liner
- *     Tags        optional, comma-separated (e.g. "Vegan, GF")
+ *     Tags        optional, comma-separated — use for dietary claims the item
+ *                 MEETS (e.g. "Vegan, GF, DF"); these render as green badges
  *     Photo       optional — paste a full https:// image link, or leave blank
  *     InStoreOnly optional — "yes" shows an "In store" badge
+ *     Calories    optional number — shown only on fixed-recipe items. Leave
+ *                 blank for self-serve froyo & toppings (nutrition varies).
+ *     Allergens   optional, comma-separated — what the item CONTAINS
+ *                 (e.g. "Dairy, Wheat, Nuts"); renders as a "Contains" line
+ *     Fat/Carbs/Protein  optional numbers in grams — shown next to Calories
  */
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -87,8 +94,16 @@ function rowsToProducts(rows) {
   const col = (name) => header.indexOf(name);
   const iCat = col("category"), iGroup = col("group"), iName = col("name"),
         iDesc = col("description"), iTags = col("tags"), iPhoto = col("photo"),
-        iStore = col("instoreonly");
+        iStore = col("instoreonly"), iCal = col("calories"), iAllerg = col("allergens"),
+        iFat = col("fat"), iCarbs = col("carbs"), iProtein = col("protein");
   if (iName < 0) throw new Error('Sheet is missing a "Name" column.');
+
+  // Parse a cell as a non-negative number, or undefined if blank / not a number.
+  const num = (cells, i) => {
+    if (i < 0) return undefined;
+    const v = parseFloat(String(cells[i] || "").replace(/[^0-9.]/g, ""));
+    return Number.isFinite(v) ? v : undefined;
+  };
 
   const seen = new Set();
   const out = [];
@@ -117,6 +132,22 @@ function rowsToProducts(rows) {
     if (img) p.img = img;
     p.tint = TINT_BY_CAT[cat] || "var(--peach-100)";
     if (store) p.instore = true;
+
+    // Nutrition (all optional). Calories shown only on fixed-recipe items;
+    // allergens render as a "Contains" line; macros sit beside the calories.
+    const cal = num(cells, iCal);
+    if (cal !== undefined) p.cal = Math.round(cal);
+    const allergens = iAllerg >= 0
+      ? (cells[iAllerg] || "").split(/[,;]/).map((a) => a.trim()).filter(Boolean)
+      : [];
+    if (allergens.length) p.allergens = allergens;
+    const macros = {};
+    const fat = num(cells, iFat), carbs = num(cells, iCarbs), protein = num(cells, iProtein);
+    if (fat !== undefined) macros.fat = fat;
+    if (carbs !== undefined) macros.carbs = carbs;
+    if (protein !== undefined) macros.protein = protein;
+    if (Object.keys(macros).length) p.macros = macros;
+
     out.push(p);
   }
   return out;
