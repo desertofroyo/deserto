@@ -172,52 +172,45 @@ body { margin: 0; }
 .menu-cat-pill:hover { border-color: var(--wine-400); color: var(--wine-700); }
 .menu-cat-pill.on { background: var(--wine-700); border-color: var(--wine-700); color: var(--cream-50); }
 
-/* feature block — two-column, photography-led, alternating sides */
-.mfeat { display: grid; grid-template-columns: 1.04fr 1fr; align-items: stretch; }
-.mfeat-media { padding: clamp(16px, 2vw, 26px); }
-.mfeat-media > * { height: clamp(280px, 33vw, 410px); }
-.mfeat-body { padding: clamp(24px, 3vw, 48px); display: flex; flex-direction: column; justify-content: center; }
-@media (max-width: 820px) {
-  .mfeat, .mfeat-rev { grid-template-columns: 1fr; }
-  .mfeat-media { order: -1; }              /* photo on top when stacked */
-  .mfeat-media > * { height: 256px; }
-}
-
-/* café menu list — one panel per category */
-.mlist-panel {
-  background: var(--white); border: 1px solid var(--border-default);
-  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
-  padding: clamp(18px, 2.4vw, 30px);
-  display: flex; flex-direction: column; gap: var(--space-6);
-}
-.mlist-grouplabel {
+/* café menu — Yogen Früz-style product card grid (one grid per group) */
+.mcat-groups { display: flex; flex-direction: column; gap: var(--space-7); }
+.mcat-grouplabel {
   font-family: var(--font-display); font-weight: 800; font-size: var(--text-sm);
   color: var(--caramel-600); text-transform: uppercase; letter-spacing: .08em;
   margin-bottom: var(--space-4); padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle);
 }
-.mlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); gap: 8px 22px; }
-.mrow {
-  display: flex; align-items: flex-start; gap: 14px; padding: 10px 8px; border-radius: var(--radius-md);
-  transition: background .16s var(--ease-out, ease);
+.mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-5); }
+.mcard {
+  background: var(--white); border: 1px solid var(--border-subtle);
+  border-radius: 20px; overflow: hidden; box-shadow: 0 3px 12px -6px rgba(42,29,17,0.14);
+  display: flex; flex-direction: column;
+  transition: transform .35s var(--ease-out-expo, ease), box-shadow .35s var(--ease-out-expo, ease);
 }
-.mrow:hover { background: var(--peach-100); }
-.mrow-thumb {
-  flex-shrink: 0; width: 54px; height: 54px; border-radius: 14px; overflow: hidden;
+.mcard:hover { transform: translateY(-5px); box-shadow: 0 20px 38px -20px rgba(42,29,17,0.32); }
+.mcard-photo {
+  height: 156px; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
 }
-.mrow-name {
-  font-family: var(--font-display); font-weight: 800; font-size: var(--text-md);
-  color: var(--ink-900); line-height: 1.18;
+.mcard-photo > div { height: 100%; width: 100%; }   /* Photo component fills the tile */
+.mcard-body { padding: 15px 16px 17px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.mcard-name {
+  margin: 0; font-family: var(--font-display); font-weight: 800; font-size: var(--text-md);
+  color: var(--wine-700); line-height: 1.14; text-wrap: balance;
 }
-.mrow-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.mcard-tags { display: flex; flex-wrap: wrap; gap: 5px; }
 /* Calorie / macro line — quiet but legible, in the brand wine. */
-.mrow-nutri {
-  margin-top: 5px; font-family: var(--font-body); font-weight: 700;
+.mcard-nutri {
+  font-family: var(--font-body); font-weight: 700;
   font-size: var(--text-xs); letter-spacing: .01em; color: var(--wine-600, var(--wine-700));
 }
 /* "Contains …" allergen line — readable safety info, not a faint afterthought. */
-.mrow-allergens {
-  margin-top: 3px; font-size: var(--text-xs); line-height: 1.4; color: var(--ink-600, var(--ink-700));
+.mcard-allerg {
+  font-size: var(--text-xs); line-height: 1.4; color: var(--ink-600, var(--ink-700));
+}
+@media (max-width: 560px) {
+  .mgrid { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+  .mcard-photo { height: 130px; }
+  .mcard-body { padding: 12px 12px 14px; }
 }
 
 /* Round add-to-bag button */
@@ -338,6 +331,100 @@ body { margin: 0; }
 /* hide secondary bits on phones */
 @media (max-width: 600px) { .hide-sm { display: none !important; } }
 
+/* ---- Delivery: nav popover, footer buttons, mobile rows ----
+   Ordering (DoorDash / Grubhub) is the money action, so it gets a branded
+   surface. Each provider carries its own colour via --brand (set inline). */
+
+/* Nav: secondary "View menu" reads quieter than the filled delivery pill. */
+.hdr-menu-link {
+  flex-shrink: 0; white-space: nowrap; padding: 11px 6px;
+  font-family: var(--font-body); font-weight: 700; font-size: var(--text-sm);
+  color: var(--wine-700); text-decoration: none; position: relative;
+}
+.hdr-menu-link::after {
+  content: ""; position: absolute; left: 6px; right: 6px; bottom: 6px; height: 2px;
+  background: var(--orange-500); border-radius: 2px;
+  transform: scaleX(0); transform-origin: left; transition: transform .26s var(--ease-out-expo, ease);
+}
+.hdr-menu-link:hover::after, .hdr-menu-link:focus-visible::after { transform: scaleX(1); }
+
+.dlv-wrap { position: relative; flex-shrink: 0; }
+.dlv-trigger {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  border: none; border-radius: 999px; padding: 11px 20px; white-space: nowrap;
+  background: var(--wine-700); color: var(--cream-50);
+  font-family: var(--font-body); font-weight: 800; font-size: var(--text-sm);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(60,20,20,.12));
+  transition: background .2s var(--ease-out, ease), transform .2s var(--ease-out, ease), box-shadow .2s var(--ease-out, ease);
+}
+.dlv-trigger:hover { background: var(--wine-800, #5f262b); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.dlv-trigger:active { transform: translateY(0); }
+
+.dlv-pop {
+  position: absolute; top: calc(100% + 12px); right: 0; z-index: 60;
+  width: 304px; padding: 10px; border-radius: 18px;
+  background: rgba(255, 250, 244, 0.92);
+  backdrop-filter: blur(18px) saturate(1.1); -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  border: 1px solid var(--border-default); box-shadow: 0 18px 44px -18px rgba(74, 32, 18, .42), 0 4px 14px -8px rgba(74, 32, 18, .3);
+  transform-origin: top right;
+  animation: dlvPopIn .26s var(--ease-out-expo, cubic-bezier(.16,1,.3,1)) both;
+}
+.dlv-pop::before {
+  content: ""; position: absolute; top: -7px; right: 30px; width: 13px; height: 13px;
+  background: inherit; border-left: 1px solid var(--border-default); border-top: 1px solid var(--border-default);
+  transform: rotate(45deg); border-top-left-radius: 3px;
+}
+@keyframes dlvPopIn { from { opacity: 0; transform: translateY(-8px) scale(.97); } to { opacity: 1; transform: none; } }
+.dlv-pop-eyebrow {
+  display: block; padding: 6px 10px 8px; font-family: var(--font-body); font-weight: 800;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500, #8a6f63);
+}
+
+/* Provider row — shared by popover + mobile sheet. */
+.dlv-row {
+  display: flex; align-items: center; gap: 13px; padding: 11px 10px; border-radius: 13px;
+  text-decoration: none; position: relative;
+  transition: background .18s var(--ease-out, ease), transform .18s var(--ease-out, ease);
+}
+.dlv-row:hover { background: color-mix(in srgb, var(--brand) 11%, transparent); }
+.dlv-row + .dlv-row { margin-top: 2px; }
+.dlv-tile {
+  flex-shrink: 0; width: 44px; height: 44px; border-radius: 13px;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 10px -4px color-mix(in srgb, var(--brand) 60%, transparent);
+  transition: transform .2s var(--ease-out, ease);
+}
+.dlv-row:hover .dlv-tile { transform: scale(1.06) rotate(-3deg); }
+.dlv-row-text { display: flex; flex-direction: column; line-height: 1.2; margin-right: auto; }
+.dlv-row-name { font-family: var(--font-body); font-weight: 800; font-size: var(--text-sm); color: var(--ink-700, #3a2a22); }
+.dlv-row-sub { font-family: var(--font-editorial); font-size: 12px; color: var(--ink-500, #8a6f63); margin-top: 2px; }
+/* nudge the trailing chevron on hover (it's the row's last child) */
+.dlv-row > span:last-child { transition: transform .2s var(--ease-out, ease); }
+.dlv-row:hover > span:last-child { transform: translateX(3px); }
+
+/* Footer: branded buttons that hold contrast on the coffee-brown band. */
+.dlv-fbtns { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.dlv-fbtn {
+  display: inline-flex; align-items: center; gap: 11px; padding: 9px 18px 9px 9px;
+  border-radius: 999px; text-decoration: none;
+  background: var(--cream-50, #fbf1e8); color: var(--coffee-700, #4a2d1c);
+  font-family: var(--font-body); font-weight: 800; font-size: var(--text-sm);
+  box-shadow: 0 6px 16px -10px rgba(0,0,0,.5);
+  transition: transform .2s var(--ease-out, ease), box-shadow .2s var(--ease-out, ease);
+}
+.dlv-fbtn:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -10px rgba(0,0,0,.55); color: var(--coffee-700, #4a2d1c) !important; }
+.dlv-fbtn-tile {
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* Mobile sheet delivery group */
+.dlv-sheet-label {
+  margin: var(--space-4) 2px 4px; font-family: var(--font-body); font-weight: 800;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500, #8a6f63);
+}
+.dlv-sheet .dlv-row { padding: 12px 6px; }
+
 /* ---- Home category tiles: 4 -> 2 -> 1 ---- */
 
 /* ---- Two-column splits (Story, Visit us) stack on tablet down ---- */
@@ -363,14 +450,13 @@ body { margin: 0; }
    Disabled under prefers-reduced-motion by the global rule below. */
 .r-hero-promo { animation: fadeUp 0.6s var(--ease-out, ease) both; }
 
-/* Hero photo: feather the right edge into the peach backdrop so it never
-   hard-cuts against the max-width margin. The fade starts at 85% — past the
-   centered product — so the product itself stays crisp, only the empty edge
-   dissolves. (The left edge is handled by the color scrim + headline column.) */
-.r-hero-img {
-  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 85%, transparent 100%);
-  mask-image: linear-gradient(to right, #000 0%, #000 85%, transparent 100%);
-}
+/* Hero photo runs crisp to the right edge — no feather. The left edge is
+   handled by the (light) color scrim + headline column. */
+
+/* Per-slide headline + copy fade in as the carousel advances (keyed remount). */
+@keyframes heroCopyIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.r-hero-copy { animation: heroCopyIn 0.6s var(--ease-out-expo, ease) both; }
+@media (prefers-reduced-motion: reduce) { .r-hero-copy { animation: none; } }
 
 /* ---- Hero on phones: copy on top, photo full-bleed behind with a top fade ----
    The box is too narrow to sit the product beside the text, so the photo stage
