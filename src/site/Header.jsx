@@ -2,8 +2,9 @@ import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Icon } from "../components/ds";
 import { SITE } from "./data.js";
+import { DeliveryMenu, DeliveryList } from "./Delivery.jsx";
 
-const LOGO = "/assets/logos/deserto-primary.svg";
+const LOGO = "/assets/logos/deserto-lockup.png";
 
 /* ---------------- Header (frosted desert-glass nav) ----------------
    Transparent over the hero so the warm photography reads edge-to-edge, then
@@ -86,7 +87,8 @@ export function Header({ onNav }) {
         </nav>
 
         <div className="hdr-actions">
-          <Link to="/menu" className="hdr-cta btn-wine">View menu</Link>
+          <Link to="/menu" className="hdr-menu-link hide-sm">View menu</Link>
+          <span className="hide-sm"><DeliveryMenu /></span>
           <button className="hdr-toggle" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}
             onClick={() => setOpen((o) => !o)}>
             <span className={"hb" + (open ? " open" : "")}><span /><span /><span /></span>
@@ -107,7 +109,11 @@ export function Header({ onNav }) {
           <Link to="/menu" className="hdr-m-cta btn-wine" style={{ "--d": nav.length }} onClick={() => setOpen(false)}>
             View menu
           </Link>
-          <p className="hdr-m-meta" style={{ "--d": nav.length + 1 }}>
+          <div className="dlv-sheet" style={{ "--d": nav.length + 1, animation: "hdrSheetIn .42s var(--ease-out-expo, ease) both", animationDelay: `calc(${nav.length + 1} * 45ms)` }}>
+            <p className="dlv-sheet-label">Order delivery</p>
+            <DeliveryList onItemClick={() => setOpen(false)} />
+          </div>
+          <p className="hdr-m-meta" style={{ "--d": nav.length + 2 }}>
             <Icon name="map-pin" size={14} color="var(--wine-500, var(--wine-700))" />
             {store.addr} · {store.hours}
           </p>

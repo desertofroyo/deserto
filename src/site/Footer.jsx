@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../components/ds";
 import { SITE } from "./data.js";
+import { DeliveryButtons } from "./Delivery.jsx";
 
-const LOGO = "/assets/logos/deserto-primary-cream.svg";
+const LOGO = "/assets/logos/deserto-lockup-cream.png";
 
 const MENU_LINKS = [
-  ["Frozen Yogurt", "/menu#froyo"],
-  ["Tonics", "/menu#tonics"],
+  ["Frozen Yogurt", "/menu"],
+  ["Tonics", "/menu"],
   ["Coffee", "/menu#coffee"],
   ["Pastries & Cake Jars", "/menu#pastries"],
 ];
@@ -22,7 +23,7 @@ const linkStyle = { color: "var(--ink-300)", fontSize: "var(--text-sm)", marginB
 
 /* Footer — coffee-brown band with brand, social links, quick links and ordering. */
 export function Footer() {
-  const { store, social, delivery } = SITE;
+  const { store, social } = SITE;
   return (
     <footer style={{ background: "var(--coffee-600)", color: "var(--sand-200)" }}>
       <div className="r-footer" style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-8) var(--space-6)", display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr", gap: "var(--space-6)" }}>
@@ -54,7 +55,7 @@ export function Footer() {
 
         {/* Menu links */}
         <div>
-          <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, color: "var(--cream-50)", marginBottom: 14, fontSize: "var(--text-sm)", letterSpacing: ".04em" }}>Menu</div>
+          <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, color: "var(--cream-50)", marginBottom: 14, fontSize: "var(--text-sm)", letterSpacing: ".08em", textTransform: "uppercase" }}>Menu</div>
           {MENU_LINKS.map(([label, to]) => (
             <Link key={label} to={to} style={linkStyle}>{label}</Link>
           ))}
@@ -62,20 +63,14 @@ export function Footer() {
 
         {/* Deserto links + ordering */}
         <div>
-          <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, color: "var(--cream-50)", marginBottom: 14, fontSize: "var(--text-sm)", letterSpacing: ".04em" }}>Deserto</div>
+          <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, color: "var(--cream-50)", marginBottom: 14, fontSize: "var(--text-sm)", letterSpacing: ".08em", textTransform: "uppercase" }}>Deserto</div>
           {DESERTO_LINKS.map(([label, to]) => (
             <Link key={label} to={to} style={linkStyle}>{label}</Link>
           ))}
           <a href={`tel:${store.phone.replace(/[^0-9+]/g, "")}`} style={linkStyle}>{store.phone}</a>
-          <div style={{ display: "flex", gap: 10, marginTop: 14, flexWrap: "wrap" }}>
-            {delivery.map((d) => (
-              <a key={d.name} href={d.url} target="_blank" rel="noopener noreferrer" style={{
-                fontSize: "var(--text-xs)", fontWeight: 800, fontFamily: "var(--font-body)",
-                color: "var(--cream-50)", background: "rgba(255,255,255,0.10)", borderRadius: 999,
-                padding: "8px 14px", textDecoration: "none",
-              }}>{d.name}</a>
-            ))}
-          </div>
+
+          <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, color: "var(--cream-50)", margin: "var(--space-5) 0 0", fontSize: "var(--text-sm)", letterSpacing: ".08em", textTransform: "uppercase" }}>Order delivery</div>
+          <DeliveryButtons />
         </div>
       </div>
 
