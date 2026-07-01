@@ -34,11 +34,23 @@ const SLIDES = [
     ],
   },
   {
-    src: "/assets/images/hero-cakejars-scene.jpg",
-    alt: "Three Deserto layered cake jars on the café counter with berries and chocolate",
+    src: "/assets/images/hero-coffee-scene.jpg",
+    alt: "Three Deserto iced coffees — a paper cup, an iced latte and a caramel iced coffee — over a scatter of roasted beans",
     pos: "right 50%",
-    head: (<>Layered to<br />the <span style={ORANGE}>last spoon.</span></>),
-    copy: "Cake jars stacked with froyo, crumble and fresh fruit — alongside NYC-style cookies baked fresh in the shop.",
+    head: (<>My taste,<br /><span style={ORANGE}>my lifestyle</span></>),
+    copy: "Indulge in what makes you happy. From creamy frozen yogurt to energizing coffee, every sip is a moment just for you.",
+  },
+  {
+    src: "/assets/images/hero-cakejars-scene.jpg",
+    alt: "Three Deserto layered cake jars — strawberry, Oreo cream and chocolate — on a marble board with fresh berries and Oreo cookies",
+    pos: "right 50%",
+    head: (<>Crafted<br /><span style={ORANGE}>to crave.</span></>),
+    copy: "Creamy frozen yogurt, real ingredients and irresistible layers in every jar.",
+    features: [
+      { icon: "leaf", label: "real ingredients", tint: "var(--olive-100)", fg: "var(--olive-600)" },
+      { icon: "clock", label: "crafted fresh daily", tint: "var(--rose-200)", fg: "var(--wine-700)" },
+      { icon: "star", label: "made to satisfy", tint: "var(--peach-200)", fg: "var(--caramel-500)" },
+    ],
   },
 ];
 
@@ -78,13 +90,14 @@ export function Hero({ onVisit }) {
         </filter>
       </svg>
       {/* ---- Product photo stage ----
-          Pinned to the viewport's right edge (outside the centered container) so
-          the photo always bleeds to the screen's right edge. Width is capped so
-          on ultrawide screens it can't creep under the headline column. The
-          per-slide right-biased object-position keeps the product + its right-side
-          detail (froyo badges, third cake-jar, splash) fully in frame. */}
+          Full-bleed: the photo spans the entire hero width (edge to edge) so each
+          scene's own soft backdrop — cream for froyo/tonics, blush-pink for the
+          cake jars — becomes the headline column too. No separate flat color panel
+          beside the photo, so there's no seam where a panel meets the image. The
+          product sits in the right ~40% of every scene; the headline overlays the
+          light left third. */}
       <div className="r-hero-stage" aria-hidden style={{
-        position: "absolute", top: 0, bottom: 0, right: 0, width: "min(63%, 940px)", zIndex: 0, overflow: "hidden",
+        position: "absolute", top: 0, bottom: 0, right: 0, width: "100%", zIndex: 0, overflow: "hidden",
       }}>
         {SLIDES.map((s, idx) => (
           <img
@@ -96,20 +109,18 @@ export function Hero({ onVisit }) {
               position: "absolute", inset: 0, width: "100%", height: "100%",
               objectFit: "cover", objectPosition: s.pos,
               filter: "url(#hero-sharpen) contrast(1.05) saturate(1.04)",
-              // feather only the photo's LEFT edge so it melts into the peach
-              // headline column; the top is left crisp (no fade) so the photo meets
-              // the header with a clean edge rather than dissolving into the nav.
-              WebkitMaskImage: "linear-gradient(to right, transparent 0%, #000 12%)",
-              maskImage: "linear-gradient(to right, transparent 0%, #000 12%)",
+              // full-bleed — no left feather. Each scene's own backdrop carries the
+              // headline column; the light left scrim below keeps the copy legible.
               opacity: idx === i ? 1 : 0, transition: "opacity 1s var(--ease-out, ease)",
             }}
           />
         ))}
-        {/* soft tint over the feathered left edge — the image mask does the
-            actual dissolve; this just blends the color a touch further in. */}
+        {/* light left veil — lifts the copy off the photo's left third for a legible
+            headline on both the cream (froyo/tonics) and pink (cake-jar) scenes,
+            without tinting either toward a single flat color. */}
         <div className="r-hero-scrim" style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(90deg, rgba(252,238,228,0.55) 4%, rgba(252,238,228,0) 22%)",
+          background: "linear-gradient(90deg, rgba(255,247,240,0.66) 0%, rgba(255,247,240,0.28) 24%, rgba(255,247,240,0) 46%)",
         }} />
       </div>
 
