@@ -23,8 +23,11 @@ export default function Home() {
     if (id) requestAnimationFrame(() => scrollTo(id));
   }, []);
 
+  // Page canvas cream is matched to the hero photography's baked wall (#FFF1DE)
+  // so the transparent nav band reads as one continuous cream with the hero
+  // photo — no warm/cool seam at the photo's crisp top edge.
   return (
-    <div style={{ background: "var(--peach-100)", minHeight: "100vh" }}>
+    <div style={{ background: "#FFF1DE", minHeight: "100vh" }}>
       <Header onNav={scrollTo} />
       <Hero onVisit={() => scrollTo("locations")} />
       <Marquee />

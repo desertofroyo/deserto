@@ -2,7 +2,7 @@ import {
   Search, ShoppingBag, ArrowRight, ArrowLeft, MapPin, Clock, Phone,
   Instagram, Facebook, Twitter, Plus, IceCreamBowl, CupSoda, Coffee,
   Cookie, Signal, Wifi, BatteryFull, House, Gift, WandSparkles, Trash2,
-  ChevronRight, Check, Star, Sparkles, Cake, Info,
+  ChevronRight, Check, Star, Sparkles, Cake, Info, Leaf, Snowflake, Zap,
 } from "lucide-react";
 
 /**
@@ -40,6 +40,9 @@ const ICONS = {
   sparkles: Sparkles,
   cake: Cake,
   info: Info,
+  leaf: Leaf,
+  snowflake: Snowflake,
+  zap: Zap,
 };
 
 export function Icon({ name, size = 20, color = "currentColor", strokeWidth = 2, style = {} }) {

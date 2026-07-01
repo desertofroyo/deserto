@@ -4,13 +4,13 @@
       "slug": "froyo",
       "name": "Froyo",
       "img": "/assets/products/froyo-cutout.png",
-      "to": "/menu#froyo"
+      "to": "/menu"
     },
     {
       "slug": "tonics",
       "name": "Tonics",
       "img": "/assets/products/hero-tonics.png",
-      "to": "/menu#tonics"
+      "to": "/menu"
     },
     {
       "slug": "coffee",

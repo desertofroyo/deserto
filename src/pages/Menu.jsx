@@ -1,187 +1,118 @@
 import React from "react";
 import { Badge, Icon } from "../components/ds";
 import { Header } from "../site/Header.jsx";
-import { Photo, Arch } from "../site/parts.jsx";
+import { Photo } from "../site/parts.jsx";
 import { SITE } from "../site/data.js";
 // Menu items are owner-editable via the CMS (content/menu.json → SITE.products).
+// We list what the café makes — no prices, no nutrition on the cards; the full
+// nutrition + allergen guide lives in one panel at the very end of the page.
 
-/* Per-category icon used for headers and for the photoless item chips. */
+/* Per-category icon used for nav pills, section headers and photoless tiles. */
 const CAT_ICON = { froyo: "ice-cream-bowl", tonics: "cup-soda", coffee: "coffee", pastries: "cookie", extras: "gift" };
+const TAG_TONE = { Vegan: "olive", GF: "caramel", DF: "mauve", New: "orange", Seasonal: "rose" };
 
-/* The two seasonal "experiences" get an editorial feature block instead of a
-   card — they're concepts (rotating flavors, recipe kept in-house), not SKUs.
-   Copy lives here so the owner's sheet only ever populates the café staples. */
-const FEATURES = {
-  froyo: {
-    img: "macro-swirl.jpg",
-    pos: "center 55%",
-    kicker: "At the swirl wall",
-    chips: ["Rotating flavors", "Full toppings bar", "Dairy & vegan bases", "Swirl it your way"],
-    note: "Flavors rotate with the seasons — the full self-serve experience lives in the shop.",
-    nutri: "Nutrition varies by flavor & toppings — ask in store for today's panels and allergens.",
-  },
-  tonics: {
-    img: "cans-white-arches.jpg",
-    pos: "center 50%",
-    kicker: "In our signature cans",
-    chips: ["Real fruit", "Lightly sparkling", "Seasonal lineup", "Ask for today's flavors"],
-    note: "A refreshing rotation of fruit tonics — the recipe stays in-house.",
-    nutri: "Vegan · gluten-free · lightly sparkling. Calories vary by seasonal flavor.",
-  },
-};
+/* Hand-styled froyo hero asset (transparent cutout) — the CMS swaps menu copy,
+   but this branded cup is a designed feature image, not a generic item photo. */
+const FROYO_CUTOUT = "/assets/products/froyo-cutout-v2.png";
 
-/* ---------- Delivery / ordering partners bar ---------- */
-function OrderBar() {
-  const { delivery, store } = SITE;
+/* ============================================================
+   Seasonal in-shop features — froyo & tonics aren't a card grid;
+   they're experiences. Each is its own art-directed block.
+   ============================================================ */
+
+/* Self-serve froyo — a confident wine block with the branded cup floating off
+   it; photography leads, the copy says "build your own" in three plain beats. */
+function FroyoFeature({ item, refCb }) {
   return (
-    <div style={{
-      background: "var(--white)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-xl)",
-      boxShadow: "var(--shadow-md)", padding: "var(--space-5) var(--space-6)",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-        <div>
-          <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-xl)", color: "var(--wine-700)" }}>Order through our partners</div>
-          <div style={{ fontSize: "var(--text-sm)", color: "var(--ink-600, var(--ink-700))", marginTop: 2 }}>Delivery &amp; pickup are handled by DoorDash and Grubhub — tap a partner to order, or call us direct.</div>
+    <section className="froyo-feat reveal" data-slug="froyo" ref={refCb} style={{ scrollMarginTop: 132 }}>
+      <div className="froyo-feat-text">
+        <span className="froyo-feat-kicker">Self-serve · in the shop</span>
+        <h2 className="froyo-feat-title">Froyo, your way</h2>
+        <p className="froyo-feat-beats">Swirl it. Top it. Weigh it.</p>
+        <p className="froyo-feat-desc">{item?.desc || "Build your own at the swirl wall — seasonal rotating flavors and a full toppings bar, made your way, in the shop."}</p>
+        <div className="froyo-feat-meta">
+          <Icon name="leaf" size={16} color="var(--leaf-200)" />
+          Vegan &amp; GF flavors · rotates every season
         </div>
-        <a href={`tel:${store.phone.replace(/[^0-9+]/g, "")}`} style={{
-          display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, padding: "11px 20px",
-          border: "2px solid var(--wine-700)", color: "var(--wine-700)", fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)", whiteSpace: "nowrap",
-        }}>
-          <Icon name="phone" size={16} color="var(--wine-700)" />
-          {store.phone}
+        <a className="froyo-feat-cta" href={SITE.store?.maps || "/#locations"} target={SITE.store?.maps ? "_blank" : undefined} rel="noopener noreferrer">
+          Find the swirl wall
+          <Icon name="arrow-right" size={17} color="var(--wine-700)" />
         </a>
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: "var(--space-5)" }}>
-        {delivery.map((d) => (
-          <a key={d.name} href={d.url} target="_blank" rel="noopener noreferrer" style={{
-            flex: "1 1 180px", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 9,
-            borderRadius: "var(--radius-lg)", padding: "15px 18px", background: d.brand, color: d.fg,
-            fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-md)", boxShadow: "var(--shadow-sm)",
-            transition: "transform .15s ease",
-          }} className="delivery-btn">
-            {d.name}
-            <Icon name="arrow-right" size={17} color={d.fg} />
-          </a>
-        ))}
+      <div className="froyo-feat-photo">
+        <img src={FROYO_CUTOUT} alt="A Deserto cup of self-serve frozen yogurt, swirled with caramel and piled with fresh strawberries and blueberries" />
       </div>
-    </div>
+    </section>
   );
 }
 
-/* ---------- Small concept chip (feature blocks) ---------- */
-function Chip({ children, dark }) {
+/* House tonics — a lighter, mirrored panel on rose-tinted sand; the seasonal
+   sibling to froyo without competing with the wine block above it. */
+function TonicsFeature({ item, refCb }) {
   return (
-    <span style={{
-      display: "inline-flex", alignItems: "center", borderRadius: 999, padding: "7px 14px",
-      fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "var(--text-sm)", whiteSpace: "nowrap",
-      background: dark ? "rgba(251,241,232,0.12)" : "var(--white)",
-      color: dark ? "var(--cream-50)" : "var(--wine-700)",
-      border: dark ? "1px solid rgba(251,241,232,0.28)" : "1px solid var(--wine-200)",
-    }}>{children}</span>
+    <section className="tonics-feat reveal" data-slug="tonics" ref={refCb} style={{ scrollMarginTop: 132 }}>
+      <div className="tonics-feat-photo">
+        <Photo src={item?.img || "/assets/products/tonic-raspberry.jpg"} pos="center" label="House fruit tonic in a Deserto can" height="100%" tint="var(--rose-200)" />
+      </div>
+      <div className="tonics-feat-text">
+        <h2 className="tonics-feat-title">House tonics</h2>
+        <p className="tonics-feat-desc">{item?.desc || "Sparkling fruit tonics in our signature cans — refreshing seasonal flavors that rotate through the year. Ask about today's lineup."}</p>
+        <div className="tonics-feat-tags">
+          {(item?.tags || ["Seasonal", "Vegan", "GF"]).map((t) => (
+            <Badge key={t} tone={TAG_TONE[t] || "neutral"} variant="soft">{t}</Badge>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
-/* ---------- Feature block — the froyo & tonics experiences ----------
-   Photography-led, alternating sides; froyo on a warm cream panel with the
-   signature arch, tonics on a bold wine color-block. */
-function FeatureBlock({ cat, product, reverse }) {
-  const f = FEATURES[cat];
-  const dark = cat === "tonics";
-  const Media = (
-    <div className="mfeat-media">
-      {cat === "froyo" ? (
-        <Arch style={{ height: "100%", boxShadow: "var(--shadow-lg)" }}>
-          <Photo src={f.img} pos={f.pos} label={product.name} height="100%" tint="var(--peach-200)" />
-        </Arch>
+/* ============================================================
+   Café menu — coffee / pastries / extras as clean cards.
+   Photo where the food sells on looks; a confident warm café
+   coin where it doesn't (every espresso photographs alike).
+   ============================================================ */
+function MenuCard({ p, cat, i }) {
+  const showPhoto = p.img && cat !== "coffee";
+  const iced = /iced/i.test(p.group || "");
+  const tileIcon = cat === "coffee" && iced ? "cup-soda" : CAT_ICON[cat];
+  // Confident café tones, not pale tints: hot coffee = deep coffee brown, iced =
+  // caramel, anything else photoless = a softer caramel. Cream mark on top.
+  const coinBg = cat === "coffee" ? (iced ? "var(--caramel-500)" : "var(--coffee-600)") : "var(--caramel-400)";
+  return (
+    <div className="mcard stagger-item" style={{ "--i": i }}>
+      <div className="mcard-body">
+        <h4 className="mcard-name">{p.name}</h4>
+        {(p.tags || []).length > 0 && (
+          <div className="mcard-tags">
+            {p.tags.map((t) => <Badge key={t} tone={TAG_TONE[t] || "neutral"} variant="soft">{t}</Badge>)}
+          </div>
+        )}
+      </div>
+      {showPhoto ? (
+        <div className="mthumb" style={{ "--tint": p.tint || "var(--sand-100)" }}>
+          <Photo src={p.img} pos={p.pos || "center"} label={p.name} height="100%" tint={p.tint || "var(--sand-100)"} />
+        </div>
       ) : (
-        <div style={{ height: "100%", borderRadius: "var(--radius-xl)", overflow: "hidden", boxShadow: "var(--shadow-lg)" }}>
-          <Photo src={f.img} pos={f.pos} label={product.name} height="100%" tint="var(--rose-300)" />
+        <div className="mthumb mthumb-coin" style={{ background: coinBg }}>
+          <Icon name={tileIcon} size={30} color="var(--cream-50)" />
         </div>
       )}
     </div>
   );
-  const ink = dark ? "var(--cream-50)" : "var(--wine-700)";
-  const body = dark ? "rgba(251,241,232,0.86)" : "var(--ink-700)";
-  return (
-    <div className={"mfeat" + (reverse ? " mfeat-rev" : "")} style={{
-      background: dark ? "var(--wine-700)" : "var(--white)",
-      border: dark ? "none" : "1px solid var(--border-default)",
-      borderRadius: "var(--radius-2xl)", overflow: "hidden", boxShadow: "var(--shadow-md)",
-    }}>
-      {!reverse && Media}
-      <div className="mfeat-body">
-        <div style={{ display: "flex", alignItems: "center", gap: 9, marginBottom: 14 }}>
-          <Icon name={CAT_ICON[cat]} size={20} color={dark ? "var(--orange-400)" : "var(--orange-600)"} />
-          <span style={{ fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)", letterSpacing: ".04em", textTransform: "uppercase", color: dark ? "var(--orange-300)" : "var(--orange-600)" }}>{f.kicker}</span>
-        </div>
-        <h2 style={{ margin: 0, fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-3xl)", lineHeight: 1.04, color: ink, textWrap: "balance" }}>{product.name}</h2>
-        {product.desc && <p style={{ margin: "14px 0 0", fontSize: "var(--text-md)", lineHeight: 1.5, color: body, maxWidth: "44ch", fontFamily: "var(--font-editorial)" }}>{product.desc}</p>}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 9, margin: "20px 0 0" }}>
-          {f.chips.map((c) => <Chip key={c} dark={dark}>{c}</Chip>)}
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 22, paddingTop: 18, borderTop: dark ? "1px solid rgba(251,241,232,0.18)" : "1px solid var(--border-subtle)" }}>
-          <Badge tone={cat === "froyo" ? "sage" : "rose"} variant={dark ? "solid" : "soft"}>Seasonal</Badge>
-          <span style={{ fontSize: "var(--text-sm)", color: dark ? "rgba(251,241,232,0.7)" : "var(--ink-500)", fontFamily: "var(--font-editorial)" }}>{f.note}</span>
-        </div>
-        {f.nutri && (
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginTop: 12, fontSize: "var(--text-xs)", color: dark ? "rgba(251,241,232,0.62)" : "var(--ink-500)" }}>
-            <Icon name="info" size={14} color={dark ? "rgba(251,241,232,0.62)" : "var(--ink-400)"} style={{ flexShrink: 0, marginTop: 1 }} />
-            <span>{f.nutri}</span>
-          </div>
-        )}
-      </div>
-      {reverse && Media}
-    </div>
-  );
 }
 
-/* ---------- One café-list row (coffee / pastries / extras) ----------
-   Photo when we have one; otherwise an honest tinted icon chip — never a
-   blank colored square pretending to be a photo. */
-function MenuRow({ p, cat, i }) {
-  const tagTone = { Vegan: "olive", GF: "caramel", DF: "mauve", New: "orange", Seasonal: "rose" };
-  const m = p.macros || {};
-  // Compact nutrition line — cal · fat · protein (carbs stay in the data but
-  // are dropped here to keep the row scannable).
-  const nutriBits = [
-    p.cal != null && `${p.cal} cal`,
-    m.fat != null && `${m.fat}g fat`,
-    m.protein != null && `${m.protein}g protein`,
-  ].filter(Boolean);
-  return (
-    <div className="mrow stagger-item" style={{ "--i": i }}>
-      <div className="mrow-thumb" style={{ background: p.img ? "var(--sand-100)" : (p.tint || "var(--peach-100)") }}>
-        {p.img
-          ? <Photo src={p.img} pos={p.pos || "center"} label={p.name} height="100%" tint="var(--sand-100)" />
-          : <Icon name={CAT_ICON[cat]} size={22} color="var(--wine-700)" style={{ opacity: 0.5 }} />}
-      </div>
-      <div style={{ minWidth: 0, flex: 1 }}>
-        <div className="mrow-name">{p.name}</div>
-        {(p.tags || []).length > 0 && (
-          <div className="mrow-tags">
-            {p.tags.map((t) => <Badge key={t} tone={tagTone[t] || "neutral"} variant="soft">{t}</Badge>)}
-          </div>
-        )}
-        {nutriBits.length > 0 && <div className="mrow-nutri">{nutriBits.join(" · ")}</div>}
-        {(p.allergens || []).length > 0 && (
-          <div className="mrow-allergens">Contains {p.allergens.join(", ")}</div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Café-list category (coffee, pastries, extras) ---------- */
+/* Each group (Hot / Iced, Cookies / Scones / Cake jars) gets a label + grid. */
 function CafeCategory({ cat, list }) {
   const groups = [...new Set(list.map((p) => p.group))];
   return (
-    <div className="mlist-panel">
+    <div className="mcat-groups">
       {groups.map((g) => (
-        <div key={g} className="mlist-group">
-          {g && <div className="mlist-grouplabel">{g}</div>}
-          <div className="mlist-grid">
+        <div key={g} className="mcat-group">
+          {g && <div className="mcat-grouplabel">{g}</div>}
+          <div className="mgrid">
             {list.filter((p) => p.group === g).map((p, idx) => (
-              <MenuRow key={p.id || `${p.name}-${idx}`} p={p} cat={cat} i={idx} />
+              <MenuCard key={p.id || `${p.name}-${idx}`} p={p} cat={cat} i={idx} />
             ))}
           </div>
         </div>
@@ -190,27 +121,81 @@ function CafeCategory({ cat, list }) {
   );
 }
 
-/* ---------- Menu page (view the menu, order via a partner) ---------- */
+/* ============================================================
+   Nutrition & allergens — one panel at the very end. Off the
+   cards, but honest and complete for anyone who needs it.
+   ============================================================ */
+function NutritionPanel({ products, categories }) {
+  const rows = products.filter((p) => p.cal != null || (p.allergens || []).length);
+  return (
+    <section className="nutri" id="nutrition" style={{ scrollMarginTop: 132 }}>
+      <details className="nutri-panel">
+        <summary className="nutri-summary">
+          <span className="nutri-summary-text">
+            <span className="nutri-summary-title">Nutrition &amp; allergens</span>
+            <span className="nutri-summary-sub">Calories and "contains" details for every café item</span>
+          </span>
+          <Icon name="chevron-right" size={20} color="var(--wine-700)" />
+        </summary>
+        <div className="nutri-body">
+          {categories.map((c) => {
+            const list = rows.filter((p) => p.cat === c.slug);
+            if (!list.length) return null;
+            return (
+              <div key={c.slug} className="nutri-group">
+                <h3 className="nutri-group-title">{c.name}</h3>
+                <table className="nutri-table">
+                  <thead>
+                    <tr><th scope="col">Item</th><th scope="col">Diet</th><th scope="col">Cal</th><th scope="col">Contains</th></tr>
+                  </thead>
+                  <tbody>
+                    {list.map((p) => (
+                      <tr key={p.id || p.name}>
+                        <th scope="row">{p.name}</th>
+                        <td>{(p.tags || []).filter((t) => t === "Vegan" || t === "GF" || t === "DF").join(", ") || "—"}</td>
+                        <td>{p.cal != null ? p.cal : "—"}</td>
+                        <td>{(p.allergens || []).length ? p.allergens.join(", ") : "—"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })}
+          <p className="nutri-note">
+            Nutrition and allergen details are a guide and may vary; items are made in a kitchen that also handles milk, eggs, wheat, soy, and tree nuts. If you have a food allergy, please tell us before you order.
+          </p>
+        </div>
+      </details>
+    </section>
+  );
+}
+
+/* ---------- Menu page ---------- */
 export default function Menu() {
-  const { categories } = SITE;
   const products = SITE.products;
-  const [activeCat, setActiveCat] = React.useState(categories[0].slug);
+  const allCats = SITE.categories;                                   // froyo, tonics, coffee, pastries, extras
+  const cafeCats = allCats.filter((c) => !["froyo", "tonics"].includes(c.slug));
+  const froyoItem = products.find((p) => p.cat === "froyo");
+  const tonicsItem = products.find((p) => p.cat === "tonics");
+  const [activeCat, setActiveCat] = React.useState(allCats[0].slug);
   const sectionRefs = React.useRef({});
 
   const byCat = (slug) => products.filter((p) => p.cat === slug);
+  const setRef = (slug) => (el) => { sectionRefs.current[slug] = el; };
 
   const scrollToCat = React.useCallback((slug) => {
     const el = sectionRefs.current[slug];
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 138, behavior: "smooth" });
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 132, behavior: "smooth" });
   }, []);
 
-  // Scroll-spy: highlight whichever category is currently in view
+  // Scroll-spy: highlight whichever section is currently in view
   React.useEffect(() => {
     const obs = new IntersectionObserver(
       (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveCat(e.target.dataset.slug); }),
-      { rootMargin: "-148px 0px -62% 0px", threshold: 0 }
+      { rootMargin: "-142px 0px -62% 0px", threshold: 0 }
     );
-    Object.values(sectionRefs.current).forEach((el) => el && obs.observe(el));
+    Object.values(sectionRefs.current).forEach((el) => el && el.dataset.slug && obs.observe(el));
     return () => obs.disconnect();
   }, []);
 
@@ -224,7 +209,7 @@ export default function Menu() {
     return () => io.disconnect();
   }, []);
 
-  // Deep link (#coffee) jumps to that category section
+  // Deep link (#coffee) jumps to that section
   React.useEffect(() => {
     const slug = window.location.hash.replace("#", "");
     if (slug && sectionRefs.current[slug]) {
@@ -233,19 +218,15 @@ export default function Menu() {
     }
   }, [scrollToCat]);
 
-  const froyo = byCat("froyo")[0];
-  const tonic = byCat("tonics")[0];
-  const cafeCats = categories.filter((c) => !["froyo", "tonics"].includes(c.slug));
-
   return (
-    <div style={{ background: "var(--peach-100)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--cream-50)", minHeight: "100vh" }}>
       <Header />
 
       {/* page intro */}
-      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-7) var(--space-6) var(--space-5)" }}>
-        <span style={{ fontFamily: "var(--font-editorial)", fontStyle: "italic", fontSize: "var(--text-md)", color: "var(--wine-500)", letterSpacing: ".01em" }}>Mi gusto, mi estilo</span>
-        <h1 style={{ fontSize: "var(--text-4xl)", margin: "6px 0 0", color: "var(--wine-700)", lineHeight: 1.02, textWrap: "balance" }}>What we make</h1>
-        <p style={{ margin: "14px 0 0", maxWidth: "54ch", fontSize: "var(--text-md)", lineHeight: 1.55, color: "var(--ink-700)", fontFamily: "var(--font-editorial)" }}>
+      <div className="menu-intro">
+        <span className="menu-intro-kicker">Mi gusto, mi estilo</span>
+        <h1 className="menu-intro-title">What we make</h1>
+        <p className="menu-intro-lede">
           Self-serve froyo and house tonics that rotate with the season — alongside an espresso bar, NYC-style cookies, and layered cake jars, made fresh in the shop.
         </p>
       </div>
@@ -253,7 +234,7 @@ export default function Menu() {
       {/* sticky category nav */}
       <nav className="menu-cats" aria-label="Menu categories">
         <div className="menu-cats-inner">
-          {categories.map((c) => (
+          {allCats.map((c) => (
             <button key={c.slug} onClick={() => scrollToCat(c.slug)} aria-current={activeCat === c.slug} className={"menu-cat-pill" + (activeCat === c.slug ? " on" : "")}>
               <Icon name={CAT_ICON[c.slug]} size={15} color="currentColor" />
               {c.name}
@@ -262,36 +243,22 @@ export default function Menu() {
         </div>
       </nav>
 
-      <main style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-6) var(--space-6) var(--space-9)" }}>
-        <OrderBar />
+      <main className="menu-main">
+        {/* seasonal in-shop features */}
+        <FroyoFeature item={froyoItem} refCb={setRef("froyo")} />
+        <TonicsFeature item={tonicsItem} refCb={setRef("tonics")} />
 
-        {/* ---- the two seasonal experiences, as feature blocks ---- */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)", marginTop: "var(--space-7)" }}>
-          {froyo && (
-            <section data-slug="froyo" className="reveal" ref={(el) => { sectionRefs.current.froyo = el; }} style={{ scrollMarginTop: 150 }}>
-              <FeatureBlock cat="froyo" product={froyo} />
-            </section>
-          )}
-          {tonic && (
-            <section data-slug="tonics" className="reveal" ref={(el) => { sectionRefs.current.tonics = el; }} style={{ scrollMarginTop: 150 }}>
-              <FeatureBlock cat="tonics" product={tonic} reverse />
-            </section>
-          )}
-        </div>
-
-        {/* ---- the café staples, as a refined menu list ---- */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", marginTop: "var(--space-9)" }}>
+        {/* café menu */}
+        <div className="menu-cafe">
           {cafeCats.map((c) => {
             const list = byCat(c.slug);
             if (!list.length) return null;
             return (
-              <section key={c.slug} data-slug={c.slug} className="reveal" ref={(el) => { sectionRefs.current[c.slug] = el; }} style={{ scrollMarginTop: 150 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: "var(--space-4)" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 40, height: 40, borderRadius: "50%", background: "var(--wine-700)", flexShrink: 0 }}>
-                    <Icon name={CAT_ICON[c.slug]} size={20} color="var(--cream-50)" />
-                  </span>
-                  <h2 style={{ fontSize: "var(--text-2xl)", margin: 0, color: "var(--wine-700)", lineHeight: 1 }}>{c.name}</h2>
-                  <span style={{ flex: 1, height: 1, background: "var(--border-default)" }} />
+              <section key={c.slug} data-slug={c.slug} className="reveal mcat" ref={setRef(c.slug)} style={{ scrollMarginTop: 132 }}>
+                <div className="mcat-head">
+                  <span className="mcat-head-icon"><Icon name={CAT_ICON[c.slug]} size={19} color="var(--cream-50)" /></span>
+                  <h2 className="mcat-head-title">{c.name}</h2>
+                  <span className="mcat-head-rule" />
                 </div>
                 <CafeCategory cat={c.slug} list={list} />
               </section>
@@ -299,10 +266,7 @@ export default function Menu() {
           })}
         </div>
 
-        {/* allergen disclaimer — guides only; the kitchen handles shared equipment */}
-        <p style={{ marginTop: "var(--space-8)", textAlign: "center", fontSize: "var(--text-xs)", color: "var(--ink-500)", maxWidth: "62ch", marginLeft: "auto", marginRight: "auto", lineHeight: 1.6, fontFamily: "var(--font-editorial)" }}>
-          Nutrition and allergen details are a guide and may vary; items are made in a kitchen that also handles milk, eggs, wheat, soy, and tree nuts. If you have a food allergy, please tell us before you order.
-        </p>
+        <NutritionPanel products={products} categories={cafeCats} />
       </main>
     </div>
   );

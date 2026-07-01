@@ -172,45 +172,202 @@ body { margin: 0; }
 .menu-cat-pill:hover { border-color: var(--wine-400); color: var(--wine-700); }
 .menu-cat-pill.on { background: var(--wine-700); border-color: var(--wine-700); color: var(--cream-50); }
 
-/* café menu — Yogen Früz-style product card grid (one grid per group) */
-.mcat-groups { display: flex; flex-direction: column; gap: var(--space-7); }
+/* ---- page intro ---- */
+.menu-intro {
+  max-width: var(--container-xl); margin: 0 auto;
+  padding: var(--space-7) var(--space-6) var(--space-5);
+}
+.menu-intro-kicker {
+  font-family: var(--font-editorial); font-style: italic;
+  font-size: var(--text-md); color: var(--wine-500); letter-spacing: .01em;
+}
+.menu-intro-title {
+  margin: 6px 0 0; font-size: var(--text-4xl); color: var(--wine-700);
+  line-height: 1.02; letter-spacing: -0.01em; text-wrap: balance;
+}
+.menu-intro-lede {
+  margin: 14px 0 0; max-width: 58ch; font-family: var(--font-editorial);
+  font-size: var(--text-md); line-height: 1.55; color: var(--ink-700); text-wrap: pretty;
+}
+.menu-main {
+  max-width: var(--container-xl); margin: 0 auto;
+  padding: var(--space-6) var(--space-6) var(--space-9);
+  display: flex; flex-direction: column; gap: var(--space-8);
+}
+
+/* ============================================================
+   Seasonal in-shop features — froyo (wine drench) & tonics (light panel)
+   ============================================================ */
+.froyo-feat {
+  position: relative; overflow: visible;
+  background: var(--wine-700);
+  background-image: radial-gradient(120% 130% at 88% 12%, var(--wine-600), transparent 55%);
+  border-radius: var(--radius-2xl); color: var(--cream-50);
+  display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center;
+  gap: var(--space-5); padding: clamp(28px, 4vw, 56px);
+  box-shadow: var(--shadow-wine);
+}
+.froyo-feat-kicker {
+  font-family: var(--font-body); font-weight: 800; font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: .16em; color: var(--orange-400);
+}
+.froyo-feat-title {
+  margin: 10px 0 0; font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 0.96;
+  letter-spacing: -0.02em; color: var(--cream-50); text-wrap: balance;
+}
+.froyo-feat-beats {
+  margin: 12px 0 0; font-family: var(--font-editorial); font-style: italic;
+  font-size: var(--text-lg); color: var(--leaf-200); letter-spacing: .01em;
+}
+.froyo-feat-desc {
+  margin: 14px 0 0; max-width: 42ch; font-size: var(--text-md); line-height: 1.55;
+  color: color-mix(in srgb, var(--cream-50) 86%, transparent); text-wrap: pretty;
+}
+.froyo-feat-meta {
+  display: flex; align-items: center; gap: 8px; margin-top: 18px;
+  font-size: var(--text-sm); font-weight: 700; color: var(--leaf-200);
+}
+.froyo-feat-cta {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: var(--space-4);
+  background: var(--orange-500); color: var(--wine-700); text-decoration: none;
+  font-family: var(--font-body); font-weight: 800; font-size: var(--text-sm);
+  padding: 12px 22px; border-radius: var(--radius-pill);
+  transition: background .18s var(--ease-out, ease), transform .18s var(--ease-out, ease);
+}
+.froyo-feat-cta:hover { background: var(--orange-400); transform: translateY(-2px); }
+.froyo-feat-photo { justify-self: center; }
+.froyo-feat-photo img {
+  display: block; width: 100%; max-width: 380px; height: auto;
+  filter: drop-shadow(0 26px 40px rgba(42, 18, 14, 0.45));
+  margin: -28px 0;                       /* let the cup breathe past the block */
+}
+
+.tonics-feat {
+  background: var(--peach-100);
+  border: 1px solid var(--peach-200); border-radius: var(--radius-2xl);
+  display: grid; grid-template-columns: 0.85fr 1.15fr; align-items: center;
+  overflow: hidden;
+}
+.tonics-feat-photo { height: clamp(260px, 30vw, 360px); }
+.tonics-feat-photo > div { width: 100%; height: 100%; }
+.tonics-feat-text { padding: clamp(24px, 3.4vw, 44px); align-self: center; }
+.tonics-feat-title { margin: 0; font-size: var(--text-2xl); color: var(--wine-700); letter-spacing: -0.01em; }
+.tonics-feat-desc {
+  margin: 12px 0 0; max-width: 46ch; font-size: var(--text-md); line-height: 1.55;
+  color: var(--ink-700); font-family: var(--font-editorial); text-wrap: pretty;
+}
+.tonics-feat-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: var(--space-4); }
+
+/* ============================================================
+   Café menu — section header, grid, clean cards
+   ============================================================ */
+.menu-cafe { display: flex; flex-direction: column; gap: var(--space-8); }
+.mcat-head { display: flex; align-items: center; gap: 12px; margin-bottom: var(--space-5); }
+.mcat-head-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%; background: var(--wine-700); flex-shrink: 0;
+}
+.mcat-head-title { margin: 0; font-size: var(--text-2xl); color: var(--wine-700); line-height: 1; letter-spacing: -0.01em; }
+.mcat-head-rule { flex: 1; height: 1px; background: var(--border-default); }
+
+.mcat-groups { display: flex; flex-direction: column; gap: var(--space-6); }
 .mcat-grouplabel {
   font-family: var(--font-display); font-weight: 800; font-size: var(--text-sm);
   color: var(--caramel-600); text-transform: uppercase; letter-spacing: .08em;
   margin-bottom: var(--space-4); padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle);
 }
-.mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-5); }
+/* Airy cards — name + dietary tags on the left, round product on the right.
+   No prices, no nutrition (that lives in the panel at the foot of the page). */
+.mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-5); }
 .mcard {
   background: var(--white); border: 1px solid var(--border-subtle);
-  border-radius: 20px; overflow: hidden; box-shadow: 0 3px 12px -6px rgba(42,29,17,0.14);
-  display: flex; flex-direction: column;
-  transition: transform .35s var(--ease-out-expo, ease), box-shadow .35s var(--ease-out-expo, ease);
+  border-radius: var(--radius-lg); box-shadow: 0 3px 12px -6px rgba(42,29,17,0.14);
+  display: flex; align-items: center; gap: 16px; padding: 16px 18px;
+  transition: transform .35s var(--ease-out-expo, ease), box-shadow .35s var(--ease-out-expo, ease), border-color .2s ease;
 }
-.mcard:hover { transform: translateY(-5px); box-shadow: 0 20px 38px -20px rgba(42,29,17,0.32); }
-.mcard-photo {
-  height: 156px; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-}
-.mcard-photo > div { height: 100%; width: 100%; }   /* Photo component fills the tile */
-.mcard-body { padding: 15px 16px 17px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.mcard:hover { transform: translateY(-4px); box-shadow: 0 18px 34px -20px rgba(42,29,17,0.30); border-color: var(--border-default); }
+.mcard-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .mcard-name {
-  margin: 0; font-family: var(--font-display); font-weight: 800; font-size: var(--text-md);
-  color: var(--wine-700); line-height: 1.14; text-wrap: balance;
+  margin: 0; font-family: var(--font-display); font-weight: 800; font-size: var(--text-lg);
+  color: var(--wine-700); line-height: 1.12; text-wrap: balance;
 }
 .mcard-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-/* Calorie / macro line — quiet but legible, in the brand wine. */
-.mcard-nutri {
-  font-family: var(--font-body); font-weight: 700;
-  font-size: var(--text-xs); letter-spacing: .01em; color: var(--wine-600, var(--wine-700));
+.mthumb {
+  flex-shrink: 0; width: 104px; height: 104px; border-radius: 50%;
+  overflow: hidden; background: var(--tint, var(--sand-100)); position: relative;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(42,29,17,0.06);
 }
-/* "Contains …" allergen line — readable safety info, not a faint afterthought. */
-.mcard-allerg {
-  font-size: var(--text-xs); line-height: 1.4; color: var(--ink-600, var(--ink-700));
+.mthumb > div { width: 100%; height: 100%; }
+/* Confident warm café coin (drinks / photoless items) — solid brand tone with a
+   cream mark and a soft top sheen, never a washed-out tint. */
+.mthumb-coin { box-shadow: 0 8px 18px -10px rgba(42,29,17,0.40), inset 0 2px 0 rgba(255,255,255,0.18); }
+.mthumb-coin::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(110% 80% at 50% 14%, rgba(255,255,255,0.22), transparent 62%);
+}
+.mthumb-coin > span { position: relative; z-index: 1; }
+
+/* ============================================================
+   Nutrition & allergens — one disclosure panel at the foot
+   ============================================================ */
+.nutri { margin-top: var(--space-4); }
+.nutri-panel {
+  background: var(--white); border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); overflow: hidden;
+}
+.nutri-summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: var(--space-5) var(--space-6); cursor: pointer; list-style: none;
+}
+.nutri-summary::-webkit-details-marker { display: none; }
+.nutri-summary-text { display: flex; flex-direction: column; gap: 3px; }
+.nutri-summary-title { font-family: var(--font-display); font-weight: 800; font-size: var(--text-xl); color: var(--wine-700); }
+.nutri-summary-sub { font-size: var(--text-sm); color: var(--ink-500); }
+.nutri-summary > span:last-child { transition: transform .25s var(--ease-out, ease); }
+.nutri-panel[open] .nutri-summary > span:last-child { transform: rotate(90deg); }
+.nutri-body {
+  padding: 0 var(--space-6) var(--space-6);
+  display: flex; flex-direction: column; gap: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+}
+.nutri-group { padding-top: var(--space-5); }
+.nutri-group-title {
+  margin: 0 0 var(--space-3); font-family: var(--font-display); font-weight: 800;
+  font-size: var(--text-sm); text-transform: uppercase; letter-spacing: .08em; color: var(--caramel-600);
+}
+.nutri-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.nutri-table thead th {
+  text-align: left; font-family: var(--font-body); font-weight: 800; font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: .06em; color: var(--ink-500);
+  padding: 0 12px 8px; border-bottom: 1px solid var(--border-default);
+}
+.nutri-table thead th:nth-child(3) { text-align: right; }
+.nutri-table tbody th {
+  text-align: left; font-weight: 700; color: var(--ink-900); padding: 11px 12px;
+}
+.nutri-table tbody td { color: var(--ink-700); padding: 11px 12px; vertical-align: top; }
+.nutri-table tbody td:nth-child(3) { text-align: right; font-weight: 700; color: var(--wine-700); white-space: nowrap; }
+.nutri-table tbody tr + tr th, .nutri-table tbody tr + tr td { border-top: 1px solid var(--border-subtle); }
+.nutri-note {
+  margin: 0; font-family: var(--font-editorial); font-size: var(--text-xs);
+  line-height: 1.6; color: var(--ink-500); max-width: 70ch;
+}
+
+@media (max-width: 860px) {
+  .froyo-feat { grid-template-columns: 1fr; text-align: center; gap: var(--space-4); }
+  .froyo-feat-desc, .froyo-feat-meta { margin-left: auto; margin-right: auto; }
+  .froyo-feat-photo { order: -1; }
+  .froyo-feat-photo img { max-width: 260px; margin: 0 auto; }
+  .tonics-feat { grid-template-columns: 1fr; }
+  .tonics-feat-photo { min-height: 220px; }
 }
 @media (max-width: 560px) {
-  .mgrid { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
-  .mcard-photo { height: 130px; }
-  .mcard-body { padding: 12px 12px 14px; }
+  .mcard { padding: 14px; gap: 14px; }
+  .mthumb { width: 84px; height: 84px; }
+  .mcard-name { font-size: var(--text-md); }
+  .nutri-table { font-size: var(--text-xs); }
+  .nutri-table tbody th, .nutri-table tbody td { padding: 9px 8px; }
 }
 
 /* Round add-to-bag button */
