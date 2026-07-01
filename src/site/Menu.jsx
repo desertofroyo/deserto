@@ -16,7 +16,11 @@ export function MenuSection({ sectionRef }) {
   const { highlights } = SITE;
   const reveal = useReveal();
   return (
-    <section id="menu" ref={sectionRef} style={{ background: "var(--surface-sunken)" }}>
+    <section id="menu" ref={sectionRef} style={{
+      // clean bright stage behind the product cutouts, fading to the warm sand at
+      // the edges — crisp contrast so the photography pops, depth so it's not flat.
+      background: "radial-gradient(ellipse 130% 95% at 50% 30%, var(--white) 0%, #FCF4EC 42%, var(--sand-100) 100%)",
+    }}>
       <div ref={reveal} style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
         <div style={{ textAlign: "center", maxWidth: 560, margin: "0 auto" }}>
           <span className="eyebrow" style={{ color: "var(--wine-500)" }}>The menu</span>
