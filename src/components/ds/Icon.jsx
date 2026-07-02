@@ -3,6 +3,7 @@ import {
   Instagram, Facebook, Twitter, Plus, IceCreamBowl, CupSoda, Coffee,
   Cookie, Signal, Wifi, BatteryFull, House, Gift, WandSparkles, Trash2,
   ChevronRight, Check, Star, Sparkles, Cake, Info, Leaf, Snowflake, Zap,
+  Play, Pause, X,
 } from "lucide-react";
 
 /**
@@ -43,6 +44,9 @@ const ICONS = {
   leaf: Leaf,
   snowflake: Snowflake,
   zap: Zap,
+  play: Play,
+  pause: Pause,
+  x: X,
 };
 
 export function Icon({ name, size = 20, color = "currentColor", strokeWidth = 2, style = {} }) {

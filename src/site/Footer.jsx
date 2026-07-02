@@ -67,6 +67,9 @@ export function Footer() {
           {DESERTO_LINKS.map(([label, to]) => (
             <Link key={label} to={to} style={linkStyle}>{label}</Link>
           ))}
+          {store.nutritionUrl && (
+            <a href={store.nutritionUrl} target="_blank" rel="noopener noreferrer" style={linkStyle}>Nutrition &amp; allergens (PDF)</a>
+          )}
           <a href={`tel:${store.phone.replace(/[^0-9+]/g, "")}`} style={linkStyle}>{store.phone}</a>
 
           <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, color: "var(--cream-50)", margin: "var(--space-5) 0 0", fontSize: "var(--text-sm)", letterSpacing: ".08em", textTransform: "uppercase" }}>Order delivery</div>

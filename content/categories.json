@@ -1,8 +1,8 @@
 {
   "items": [
     {
-      "slug": "froyo",
-      "name": "Frozen Yogurt"
+      "slug": "swirl",
+      "name": "Take Home Swirl"
     },
     {
       "slug": "tonics",
@@ -15,10 +15,6 @@
     {
       "slug": "pastries",
       "name": "Pastries"
-    },
-    {
-      "slug": "extras",
-      "name": "Extras"
     }
   ]
 }

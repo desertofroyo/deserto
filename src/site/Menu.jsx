@@ -29,7 +29,7 @@ export function MenuSection({ sectionRef }) {
 
         <div className="showcase">
           {highlights.map((h, i) => (
-            <Link key={h.slug} to={h.to} className="showcase-item stagger-item" style={{ "--i": i }}>
+            <Link key={h.slug} to={h.to} data-slug={h.slug} className="showcase-item stagger-item" style={{ "--i": i }}>
               <div className="showcase-photo">
                 <img src={srcOf(h.img)} alt={h.name} loading="lazy" />
               </div>

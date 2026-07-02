@@ -15,14 +15,14 @@ const ROTATE_MS = 5500;
 const ORANGE = { color: "var(--orange-500)" };
 const SLIDES = [
   {
-    src: "/assets/images/hero-froyo-scene.jpg",
+    src: "/assets/images/hero-froyo-scene.jpg?v=3",
     alt: "A Deserto frozen yogurt cup topped with strawberries, blueberries, granola and caramel",
-    pos: "right 50%",
-    head: (<>Where coffee<br />meets creamy<br /><span style={ORANGE}>bliss.</span></>),
+    pos: "right bottom",
+    head: (<>Where coffee meets<br />creamy <span style={ORANGE}>bliss.</span></>),
     copy: "Self-serve frozen yogurt with curated toppings, caramel drizzle and fresh fruit — swirled exactly your way at the topping wall.",
   },
   {
-    src: "/assets/images/hero-tonics-scene.jpg",
+    src: "/assets/images/hero-tonics-scene.jpg?v=2",
     alt: "Three Deserto fruit tonics in signature cans over crushed ice with berries and citrus",
     pos: "right 50%",
     head: (<>Real fruit.<br /><span style={ORANGE}>Real refreshment.</span></>),
@@ -34,16 +34,20 @@ const SLIDES = [
     ],
   },
   {
-    src: "/assets/images/hero-coffee-scene.jpg",
+    src: "/assets/images/hero-coffee-scene.jpg?v=2",
     alt: "Three Deserto iced coffees — a paper cup, an iced latte and a caramel iced coffee — over a scatter of roasted beans",
     pos: "right 50%",
     head: (<>My taste,<br /><span style={ORANGE}>my lifestyle</span></>),
     copy: "Indulge in what makes you happy. From creamy frozen yogurt to energizing coffee, every sip is a moment just for you.",
   },
   {
-    src: "/assets/images/hero-cakejars-scene.jpg",
-    alt: "Three Deserto layered cake jars — strawberry, Oreo cream and chocolate — on a marble board with fresh berries and Oreo cookies",
+    src: "/assets/images/hero-cakejars-scene.jpg?v=3",
+    alt: "Three Deserto layered cake jars — strawberry, Oreo cream and chocolate — against a warm peach studio wall with fresh berries and Oreo cookies",
     pos: "right 50%",
+    // Full pre-composed scene (jars already sized + placed on the right, logos
+    // wrapped in): no scale-up needed, and it's a clean AI render so skip the
+    // render-time unsharp + contrast/saturate boost that over-cooks it.
+    noSharpen: true,
     head: (<>Crafted<br /><span style={ORANGE}>to crave.</span></>),
     copy: "Creamy frozen yogurt, real ingredients and irresistible layers in every jar.",
     features: [
@@ -61,20 +65,27 @@ const SLIDES = [
    edge. The fixed left column (headline, copy, buttons) overlays on top. */
 export function Hero({ onVisit }) {
   const [i, setI] = React.useState(0);
-  const [paused, setPaused] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
+  // Explicit, sticky user control — stays paused after the pointer leaves,
+  // unlike the transient hover pause below.
+  const [userPaused, setUserPaused] = React.useState(false);
   const n = SLIDES.length;
 
+  // Rotation halts while the pointer rests on the hero (so people can read a
+  // slide) OR when the user has explicitly paused it with the control.
+  const rotating = !hovered && !userPaused && n > 1;
+
   React.useEffect(() => {
-    if (paused || n <= 1) return;
+    if (!rotating) return;
     const t = setInterval(() => setI((p) => (p + 1) % n), ROTATE_MS);
     return () => clearInterval(t);
-  }, [paused, n]);
+  }, [rotating, n]);
 
   return (
     <section
       id="top"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       /* bg inherits the page wrapper's cream (#FFF1DE), which is matched to the
          hero photos' baked cream wall — so the transparent nav band, the hero
          canvas and the photo wall are all one cream with no seam at the crisp top. */
@@ -108,7 +119,8 @@ export function Hero({ onVisit }) {
             style={{
               position: "absolute", inset: 0, width: "100%", height: "100%",
               objectFit: "cover", objectPosition: s.pos,
-              filter: "url(#hero-sharpen) contrast(1.05) saturate(1.04)",
+              transform: s.transform, transformOrigin: s.transformOrigin,
+              filter: s.noSharpen ? "none" : "url(#hero-sharpen) contrast(1.05) saturate(1.04)",
               // full-bleed — no left feather. Each scene's own backdrop carries the
               // headline column; the light left scrim below keeps the copy legible.
               opacity: idx === i ? 1 : 0, transition: "opacity 1s var(--ease-out, ease)",
@@ -130,7 +142,7 @@ export function Hero({ onVisit }) {
         display: "flex", alignItems: "center",
       }}>
         {/* ---- Foreground content (left column) ---- */}
-        <div className="r-hero-text" style={{ position: "relative", zIndex: 2, maxWidth: 540 }}>
+        <div className="r-hero-text" style={{ position: "relative", zIndex: 2, maxWidth: 780 }}>
           <span style={{
             display: "inline-block", background: "var(--wine-700)", color: "var(--lime-400)",
             fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", letterSpacing: ".02em",
@@ -141,7 +153,7 @@ export function Hero({ onVisit }) {
           <div className="r-hero-copy" key={i}>
             <h1 className="r-hero-h1" style={{
               fontFamily: "var(--font-display)", fontWeight: 800, textTransform: "uppercase",
-              fontSize: "clamp(40px, 4.4vw, 68px)", lineHeight: 0.92, letterSpacing: "-0.01em",
+              fontSize: "clamp(40px, 4.4vw, 60px)", lineHeight: 0.92, letterSpacing: "-0.01em",
               margin: "var(--space-4) 0 0", color: "var(--wine-700)",
             }}>
               {SLIDES[i].head}
@@ -195,14 +207,30 @@ export function Hero({ onVisit }) {
             </button>
           </div>
 
-          {/* carousel dots */}
-          <div style={{ display: "flex", gap: 8, marginTop: "var(--space-5)" }}>
-            {SLIDES.map((s, idx) => (
-              <button key={s.src} aria-label={`Show slide ${idx + 1}`} onClick={() => setI(idx)} style={{
-                width: idx === i ? 26 : 10, height: 10, borderRadius: 999, border: "none", cursor: "pointer", padding: 0,
-                background: idx === i ? "var(--wine-700)" : "rgba(118,47,53,0.3)", transition: "all .25s var(--ease-out, ease)",
-              }} />
-            ))}
+          {/* carousel controls: play/pause toggle + slide dots */}
+          <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "var(--space-5)" }}>
+            <button
+              onClick={() => setUserPaused((p) => !p)}
+              aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
+              aria-pressed={userPaused}
+              style={{
+                width: 34, height: 34, borderRadius: 999, cursor: "pointer", padding: 0, flexShrink: 0,
+                border: "2px solid var(--wine-700)", background: "rgba(255,255,255,0.55)",
+                display: "inline-flex", alignItems: "center", justifyContent: "center",
+                transition: "background .2s var(--ease-out, ease)",
+              }}
+            >
+              <Icon name={userPaused ? "play" : "pause"} size={15} color="var(--wine-700)" />
+            </button>
+
+            <div style={{ display: "flex", gap: 8 }}>
+              {SLIDES.map((s, idx) => (
+                <button key={s.src} aria-label={`Show slide ${idx + 1}`} onClick={() => setI(idx)} style={{
+                  width: idx === i ? 26 : 10, height: 10, borderRadius: 999, border: "none", cursor: "pointer", padding: 0,
+                  background: idx === i ? "var(--wine-700)" : "rgba(118,47,53,0.3)", transition: "all .25s var(--ease-out, ease)",
+                }} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
