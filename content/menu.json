@@ -15,6 +15,7 @@
       "group": "",
       "name": "Vanilla",
       "desc": "A 32 oz take-home pint of creamy self-serve vanilla froyo.",
+      "img": "/assets/products/swirl-vanilla.png",
       "tags": ["GF"],
       "allergens": ["Dairy"]
     },
@@ -24,6 +25,7 @@
       "group": "",
       "name": "Orange",
       "desc": "A 32 oz take-home pint of bright, tangy orange froyo.",
+      "img": "/assets/products/swirl-orange.png",
       "tags": ["Vegan", "DF", "GF"]
     },
     {
@@ -32,6 +34,7 @@
       "group": "",
       "name": "Salted Caramel",
       "desc": "A 32 oz take-home pint of sweet-and-salty caramel froyo.",
+      "img": "/assets/products/swirl-caramel.png",
       "tags": ["GF"],
       "allergens": ["Dairy"]
     },
@@ -41,6 +44,7 @@
       "group": "",
       "name": "Taro",
       "desc": "A 32 oz take-home pint of smooth, nutty taro froyo.",
+      "img": "/assets/products/swirl-taro.png",
       "tags": ["GF"],
       "allergens": ["Dairy"]
     },
@@ -50,6 +54,7 @@
       "group": "",
       "name": "Guava",
       "desc": "A 32 oz take-home pint of tropical guava froyo.",
+      "img": "/assets/products/swirl-guava.png",
       "tags": ["Vegan", "DF", "GF"]
     },
     {
@@ -58,6 +63,7 @@
       "group": "",
       "name": "Premium Tarte",
       "desc": "A 32 oz take-home pint of our tangy premium tarte froyo.",
+      "img": "/assets/products/swirl-tarte.png",
       "tags": ["GF"],
       "allergens": ["Dairy"]
     },
