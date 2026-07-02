@@ -1,109 +1,98 @@
 import React from "react";
-import { Badge, Icon } from "../components/ds";
+import { Icon } from "../components/ds";
 import { Header } from "../site/Header.jsx";
-import { Photo } from "../site/parts.jsx";
 import { SITE } from "../site/data.js";
 // Menu items are owner-editable via the CMS (content/menu.json → SITE.products).
-// We list what the café makes — no prices, no nutrition on the cards; the full
-// nutrition + allergen guide lives in one panel at the very end of the page.
+// The menu reads like the Dutch Bros menu: a slim self-serve froyo callout, a
+// vertical category rail on the side, and lightly-boxed cards — a transparent
+// product cutout, its name and a short line of copy. Clicking a card opens a
+// simple detail modal. Nutrition & allergens is not on the page — it's a link
+// to a PDF (SITE.store.nutritionUrl), surfaced in the footer and each modal.
 
-/* Per-category icon used for nav pills, section headers and photoless tiles. */
-const CAT_ICON = { froyo: "ice-cream-bowl", tonics: "cup-soda", coffee: "coffee", pastries: "cookie", extras: "gift" };
-const TAG_TONE = { Vegan: "olive", GF: "caramel", DF: "mauve", New: "orange", Seasonal: "rose" };
+/* Per-category icon used for nav tabs, section headers and photoless cards. */
+const CAT_ICON = { froyo: "ice-cream-bowl", swirl: "ice-cream-bowl", tonics: "cup-soda", coffee: "coffee", pastries: "cookie" };
 
-/* Hand-styled froyo hero asset (transparent cutout) — the CMS swaps menu copy,
-   but this branded cup is a designed feature image, not a generic item photo. */
-const FROYO_CUTOUT = "/assets/products/froyo-cutout-v2.png";
+/* The in-shop self-serve froyo is a callout, not a tab. The card-bearing
+   categories below each get a side tab, in this order: take-home swirl pints,
+   tonics, coffee, then pastries. */
+const CARD_CATS = ["swirl", "tonics", "coffee", "pastries"];
+
+/* Resolve an item image: absolute/remote paths pass through; bare filenames come
+   from the editorial image folder (kept for any legacy CMS entries). */
+const IMG_DIR = "/assets/images/";
+const srcOf = (s) => (!s ? null : s[0] === "/" || /^https?:\/\//.test(s) ? s : IMG_DIR + s);
 
 /* ============================================================
-   Seasonal in-shop features — froyo & tonics aren't a card grid;
-   they're experiences. Each is its own art-directed block.
+   Self-serve froyo — a slim wine callout, not a card. Says
+   "build your own" in one beat and points at the swirl wall.
    ============================================================ */
-
-/* Self-serve froyo — a confident wine block with the branded cup floating off
-   it; photography leads, the copy says "build your own" in three plain beats. */
-function FroyoFeature({ item, refCb }) {
+function FroyoCallout() {
   return (
-    <section className="froyo-feat reveal" data-slug="froyo" ref={refCb} style={{ scrollMarginTop: 132 }}>
-      <div className="froyo-feat-text">
-        <span className="froyo-feat-kicker">Self-serve · in the shop</span>
-        <h2 className="froyo-feat-title">Froyo, your way</h2>
-        <p className="froyo-feat-beats">Swirl it. Top it. Weigh it.</p>
-        <p className="froyo-feat-desc">{item?.desc || "Build your own at the swirl wall — seasonal rotating flavors and a full toppings bar, made your way, in the shop."}</p>
-        <div className="froyo-feat-meta">
-          <Icon name="leaf" size={16} color="var(--leaf-200)" />
-          Vegan &amp; GF flavors · rotates every season
-        </div>
-        <a className="froyo-feat-cta" href={SITE.store?.maps || "/#locations"} target={SITE.store?.maps ? "_blank" : undefined} rel="noopener noreferrer">
-          Find the swirl wall
-          <Icon name="arrow-right" size={17} color="var(--wine-700)" />
-        </a>
+    <section className="froyo-callout">
+      <span className="froyo-callout-icon" aria-hidden>
+        <Icon name="ice-cream-bowl" size={26} color="var(--cream-50)" />
+      </span>
+      <div className="froyo-callout-text">
+        <span className="froyo-callout-kicker">Self-serve · in the shop</span>
+        <p className="froyo-callout-line">
+          <strong>Froyo, your way.</strong> Swirl it, top it, weigh it — seasonal flavors and a full toppings bar.
+        </p>
       </div>
-      <div className="froyo-feat-photo">
-        <img src={FROYO_CUTOUT} alt="A Deserto cup of self-serve frozen yogurt, swirled with caramel and piled with fresh strawberries and blueberries" />
-      </div>
+      <a
+        className="froyo-callout-cta"
+        href={SITE.store?.maps || "/#locations"}
+        target={SITE.store?.maps ? "_blank" : undefined}
+        rel="noopener noreferrer"
+      >
+        Find the swirl wall
+        <Icon name="arrow-right" size={16} color="var(--cream-50)" />
+      </a>
     </section>
   );
 }
 
-/* House tonics — a lighter, mirrored panel on rose-tinted sand; the seasonal
-   sibling to froyo without competing with the wine block above it. */
-function TonicsFeature({ item, refCb }) {
+/* Shared art: the transparent cutout, or a category-icon coin when no cutout
+   exists yet. `size` scales the coin/icon for the card vs. the expanded view. */
+function ProductArt({ p, cat, broken, onError, coin = 108, icon = 34 }) {
+  const img = srcOf(p.img);
+  if (img && !broken) return <img src={img} alt={p.name} loading="lazy" onError={onError} />;
   return (
-    <section className="tonics-feat reveal" data-slug="tonics" ref={refCb} style={{ scrollMarginTop: 132 }}>
-      <div className="tonics-feat-photo">
-        <Photo src={item?.img || "/assets/products/tonic-raspberry.jpg"} pos="center" label="House fruit tonic in a Deserto can" height="100%" tint="var(--rose-200)" />
-      </div>
-      <div className="tonics-feat-text">
-        <h2 className="tonics-feat-title">House tonics</h2>
-        <p className="tonics-feat-desc">{item?.desc || "Sparkling fruit tonics in our signature cans — refreshing seasonal flavors that rotate through the year. Ask about today's lineup."}</p>
-        <div className="tonics-feat-tags">
-          {(item?.tags || ["Seasonal", "Vegan", "GF"]).map((t) => (
-            <Badge key={t} tone={TAG_TONE[t] || "neutral"} variant="soft">{t}</Badge>
-          ))}
-        </div>
-      </div>
-    </section>
+    <span className="mcard-coin" style={{ background: "var(--caramel-400)", width: coin, height: coin }}>
+      <Icon name={CAT_ICON[cat]} size={icon} color="var(--cream-50)" />
+    </span>
   );
 }
 
 /* ============================================================
-   Café menu — coffee / pastries / extras as clean cards.
-   Photo where the food sells on looks; a confident warm café
-   coin where it doesn't (every espresso photographs alike).
+   Menu card — Dutch-Bros style. A transparent product cutout that
+   overhangs the top of a lightly-boxed card, its name and a short
+   description. The whole card is a button: click it for the details.
    ============================================================ */
-function MenuCard({ p, cat, i }) {
-  const showPhoto = p.img && cat !== "coffee";
-  const iced = /iced/i.test(p.group || "");
-  const tileIcon = cat === "coffee" && iced ? "cup-soda" : CAT_ICON[cat];
-  // Confident café tones, not pale tints: hot coffee = deep coffee brown, iced =
-  // caramel, anything else photoless = a softer caramel. Cream mark on top.
-  const coinBg = cat === "coffee" ? (iced ? "var(--caramel-500)" : "var(--coffee-600)") : "var(--caramel-400)";
+function MenuCard({ p, cat, catName, i, onSelect }) {
+  // Missing/misnamed cutouts degrade to the category coin rather than a blank box.
+  const [broken, setBroken] = React.useState(false);
+  const open = () => onSelect({ p, cat, catName });
   return (
-    <div className="mcard stagger-item" style={{ "--i": i }}>
-      <div className="mcard-body">
-        <h4 className="mcard-name">{p.name}</h4>
-        {(p.tags || []).length > 0 && (
-          <div className="mcard-tags">
-            {p.tags.map((t) => <Badge key={t} tone={TAG_TONE[t] || "neutral"} variant="soft">{t}</Badge>)}
-          </div>
-        )}
+    <div
+      className="mcard stagger-item"
+      style={{ "--i": i }}
+      role="button"
+      tabIndex={0}
+      aria-haspopup="dialog"
+      onClick={open}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } }}
+    >
+      <div className="mcard-art">
+        <ProductArt p={p} cat={cat} broken={broken} onError={() => setBroken(true)} />
       </div>
-      {showPhoto ? (
-        <div className="mthumb" style={{ "--tint": p.tint || "var(--sand-100)" }}>
-          <Photo src={p.img} pos={p.pos || "center"} label={p.name} height="100%" tint={p.tint || "var(--sand-100)"} />
-        </div>
-      ) : (
-        <div className="mthumb mthumb-coin" style={{ background: coinBg }}>
-          <Icon name={tileIcon} size={30} color="var(--cream-50)" />
-        </div>
-      )}
+      <h4 className="mcard-name">{p.name}</h4>
+      {p.desc && <p className="mcard-desc">{p.desc}</p>}
     </div>
   );
 }
 
 /* Each group (Hot / Iced, Cookies / Scones / Cake jars) gets a label + grid. */
-function CafeCategory({ cat, list }) {
+function CafeCategory({ cat, catName, list, onSelect }) {
   const groups = [...new Set(list.map((p) => p.group))];
   return (
     <div className="mcat-groups">
@@ -112,7 +101,7 @@ function CafeCategory({ cat, list }) {
           {g && <div className="mcat-grouplabel">{g}</div>}
           <div className="mgrid">
             {list.filter((p) => p.group === g).map((p, idx) => (
-              <MenuCard key={p.id || `${p.name}-${idx}`} p={p} cat={cat} i={idx} />
+              <MenuCard key={p.id || `${p.name}-${idx}`} p={p} cat={cat} catName={catName} i={idx} onSelect={onSelect} />
             ))}
           </div>
         </div>
@@ -122,52 +111,52 @@ function CafeCategory({ cat, list }) {
 }
 
 /* ============================================================
-   Nutrition & allergens — one panel at the very end. Off the
-   cards, but honest and complete for anyone who needs it.
+   Product detail — a simple expanded card (not a new page). Opens
+   on card click: the cutout, the name, a subtitle, the full line of
+   copy, any diet tags, and a link out to the nutrition & allergens
+   guide (a PDF).
    ============================================================ */
-function NutritionPanel({ products, categories }) {
-  const rows = products.filter((p) => p.cal != null || (p.allergens || []).length);
+function ProductModal({ sel, onClose }) {
+  const { p, cat, catName } = sel;
+  const [broken, setBroken] = React.useState(false);
+  const dietTags = (p.tags || []).filter((t) => t === "Vegan" || t === "GF" || t === "DF");
+
+  // Close on Escape; lock body scroll while open.
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [onClose]);
+
   return (
-    <section className="nutri" id="nutrition" style={{ scrollMarginTop: 132 }}>
-      <details className="nutri-panel">
-        <summary className="nutri-summary">
-          <span className="nutri-summary-text">
-            <span className="nutri-summary-title">Nutrition &amp; allergens</span>
-            <span className="nutri-summary-sub">Calories and "contains" details for every café item</span>
-          </span>
-          <Icon name="chevron-right" size={20} color="var(--wine-700)" />
-        </summary>
-        <div className="nutri-body">
-          {categories.map((c) => {
-            const list = rows.filter((p) => p.cat === c.slug);
-            if (!list.length) return null;
-            return (
-              <div key={c.slug} className="nutri-group">
-                <h3 className="nutri-group-title">{c.name}</h3>
-                <table className="nutri-table">
-                  <thead>
-                    <tr><th scope="col">Item</th><th scope="col">Diet</th><th scope="col">Cal</th><th scope="col">Contains</th></tr>
-                  </thead>
-                  <tbody>
-                    {list.map((p) => (
-                      <tr key={p.id || p.name}>
-                        <th scope="row">{p.name}</th>
-                        <td>{(p.tags || []).filter((t) => t === "Vegan" || t === "GF" || t === "DF").join(", ") || "—"}</td>
-                        <td>{p.cal != null ? p.cal : "—"}</td>
-                        <td>{(p.allergens || []).length ? p.allergens.join(", ") : "—"}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            );
-          })}
-          <p className="nutri-note">
-            Nutrition and allergen details are a guide and may vary; items are made in a kitchen that also handles milk, eggs, wheat, soy, and tree nuts. If you have a food allergy, please tell us before you order.
-          </p>
+    <div className="pmodal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label={p.name}>
+      <div className="pmodal" onClick={(e) => e.stopPropagation()}>
+        <button className="pmodal-close" onClick={onClose} aria-label="Close">
+          <Icon name="x" size={20} color="var(--ink-700)" />
+        </button>
+        <div className="pmodal-art">
+          <ProductArt p={p} cat={cat} broken={broken} onError={() => setBroken(true)} coin={150} icon={50} />
         </div>
-      </details>
-    </section>
+        <div className="pmodal-body">
+          <span className="pmodal-sub">{p.group || catName}</span>
+          <h3 className="pmodal-title">{p.name}</h3>
+          {p.desc && <p className="pmodal-desc">{p.desc}</p>}
+          {dietTags.length > 0 && (
+            <div className="pmodal-tags">
+              {dietTags.map((t) => <span key={t} className="pmodal-tag">{t}</span>)}
+            </div>
+          )}
+          {SITE.store?.nutritionUrl && (
+            <a className="pmodal-nutri" href={SITE.store.nutritionUrl} target="_blank" rel="noopener noreferrer">
+              Nutrition &amp; allergens (PDF)
+              <Icon name="arrow-right" size={15} color="currentColor" />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -175,10 +164,10 @@ function NutritionPanel({ products, categories }) {
 export default function Menu() {
   const products = SITE.products;
   const allCats = SITE.categories;                                   // froyo, tonics, coffee, pastries, extras
-  const cafeCats = allCats.filter((c) => !["froyo", "tonics"].includes(c.slug));
-  const froyoItem = products.find((p) => p.cat === "froyo");
-  const tonicsItem = products.find((p) => p.cat === "tonics");
-  const [activeCat, setActiveCat] = React.useState(allCats[0].slug);
+  // Card-bearing categories, in the site's declared order — these are the tabs.
+  const cardCats = allCats.filter((c) => CARD_CATS.includes(c.slug) && products.some((p) => p.cat === c.slug));
+  const [activeCat, setActiveCat] = React.useState(cardCats[0]?.slug);
+  const [selected, setSelected] = React.useState(null);
   const sectionRefs = React.useRef({});
 
   const byCat = (slug) => products.filter((p) => p.cat === slug);
@@ -209,7 +198,7 @@ export default function Menu() {
     return () => io.disconnect();
   }, []);
 
-  // Deep link (#coffee) jumps to that section
+  // Deep link: #coffee/#pastries jump to that section.
   React.useEffect(() => {
     const slug = window.location.hash.replace("#", "");
     if (slug && sectionRefs.current[slug]) {
@@ -231,26 +220,31 @@ export default function Menu() {
         </p>
       </div>
 
-      {/* sticky category nav */}
-      <nav className="menu-cats" aria-label="Menu categories">
-        <div className="menu-cats-inner">
-          {allCats.map((c) => (
-            <button key={c.slug} onClick={() => scrollToCat(c.slug)} aria-current={activeCat === c.slug} className={"menu-cat-pill" + (activeCat === c.slug ? " on" : "")}>
-              <Icon name={CAT_ICON[c.slug]} size={15} color="currentColor" />
-              {c.name}
-            </button>
-          ))}
-        </div>
-      </nav>
+      {/* self-serve froyo callout (not a card) */}
+      <div className="menu-callout-wrap">
+        <FroyoCallout />
+      </div>
 
-      <main className="menu-main">
-        {/* seasonal in-shop features */}
-        <FroyoFeature item={froyoItem} refCb={setRef("froyo")} />
-        <TonicsFeature item={tonicsItem} refCb={setRef("tonics")} />
+      {/* two-column layout: sticky side rail + stacked category card grids */}
+      <main className="menu-layout">
+        <aside className="menu-rail" aria-label="Menu categories">
+          <div className="menu-rail-inner">
+            {cardCats.map((c) => (
+              <button
+                key={c.slug}
+                onClick={() => scrollToCat(c.slug)}
+                aria-current={activeCat === c.slug}
+                className={"menu-tab" + (activeCat === c.slug ? " on" : "")}
+              >
+                <Icon name={CAT_ICON[c.slug]} size={16} color="currentColor" />
+                {c.name}
+              </button>
+            ))}
+          </div>
+        </aside>
 
-        {/* café menu */}
         <div className="menu-cafe">
-          {cafeCats.map((c) => {
+          {cardCats.map((c) => {
             const list = byCat(c.slug);
             if (!list.length) return null;
             return (
@@ -260,14 +254,16 @@ export default function Menu() {
                   <h2 className="mcat-head-title">{c.name}</h2>
                   <span className="mcat-head-rule" />
                 </div>
-                <CafeCategory cat={c.slug} list={list} />
+                <CafeCategory cat={c.slug} catName={c.name} list={list} onSelect={setSelected} />
               </section>
             );
           })}
         </div>
-
-        <NutritionPanel products={products} categories={cafeCats} />
       </main>
+
+      {selected && (
+        <ProductModal sel={selected} onClose={() => setSelected(null)} />
+      )}
     </div>
   );
 }

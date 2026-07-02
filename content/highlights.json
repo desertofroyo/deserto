@@ -15,13 +15,13 @@
     {
       "slug": "coffee",
       "name": "Coffee",
-      "img": "/assets/products/hero-coffee.png",
+      "img": "/assets/products/hero-coffee.png?v=2",
       "to": "/menu#coffee"
     },
     {
       "slug": "pastries",
       "name": "Pastries & Cake Jars",
-      "img": "/assets/products/hero-cakejars.png",
+      "img": "/assets/products/hero-cakejars.png?v=2",
       "to": "/menu#pastries"
     }
   ]
