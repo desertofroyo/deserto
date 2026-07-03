@@ -126,7 +126,11 @@ export function Hero({ onVisit }) {
               filter: s.noSharpen ? "none" : "url(#hero-sharpen) contrast(1.05) saturate(1.04)",
               // full-bleed — no left feather. Each scene's own backdrop carries the
               // headline column; the light left scrim below keeps the copy legible.
-              opacity: idx === i ? 1 : 0, transition: "opacity 1s var(--ease-out, ease)",
+              // ease-in-out drives the crossfade quickly through the ~50/50 point so
+              // two dissimilar scenes don't linger as a muddy double-exposure; .85s
+              // matches the headline's clock so photo + copy resolve as one motion.
+              opacity: idx === i ? 1 : 0,
+              transition: "opacity .85s var(--ease-in-out, ease)", willChange: "opacity",
             }}
           />
         ))}
@@ -146,14 +150,16 @@ export function Hero({ onVisit }) {
       }}>
         {/* ---- Foreground content (left column) ---- */}
         <div className="r-hero-text" style={{ position: "relative", zIndex: 2, maxWidth: 780 }}>
-          {/* store-hours pill — only on the first slide, matching the CTA row below. */}
-          {i === 0 && (
-            <span style={{
-              display: "inline-block", background: "var(--wine-700)", color: "var(--lime-400)",
-              fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", letterSpacing: ".02em",
-              padding: "8px 18px", borderRadius: 999,
-            }}>Open daily 10–10 · River Rd, Tucson</span>
-          )}
+          {/* Store-hours pill. On desktop it belongs to the first slide only; on
+              phones the carousel reads as one melted composition, so it persists on
+              every slide instead of blinking out when the photo advances. It sits
+              outside the keyed copy below, so it holds still as slides change.
+              Visibility is driven by CSS (.r-hero-hours) per viewport. */}
+          <span className={"r-hero-hours" + (i === 0 ? " is-first" : "")} style={{
+            background: "var(--wine-700)", color: "var(--lime-400)",
+            fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", letterSpacing: ".02em",
+            padding: "8px 18px", borderRadius: 999,
+          }}>Open daily 10–10 · River Rd, Tucson</span>
 
           {/* keyed so the headline + copy crossfade in step with the photo */}
           <div className="r-hero-copy" key={i}>

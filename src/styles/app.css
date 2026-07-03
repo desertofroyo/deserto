@@ -640,10 +640,20 @@ body { margin: 0; }
 /* Hero photo runs crisp to the right edge — no feather. The left edge is
    handled by the (light) color scrim + headline column. */
 
-/* Per-slide headline + copy fade in as the carousel advances (keyed remount). */
+/* Per-slide headline + copy fade in as the carousel advances (keyed remount).
+   Shares the photo crossfade's .85s clock so the words and the picture settle
+   together instead of the text snapping in ahead of the dissolve. */
 @keyframes heroCopyIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.r-hero-copy { animation: heroCopyIn 0.6s var(--ease-out-expo, ease) both; }
+.r-hero-copy { animation: heroCopyIn 0.85s var(--ease-out-expo, ease) both; }
 @media (prefers-reduced-motion: reduce) { .r-hero-copy { animation: none; } }
+
+/* Store-hours pill: on the first slide only on desktop (where it pairs with the
+   CTA row), but persistent on every slide on phones — the mobile hero reads as one
+   melted composition, so a pill blinking in/out as the photo changes looks broken.
+   The mobile override lives in the max-width:760px block below (later in source,
+   equal specificity → wins there). */
+.r-hero-hours { display: inline-block; }
+.r-hero-hours:not(.is-first) { display: none; }
 
 /* ---- Hero on phones: copy melts down into the photo (one composition) ----
    The scenes are ~3:1 panoramas with the product in the right ~40% — too wide to
@@ -670,6 +680,8 @@ body { margin: 0; }
       rgba(251, 241, 232, 0.82) 70%, rgba(251, 241, 232, 0) 100%) !important;
   }
   .r-hero-text { max-width: 100% !important; }
+  /* keep the hours pill on every slide on phones (see .r-hero-hours above) */
+  .r-hero-hours:not(.is-first) { display: inline-block; }
   .r-hero-h1 { font-size: clamp(38px, 9vw, 54px) !important; }
   .r-hero-stage {
     order: 2; position: relative !important;
