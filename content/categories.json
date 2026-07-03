@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "slug": "swirl",
+      "name": "Take Home Swirl"
+    },
+    {
+      "slug": "tonics",
+      "name": "Tonics"
+    },
+    {
+      "slug": "coffee",
+      "name": "Coffee"
+    },
+    {
+      "slug": "pastries",
+      "name": "Pastries"
+    }
+  ]
+}

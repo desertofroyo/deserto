@@ -1,0 +1,317 @@
+{
+  "items": [
+    {
+      "id": "fy-selfserve",
+      "cat": "froyo",
+      "group": "",
+      "name": "Self-Serve Frozen Yogurt",
+      "desc": "Build your own at the swirl wall — seasonal rotating flavors and a full toppings bar. Made your way, in the shop.",
+      "instore": true
+    },
+
+    {
+      "id": "sw-vanilla",
+      "cat": "swirl",
+      "group": "",
+      "name": "Vanilla",
+      "desc": "Cool, creamy classic vanilla — our signature swirl, in a 32 oz take-home pint.",
+      "img": "/assets/products/swirl-vanilla.png",
+      "tags": ["GF"],
+      "allergens": ["Dairy"]
+    },
+    {
+      "id": "sw-orange",
+      "cat": "swirl",
+      "group": "",
+      "name": "Orange",
+      "desc": "Bright, tangy orange with a citrus lift — 32 oz, packed for the freezer.",
+      "img": "/assets/products/swirl-orange.png",
+      "tags": ["Vegan", "DF", "GF"]
+    },
+    {
+      "id": "sw-caramel",
+      "cat": "swirl",
+      "group": "",
+      "name": "Salted Caramel",
+      "desc": "Deep caramel with a salt-flecked finish — 32 oz of take-home indulgence.",
+      "img": "/assets/products/swirl-caramel.png",
+      "tags": ["GF"],
+      "allergens": ["Dairy"]
+    },
+    {
+      "id": "sw-taro",
+      "cat": "swirl",
+      "group": "",
+      "name": "Taro",
+      "desc": "Smooth, nutty taro in a mellow violet swirl — a 32 oz pint for home.",
+      "img": "/assets/products/swirl-taro.png",
+      "tags": ["GF"],
+      "allergens": ["Dairy"]
+    },
+    {
+      "id": "sw-guava",
+      "cat": "swirl",
+      "group": "",
+      "name": "Guava",
+      "desc": "Tropical guava, sweet with a gentle tartness — 32 oz to take with you.",
+      "img": "/assets/products/swirl-guava.png",
+      "tags": ["Vegan", "DF", "GF"]
+    },
+    {
+      "id": "sw-tarte",
+      "cat": "swirl",
+      "group": "",
+      "name": "Premium Tarte",
+      "desc": "Our tangy original tart — clean, bright and refreshing, in a 32 oz pint.",
+      "img": "/assets/products/swirl-tarte.png",
+      "tags": ["GF"],
+      "allergens": ["Dairy"]
+    },
+
+    {
+      "id": "to-blueberry",
+      "img": "/assets/products/tonics/blueberry.png",
+      "cat": "tonics",
+      "group": "",
+      "name": "Blueberry Tonic",
+      "desc": "Sparkling tonic bursting with ripe blueberry.",
+      "tags": ["Vegan", "GF"]
+    },
+    {
+      "id": "to-kiwi",
+      "img": "/assets/products/tonics/kiwi.png",
+      "cat": "tonics",
+      "group": "",
+      "name": "Kiwi Tonic",
+      "desc": "Bright, tangy kiwi over sparkling water.",
+      "tags": ["Vegan", "GF"]
+    },
+    {
+      "id": "to-mango",
+      "img": "/assets/products/tonics/mango.png",
+      "cat": "tonics",
+      "group": "",
+      "name": "Mango Tonic",
+      "desc": "Sun-ripe mango, sparkling and refreshing.",
+      "tags": ["Vegan", "GF"]
+    },
+    {
+      "id": "to-raspberry",
+      "img": "/assets/products/tonics/raspberry.png",
+      "cat": "tonics",
+      "group": "",
+      "name": "Raspberry Tonic",
+      "desc": "Naturally sweet raspberry, subtly tart and refreshing.",
+      "tags": ["Vegan", "GF"]
+    },
+    {
+      "id": "to-pineapple",
+      "img": "/assets/products/tonics/pineapple.png",
+      "cat": "tonics",
+      "group": "",
+      "name": "Pineapple Tonic",
+      "desc": "Juicy tropical pineapple, sparkling cold.",
+      "tags": ["Vegan", "GF"]
+    },
+    {
+      "id": "to-strawberry",
+      "img": "/assets/products/tonics/strawberry.png",
+      "cat": "tonics",
+      "group": "",
+      "name": "Strawberry Tonic",
+      "desc": "Fresh strawberry, crisp and refreshing.",
+      "tags": ["Vegan", "GF"]
+    },
+    {
+      "id": "to-peach",
+      "img": "/assets/products/tonics/peach.png",
+      "cat": "tonics",
+      "group": "",
+      "name": "Golden Peach Tonic",
+      "desc": "Golden peach, sparkling and mellow-sweet.",
+      "tags": ["Vegan", "GF"]
+    },
+
+    {
+      "id": "c-latte",
+      "img": "/assets/products/hot-latte.png",
+      "cat": "coffee",
+      "group": "Hot",
+      "name": "Hot Latte",
+      "desc": "Smooth espresso and steamed milk — your milk, your size.",
+      "allergens": ["Dairy"],
+      "cal": 190
+    },
+    {
+      "id": "c-macch",
+      "img": "/assets/products/hot-macchiato.png",
+      "cat": "coffee",
+      "group": "Hot",
+      "name": "Hot Macchiato",
+      "desc": "Bold espresso marked with a little foamed milk.",
+      "allergens": ["Dairy"],
+      "cal": 20
+    },
+    {
+      "id": "c-chai",
+      "img": "/assets/products/hot-chai-latte.png",
+      "cat": "coffee",
+      "group": "Hot",
+      "name": "Hot Chai Latte",
+      "desc": "Warm spiced chai with steamed milk.",
+      "allergens": ["Dairy"],
+      "cal": 240
+    },
+    {
+      "id": "c-amer",
+      "img": "/assets/products/americano.png",
+      "cat": "coffee",
+      "group": "Hot",
+      "name": "Americano",
+      "desc": "Espresso and hot water — clean and bold.",
+      "tags": ["Vegan", "GF"],
+      "cal": 15
+    },
+    {
+      "id": "c-capp",
+      "img": "/assets/products/cappuccino.png",
+      "cat": "coffee",
+      "group": "Hot",
+      "name": "Cappuccino",
+      "desc": "Espresso, steamed milk and a deep cap of foam.",
+      "allergens": ["Dairy"],
+      "cal": 130
+    },
+    {
+      "id": "c-esp",
+      "img": "/assets/products/espresso.png",
+      "cat": "coffee",
+      "group": "Hot",
+      "name": "Espresso · Single",
+      "desc": "A single, freshly pulled shot — rich and concentrated.",
+      "tags": ["Vegan", "GF"],
+      "cal": 5
+    },
+
+    {
+      "id": "c-ichai",
+      "img": "/assets/products/iced-chai-latte.png",
+      "cat": "coffee",
+      "group": "Iced",
+      "name": "Iced Chai Latte",
+      "desc": "Spiced chai over ice with your choice of milk.",
+      "allergens": ["Dairy"],
+      "cal": 230
+    },
+    {
+      "id": "c-imacch",
+      "img": "/assets/products/iced-macchiato.png",
+      "cat": "coffee",
+      "group": "Iced",
+      "name": "Iced Macchiato",
+      "desc": "Chilled espresso marked with milk over ice.",
+      "allergens": ["Dairy"],
+      "cal": 25
+    },
+    {
+      "id": "c-ilatte",
+      "img": "/assets/products/iced-latte.png",
+      "cat": "coffee",
+      "group": "Iced",
+      "name": "Iced Latte",
+      "desc": "Espresso and cold milk over ice — easy and smooth.",
+      "allergens": ["Dairy"],
+      "cal": 180
+    },
+    {
+      "id": "c-iamer",
+      "img": "/assets/products/iced-americano.png",
+      "cat": "coffee",
+      "group": "Iced",
+      "name": "Iced Americano",
+      "desc": "Espresso and cold water over ice — crisp and clean.",
+      "tags": ["Vegan", "GF"],
+      "cal": 15
+    },
+
+    {
+      "id": "p-macad",
+      "img": "/assets/products/white-chocolate-macadamia.png",
+      "cat": "pastries",
+      "group": "Cookies NYC",
+      "name": "White Chocolate Macadamia",
+      "desc": "Sweet white chocolate and buttery macadamia in a thick NYC-style cookie.",
+      "allergens": ["Wheat", "Dairy", "Eggs", "Nuts", "Soy"],
+      "cal": 620,
+      "macros": { "fat": 34, "carbs": 73, "protein": 7 }
+    },
+    {
+      "id": "p-redv",
+      "img": "/assets/products/red-velvet-and-white-chocolate.png",
+      "cat": "pastries",
+      "group": "Cookies NYC",
+      "name": "Red Velvet & White Chocolate",
+      "desc": "Soft red velvet cookie loaded with white chocolate chips.",
+      "allergens": ["Wheat", "Dairy", "Eggs", "Soy"],
+      "cal": 600,
+      "macros": { "fat": 30, "carbs": 76, "protein": 7 }
+    },
+    {
+      "id": "p-ccw",
+      "img": "/assets/products/chocolate-chip-and-walnut.png",
+      "cat": "pastries",
+      "group": "Cookies NYC",
+      "name": "Chocolate Chip & Walnut",
+      "desc": "Classic chocolate chip with toasted walnuts — thick and chewy.",
+      "allergens": ["Wheat", "Dairy", "Eggs", "Nuts", "Soy"],
+      "cal": 620,
+      "macros": { "fat": 33, "carbs": 74, "protein": 8 }
+    },
+
+    {
+      "id": "p-bluelem",
+      "img": "/assets/products/blueberry-lemon.png",
+      "cat": "pastries",
+      "group": "Scones",
+      "name": "Blueberry Lemon",
+      "desc": "Tender scone with juicy blueberries and bright lemon.",
+      "allergens": ["Wheat", "Dairy", "Eggs"],
+      "cal": 410,
+      "macros": { "fat": 19, "carbs": 55, "protein": 6 }
+    },
+    {
+      "id": "p-vanilla",
+      "img": "/assets/products/vanilla-almond.png",
+      "cat": "pastries",
+      "group": "Scones",
+      "name": "Vanilla Almond",
+      "desc": "Buttery vanilla scone with sliced almonds.",
+      "allergens": ["Wheat", "Dairy", "Eggs", "Nuts"],
+      "cal": 430,
+      "macros": { "fat": 22, "carbs": 52, "protein": 7 }
+    },
+
+    {
+      "id": "p-gansito",
+      "img": "/assets/products/gansito-cake-jar.png",
+      "cat": "pastries",
+      "group": "Cake jars",
+      "name": "Gansito Cake Jar",
+      "desc": "Layers of cake, cream and chocolate — a nod to the classic Gansito.",
+      "allergens": ["Wheat", "Dairy", "Eggs", "Soy"],
+      "cal": 500,
+      "macros": { "fat": 24, "carbs": 64, "protein": 6 }
+    },
+    {
+      "id": "p-oreo",
+      "img": "/assets/products/oreo-cake-jar.png",
+      "cat": "pastries",
+      "group": "Cake jars",
+      "name": "Oreo Cake Jar",
+      "desc": "Layered cookies-and-cream crumble in a jar.",
+      "allergens": ["Wheat", "Dairy", "Soy"],
+      "cal": 520,
+      "macros": { "fat": 25, "carbs": 68, "protein": 5 }
+    }
+  ]
+}

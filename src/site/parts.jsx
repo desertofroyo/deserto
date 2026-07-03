@@ -3,7 +3,7 @@ import React from "react";
 /* Deserto website — primitives, season theme engine, kinetic marquee. */
 
 export const IMG = "/assets/images/";
-export const ISO = "/assets/logos/deserto-isotype.png";
+export const ISO = "/assets/logos/deserto-mark.svg";
 
 /* ---------- Photo — real café photography w/ graceful fallback ---------- */
 export function Photo({ src, tint = "var(--peach-100)", label, height = "100%", radius = 0, pos = "center", style = {} }) {
@@ -13,12 +13,33 @@ export function Photo({ src, tint = "var(--peach-100)", label, height = "100%", 
       overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", ...style,
     }}>
       {src ? (
-        <img src={src[0] === "/" ? src : IMG + src} alt={label || ""} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos }} />
+        <img src={src[0] === "/" || /^https?:\/\//.test(src) ? src : IMG + src} alt={label || ""} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos }} />
       ) : (
         <img src={ISO} alt="" style={{ height: "38%", opacity: 0.14, filter: "saturate(0.6)" }} />
       )}
     </div>
   );
+}
+
+/* ---------- useReveal — fade + rise an element into view on scroll ----------
+   Returns a ref; attach it to any element to make it (and any .stagger-item
+   children) animate in once, the first time it enters the viewport. */
+export function useReveal(options = {}) {
+  const ref = React.useRef(null);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.classList.add("reveal");
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { el.classList.add("in"); io.unobserve(el); }
+      }),
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px", ...options }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
 }
 
 /* ---------- Arch — the café's signature arched silhouette ---------- */

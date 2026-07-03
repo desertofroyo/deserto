@@ -1,47 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../components/ds";
-import { Photo, Arch } from "./parts.jsx";
+import { IMG, useReveal } from "./parts.jsx";
 import { SITE } from "./data.js";
 
-/* "What we make" highlights — arch-framed cards linking to the order page. */
+/* Resolve a highlight image: absolute/remote paths pass through, bare filenames
+   come from the editorial image folder. */
+const srcOf = (s) => (s[0] === "/" || /^https?:\/\//.test(s) ? s : IMG + s);
+
+/* "What we make" — a clean, airy product showcase: each category is a cutout
+   product shot floating on the calm sand section, with its name and a single
+   "View menu" link beneath. No frames, no color blocks — the photography and
+   generous whitespace do the work. Cake jars live within the pastries card. */
 export function MenuSection({ sectionRef }) {
   const { highlights } = SITE;
+  const reveal = useReveal();
   return (
-    <section id="menu" ref={sectionRef} style={{ background: "var(--surface-sunken)" }}>
-      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
-          <div>
-            <span className="eyebrow" style={{ color: "var(--wine-500)" }}>The menu</span>
-            <h2 style={{ fontSize: "var(--text-4xl)", margin: "8px 0 0", color: "var(--wine-700)" }}>What we make</h2>
-          </div>
-          <Link to="/order" className="nav-link" style={{ fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)", color: "var(--wine-700)", display: "inline-flex", alignItems: "center", gap: 7 }}>
-            See the full menu & order
-            <Icon name="arrow-right" size={17} color="var(--wine-700)" />
-          </Link>
+    <section id="menu" ref={sectionRef} style={{
+      // clean bright stage behind the product cutouts, fading to the warm sand at
+      // the edges — crisp contrast so the photography pops, depth so it's not flat.
+      background: "radial-gradient(ellipse 130% 95% at 50% 30%, var(--white) 0%, #FCF4EC 42%, var(--sand-100) 100%)",
+    }}>
+      <div ref={reveal} style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
+        <div style={{ textAlign: "center", maxWidth: 560, margin: "0 auto" }}>
+          <span className="eyebrow" style={{ color: "var(--wine-500)" }}>The menu</span>
+          <h2 style={{ fontSize: "var(--text-4xl)", margin: "8px 0 0", color: "var(--wine-700)" }}>What we make</h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "var(--space-5)", marginTop: "var(--space-7)" }}>
+
+        <div className="showcase">
           {highlights.map((h, i) => (
-            <Link key={h.slug} to={"/order?tab=" + h.slug} className="season-card" style={{
-              display: "block", background: "var(--white)", borderRadius: "var(--radius-xl)", overflow: "hidden",
-              boxShadow: "var(--shadow-sm)", border: "1px solid var(--border-default)",
-              animation: `fadeUp .4s ${i * 0.05}s var(--ease-out, ease) both`,
-            }}>
-              <Arch style={{ height: 200 }} radius="50% 50% 0 0 / 30% 30% 0 0">
-                <Photo src={h.img} pos={h.pos || "center"} label={h.name} height="100%" />
-              </Arch>
-              <div style={{ padding: "var(--space-4)" }}>
-                <h3 style={{ margin: 0, fontSize: "var(--text-lg)", color: "var(--ink-900)" }}>{h.name}</h3>
-                <p style={{ margin: "6px 0 12px", fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: 1.5 }}>{h.desc}</p>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontWeight: 800, color: "var(--wine-700)", fontFamily: "var(--font-body)", fontSize: "var(--text-sm)" }}>Order</span>
-                  <span style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--orange-500)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
-                    <Icon name="arrow-right" size={16} color="var(--wine-900)" />
-                  </span>
-                </div>
+            <Link key={h.slug} to={h.to} data-slug={h.slug} className="showcase-item stagger-item" style={{ "--i": i }}>
+              <div className="showcase-photo">
+                <img src={srcOf(h.img)} alt={h.name} loading="lazy" />
               </div>
+              <h3 className="showcase-name">{h.name}</h3>
             </Link>
           ))}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "var(--space-8)" }}>
+          <Link to="/menu" className="btn-wine" style={{
+            borderRadius: 999, padding: "15px 32px", background: "var(--wine-700)", color: "var(--cream-50)",
+            fontFamily: "var(--font-body)", fontWeight: 800, fontSize: "var(--text-sm)",
+            display: "inline-flex", alignItems: "center", gap: 10, boxShadow: "var(--shadow-md)",
+          }}>
+            View full menu
+            <Icon name="arrow-right" size={18} color="var(--cream-50)" />
+          </Link>
         </div>
       </div>
     </section>

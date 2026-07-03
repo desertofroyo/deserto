@@ -47,7 +47,12 @@ a {
   color: var(--text-link);
   text-decoration: none;
 }
-a:hover { text-decoration: underline; }
+/* Only inline links in running copy get the underline-on-hover affordance.
+   Styled links and buttons (nav tabs, CTAs, the logo, the phone/delivery pills)
+   own their own hover treatment — applying the default underline to them stacked
+   a second line on top of the nav tabs' custom orange underline. Scope it to
+   prose so that never happens again, anywhere on the site. */
+:where(p, li, .prose) a:hover { text-decoration: underline; }
 
 /* Small caps eyebrow utility used across the brand */
 .eyebrow {

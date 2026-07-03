@@ -1,0 +1,24 @@
+{
+  "gallery": [
+    {
+      "img": "story-froyo-caramel.jpg",
+      "caption": "Where coffee meets creamy bliss"
+    },
+    {
+      "img": "story-coffee-tray.jpg",
+      "caption": "Coffee to go — hot & iced"
+    },
+    {
+      "img": "cans-white-arches.jpg",
+      "caption": "Tonics in our signature cans"
+    },
+    {
+      "img": "strawberry-hand.jpg",
+      "caption": "Fresh fruit, every day"
+    },
+    {
+      "img": "tulips-drinks.jpg",
+      "caption": "Coffee, blooms & good company"
+    }
+  ]
+}
