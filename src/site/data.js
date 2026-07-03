@@ -44,7 +44,7 @@ export const SITE = {
 
   /* ---- Navigation (structural — not owner-edited) ---- */
   nav: [
-    { en: "Menu", id: "menu" },
+    { en: "What we make", id: "menu" },
     { en: "Our Story", id: "story" },
     { en: "Visit", id: "locations" },
   ],

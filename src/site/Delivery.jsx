@@ -61,8 +61,11 @@ function ProviderRow({ p, onClick }) {
 
 /* ---- Nav: "Order delivery" pill + branded popover ----
    The header isn't overflow-clipped, so an absolutely-positioned popover is safe.
-   Closes on outside-click and Escape; the disclosure chevron flips while open. */
-export function DeliveryMenu() {
+   Closes on outside-click and Escape; the disclosure chevron flips while open.
+
+   `compact` renders an icon-only circular trigger (used in the phone header,
+   where it balances the hamburger on the right); the popover is identical. */
+export function DeliveryMenu({ compact = false }) {
   const { delivery } = SITE;
   const [open, setOpen] = React.useState(false);
   const wrapRef = React.useRef(null);
@@ -77,18 +80,31 @@ export function DeliveryMenu() {
   }, [open]);
 
   return (
-    <div className="dlv-wrap" ref={wrapRef}>
-      <button
-        type="button"
-        className={"dlv-trigger" + (open ? " open" : "")}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
-      >
-        <Icon name="shopping-bag" size={17} color="var(--cream-50)" />
-        Order delivery
-        <Icon name="chevron-right" size={16} color="var(--cream-50)" style={{ transition: "transform .25s var(--ease-out, ease)", transform: open ? "rotate(90deg)" : "rotate(0)" }} />
-      </button>
+    <div className={"dlv-wrap" + (compact ? " dlv-wrap-compact" : "")} ref={wrapRef}>
+      {compact ? (
+        <button
+          type="button"
+          className={"dlv-trigger-compact" + (open ? " open" : "")}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          aria-label="Order delivery"
+          onClick={() => setOpen((o) => !o)}
+        >
+          <Icon name="shopping-bag" size={18} color="var(--cream-50)" />
+        </button>
+      ) : (
+        <button
+          type="button"
+          className={"dlv-trigger" + (open ? " open" : "")}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <Icon name="shopping-bag" size={17} color="var(--cream-50)" />
+          Order delivery
+          <Icon name="chevron-right" size={16} color="var(--cream-50)" style={{ transition: "transform .25s var(--ease-out, ease)", transform: open ? "rotate(90deg)" : "rotate(0)" }} />
+        </button>
+      )}
 
       <div className={"dlv-pop" + (open ? " open" : "")} role="menu" aria-label="Order delivery" hidden={!open}>
         <span className="dlv-pop-eyebrow">Order from</span>

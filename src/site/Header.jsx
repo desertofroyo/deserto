@@ -93,6 +93,11 @@ export function Header({ onNav }) {
             <span className={"hb" + (open ? " open" : "")}><span /><span /><span /></span>
           </button>
         </div>
+
+        {/* Phone header only: a compact delivery button on the right, balancing
+            the hamburger on the left (the full "Order delivery" pill is too wide
+            for a phone bar). Hidden on desktop, where the pill lives in actions. */}
+        <div className="hdr-mobile-dlv"><DeliveryMenu compact /></div>
       </div>
 
       {/* mobile sheet */}
