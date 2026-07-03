@@ -34,7 +34,6 @@ export function MenuSection({ sectionRef }) {
                 <img src={srcOf(h.img)} alt={h.name} loading="lazy" />
               </div>
               <h3 className="showcase-name">{h.name}</h3>
-              <span className="showcase-link">View menu</span>
             </Link>
           ))}
         </div>

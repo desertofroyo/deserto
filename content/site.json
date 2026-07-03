@@ -3,7 +3,6 @@
     "name": "Deserto Frozen Yogurt & Café",
     "addr": "5635 E River Rd, Unit 101",
     "city": "Tucson, AZ 85750",
-    "phone": "(520) 981-1029",
     "hours": "Open daily · 10 AM – 10 PM",
     "maps": "https://www.google.com/maps/search/?api=1&query=5635%20E%20River%20Rd%20Unit%20101%2C%20Tucson%2C%20AZ%2085750",
     "nutritionUrl": "/assets/deserto-nutrition-allergens.pdf",
@@ -33,6 +32,11 @@
       "name": "Facebook",
       "icon": "facebook",
       "url": "https://www.facebook.com/61577031538659/photos/"
+    },
+    {
+      "name": "TikTok",
+      "icon": "tiktok",
+      "url": "https://www.tiktok.com/@deserto.frozenyogurt"
     }
   ]
 }

@@ -1,13 +1,14 @@
 import React from "react";
 import { Icon } from "../components/ds";
 import { Header } from "../site/Header.jsx";
+import { Footer } from "../site/Footer.jsx";
 import { SITE } from "../site/data.js";
 // Menu items are owner-editable via the CMS (content/menu.json → SITE.products).
-// The menu reads like the Dutch Bros menu: a slim self-serve froyo callout, a
-// vertical category rail on the side, and lightly-boxed cards — a transparent
-// product cutout, its name and a short line of copy. Clicking a card opens a
-// simple detail modal. Nutrition & allergens is not on the page — it's a link
-// to a PDF (SITE.store.nutritionUrl), surfaced in the footer and each modal.
+// The menu reads like the Dutch Bros menu: a vertical category rail on the
+// side and lightly-boxed cards — a transparent product cutout, its name and a
+// short line of copy. Clicking a card opens a simple detail modal. Nutrition &
+// allergens is not on the page — it's a link to a PDF
+// (SITE.store.nutritionUrl), surfaced in the footer and each modal.
 
 /* Per-category icon used for nav tabs, section headers and photoless cards. */
 const CAT_ICON = { froyo: "ice-cream-bowl", swirl: "ice-cream-bowl", tonics: "cup-soda", coffee: "coffee", pastries: "cookie" };
@@ -21,35 +22,6 @@ const CARD_CATS = ["swirl", "tonics", "coffee", "pastries"];
    from the editorial image folder (kept for any legacy CMS entries). */
 const IMG_DIR = "/assets/images/";
 const srcOf = (s) => (!s ? null : s[0] === "/" || /^https?:\/\//.test(s) ? s : IMG_DIR + s);
-
-/* ============================================================
-   Self-serve froyo — a slim wine callout, not a card. Says
-   "build your own" in one beat and points at the swirl wall.
-   ============================================================ */
-function FroyoCallout() {
-  return (
-    <section className="froyo-callout">
-      <span className="froyo-callout-icon" aria-hidden>
-        <Icon name="ice-cream-bowl" size={26} color="var(--cream-50)" />
-      </span>
-      <div className="froyo-callout-text">
-        <span className="froyo-callout-kicker">Self-serve · in the shop</span>
-        <p className="froyo-callout-line">
-          <strong>Froyo, your way.</strong> Swirl it, top it, weigh it — seasonal flavors and a full toppings bar.
-        </p>
-      </div>
-      <a
-        className="froyo-callout-cta"
-        href={SITE.store?.maps || "/#locations"}
-        target={SITE.store?.maps ? "_blank" : undefined}
-        rel="noopener noreferrer"
-      >
-        Find the swirl wall
-        <Icon name="arrow-right" size={16} color="var(--cream-50)" />
-      </a>
-    </section>
-  );
-}
 
 /* Shared art: the transparent cutout, or a category-icon coin when no cutout
    exists yet. `size` scales the coin/icon for the card vs. the expanded view. */
@@ -213,16 +185,7 @@ export default function Menu() {
 
       {/* page intro */}
       <div className="menu-intro">
-        <span className="menu-intro-kicker">Mi gusto, mi estilo</span>
-        <h1 className="menu-intro-title">What we make</h1>
-        <p className="menu-intro-lede">
-          Self-serve froyo and house tonics that rotate with the season — alongside an espresso bar, NYC-style cookies, and layered cake jars, made fresh in the shop.
-        </p>
-      </div>
-
-      {/* self-serve froyo callout (not a card) */}
-      <div className="menu-callout-wrap">
-        <FroyoCallout />
+        <h1 className="menu-intro-title">Menu</h1>
       </div>
 
       {/* two-column layout: sticky side rail + stacked category card grids */}
@@ -264,6 +227,8 @@ export default function Menu() {
       {selected && (
         <ProductModal sel={selected} onClose={() => setSelected(null)} />
       )}
+
+      <Footer />
     </div>
   );
 }

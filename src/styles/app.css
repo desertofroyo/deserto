@@ -97,17 +97,12 @@ body { margin: 0; }
 .showcase-photo img {
   max-height: 100%; max-width: 86%; width: auto; object-fit: contain;
   border-radius: 14px; /* softens any non-cutout placeholder; transparent PNGs unaffected */
-  filter: drop-shadow(0 12px 16px rgba(42,29,17,0.15));
+  /* One consistent grounded shadow across all four cutouts — a soft ground puddle
+     plus a close darker one — so none of them (esp. the light froyo cup / clear
+     tonic glass) read as floating. */
+  filter: drop-shadow(0 16px 18px rgba(42,29,17,0.22)) drop-shadow(0 5px 7px rgba(42,29,17,0.20));
   transition: transform .42s var(--ease-out-expo, ease);
   will-change: transform;
-}
-/* Froyo (white cup) and Tonics (clear glass) have light/translucent bases, so
-   the default 0.15 shadow disappears behind them and they read as floating.
-   Give those two a stronger, tighter contact shadow — a soft ground puddle plus
-   a close darker one — so they sit as grounded as the coffee/cake-jar cutouts. */
-.showcase-item[data-slug="froyo"] .showcase-photo img,
-.showcase-item[data-slug="tonics"] .showcase-photo img {
-  filter: drop-shadow(0 16px 18px rgba(42,29,17,0.22)) drop-shadow(0 5px 7px rgba(42,29,17,0.20));
 }
 /* Each product has a different aspect ratio, so a single width cap renders them
    at wildly different heights (the wide 3-up coffee/cake-jar shots come out tiny;
@@ -118,6 +113,12 @@ body { margin: 0; }
 .showcase-item[data-slug="froyo"] .showcase-photo img { max-width: 74%; }
 .showcase-item[data-slug="coffee"] .showcase-photo img { max-width: 103%; }
 .showcase-item[data-slug="pastries"] .showcase-photo img { max-width: 145%; }
+/* The tall, near-clear tonic can needs a tighter, denser contact shadow than the
+   shared soft puddle — otherwise the offset smears behind the can and it floats
+   while the wider froyo/coffee/cake shots read grounded. */
+.showcase-item[data-slug="tonics"] .showcase-photo img {
+  filter: drop-shadow(0 9px 8px rgba(42,29,17,0.26)) drop-shadow(0 3px 4px rgba(42,29,17,0.30));
+}
 .showcase-item:hover .showcase-photo img { transform: translateY(-9px) scale(1.035); }
 .showcase-name {
   margin: var(--space-4) 0 0;
@@ -166,39 +167,6 @@ body { margin: 0; }
    froyo & tonics experiences), and the café menu list.
    ============================================================ */
 
-/* ---- self-serve froyo callout — slim wine strip, above the tab layout ---- */
-.menu-callout-wrap { max-width: var(--container-xl); margin: 0 auto; padding: 0 var(--space-6); }
-.froyo-callout {
-  display: flex; align-items: center; gap: 18px;
-  background: var(--wine-700);
-  background-image: radial-gradient(120% 180% at 92% 10%, var(--wine-600), transparent 60%);
-  border-radius: var(--radius-xl); color: var(--cream-50);
-  padding: 16px 22px; box-shadow: var(--shadow-wine);
-}
-.froyo-callout-icon {
-  flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
-  display: inline-flex; align-items: center; justify-content: center;
-  background: rgba(255,255,255,0.12); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
-}
-.froyo-callout-text { flex: 1; min-width: 0; }
-.froyo-callout-kicker {
-  display: block; font-family: var(--font-body); font-weight: 800; font-size: var(--text-xs);
-  text-transform: uppercase; letter-spacing: .16em; color: var(--orange-400);
-}
-.froyo-callout-line {
-  margin: 3px 0 0; font-family: var(--font-editorial); font-size: var(--text-md);
-  line-height: 1.4; color: color-mix(in srgb, var(--cream-50) 92%, transparent);
-}
-.froyo-callout-line strong { color: var(--cream-50); font-weight: 800; }
-.froyo-callout-cta {
-  flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,0.12); color: var(--cream-50); text-decoration: none;
-  font-family: var(--font-body); font-weight: 800; font-size: var(--text-sm);
-  padding: 11px 18px; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.22);
-  transition: background .18s var(--ease-out, ease), transform .18s var(--ease-out, ease);
-}
-.froyo-callout-cta:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
-
 /* ---- two-column menu: sticky side rail + stacked category card grids ---- */
 .menu-layout {
   max-width: var(--container-xl); margin: 0 auto;
@@ -219,7 +187,7 @@ body { margin: 0; }
 
 /* ---- page intro ---- */
 .menu-intro {
-  max-width: var(--container-xl); margin: 0 auto;
+  max-width: var(--container-xl); margin: 0 auto; text-align: center;
   padding: var(--space-7) var(--space-6) var(--space-5);
 }
 .menu-intro-kicker {
@@ -257,7 +225,7 @@ body { margin: 0; }
    a button; the detail (with tags/nutrition) lives in the expanded modal. */
 .mgrid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  column-gap: var(--space-5); row-gap: 54px; padding-top: 46px;
+  column-gap: var(--space-5); row-gap: 60px; padding-top: 56px;
 }
 .mcard {
   background: var(--white); border: 1px solid var(--border-subtle);
@@ -270,7 +238,7 @@ body { margin: 0; }
 .mcard:focus-visible { outline: 2px solid var(--wine-500); outline-offset: 3px; }
 .mcard-art {
   position: relative;
-  width: 100%; height: 128px; margin-top: -46px; margin-bottom: 8px;
+  width: 100%; height: 150px; margin-top: -50px; margin-bottom: 8px;
   display: flex; align-items: flex-end; justify-content: center;
 }
 /* Grounded contact shadow — a soft ellipse under the cup base so the cutout
@@ -284,7 +252,7 @@ body { margin: 0; }
 }
 .mcard-art img {
   position: relative; z-index: 1;
-  max-width: 80%; max-height: 174px; width: auto; object-fit: contain;
+  max-width: 80%; max-height: 150px; width: auto; object-fit: contain;
   filter: drop-shadow(0 10px 10px rgba(42,29,17,0.18));
   transition: transform .42s var(--ease-out-expo, ease);
 }
@@ -386,14 +354,12 @@ body { margin: 0; }
   }
   .menu-rail-inner::-webkit-scrollbar { display: none; }
   .menu-tab { width: auto; flex-shrink: 0; white-space: nowrap; border-color: var(--border-default); background: var(--white); }
-  .froyo-callout { flex-wrap: wrap; }
-  .froyo-callout-cta { width: 100%; justify-content: center; }
 }
 @media (max-width: 560px) {
-  .mgrid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); column-gap: var(--space-4); row-gap: 44px; padding-top: 38px; }
+  .mgrid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); column-gap: var(--space-4); row-gap: 50px; padding-top: 46px; }
   .mcard { padding: 0 12px 18px; }
-  .mcard-art { height: 104px; margin-top: -38px; }
-  .mcard-art img { max-height: 138px; }
+  .mcard-art { height: 116px; margin-top: -40px; }
+  .mcard-art img { max-height: 116px; }
   .mcard-name { font-size: var(--text-md); }
 }
 
@@ -436,13 +402,14 @@ body { margin: 0; }
 }
 .site-header-inner {
   max-width: var(--container-xl); margin: 0 auto; padding: 0 var(--space-6); height: 74px;
-  display: flex; align-items: center; gap: var(--space-6);
+  /* Dutch-Bros layout: nav left, logo dead-center, actions right */
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-6);
 }
-.hdr-logo { display: inline-flex; align-items: center; flex-shrink: 0; }
+.hdr-logo { justify-self: center; display: inline-flex; align-items: center; flex-shrink: 0; }
 .hdr-logo img { height: 48px; width: auto; display: block; transition: transform .22s var(--ease-out, ease); }
 .hdr-logo:hover img { transform: scale(1.035); }
-.hdr-nav { display: flex; gap: var(--space-5); margin-left: var(--space-4); }
-.hdr-actions { margin-left: auto; display: flex; align-items: center; gap: var(--space-3); }
+.hdr-nav { justify-self: start; display: flex; gap: var(--space-5); }
+.hdr-actions { justify-self: end; display: flex; align-items: center; gap: var(--space-3); }
 .hdr-cta {
   border-radius: 999px; padding: 11px 22px; flex-shrink: 0; white-space: nowrap;
   background: var(--wine-700); color: var(--cream-50);
@@ -499,6 +466,8 @@ body { margin: 0; }
 @media (max-width: 860px) {
   .hdr-nav { display: none !important; }
   .hdr-toggle { display: inline-flex !important; align-items: center; justify-content: center; }
+  /* left-gutter carousel rail has no room beside the copy on phones */
+  .r-hero-controls { display: none !important; }
 }
 @media (min-width: 861px) { .hdr-mobile-panel { display: none !important; } }
 /* On phones the standalone CTA would crowd out the toggle — fold it into the
@@ -587,19 +556,21 @@ body { margin: 0; }
 .dlv-row:hover > span:last-child { transform: translateX(3px); }
 
 /* Footer: branded buttons that hold contrast on the coffee-brown band. */
-.dlv-fbtns { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.dlv-fbtns { display: flex; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
 .dlv-fbtn {
-  display: inline-flex; align-items: center; gap: 11px; padding: 9px 18px 9px 9px;
+  display: inline-flex; align-items: center; gap: 9px; padding: 4px 18px 4px 5px;
   border-radius: 999px; text-decoration: none;
   background: var(--cream-50, #fbf1e8); color: var(--coffee-700, #4a2d1c);
-  font-family: var(--font-body); font-weight: 800; font-size: var(--text-sm);
-  box-shadow: 0 6px 16px -10px rgba(0,0,0,.5);
-  transition: transform .2s var(--ease-out, ease), box-shadow .2s var(--ease-out, ease);
+  font-family: var(--font-body); font-weight: 700; font-size: var(--text-sm); letter-spacing: .012em;
+  border: 1px solid rgba(255,255,255,0.55);
+  box-shadow: 0 10px 22px -14px rgba(42,29,17,0.9), 0 2px 5px -3px rgba(42,29,17,0.45);
+  transition: transform .22s var(--ease-out, ease), box-shadow .22s var(--ease-out, ease);
 }
-.dlv-fbtn:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -10px rgba(0,0,0,.55); color: var(--coffee-700, #4a2d1c) !important; }
+.dlv-fbtn:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(42,29,17,0.95), 0 3px 7px -3px rgba(42,29,17,0.5); color: var(--coffee-700, #4a2d1c) !important; }
 .dlv-fbtn-tile {
-  flex-shrink: 0; width: 34px; height: 34px; border-radius: 10px;
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 9px;
   display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 6px -2px rgba(42,29,17,0.4), inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
 /* Mobile sheet delivery group */

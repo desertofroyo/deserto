@@ -37,10 +37,6 @@ export function Locations() {
                 <Icon name="clock" size={17} color="var(--caramel-500)" />
                 <span style={{ fontSize: "var(--text-md)" }}>{store.hours}</span>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, color: "var(--text-muted)" }}>
-                <Icon name="phone" size={17} color="var(--wine-500)" />
-                <span style={{ fontSize: "var(--text-md)" }}>{store.phone}</span>
-              </div>
             </div>
             <div style={{ display: "flex", gap: 12, marginTop: "var(--space-6)", flexWrap: "wrap" }}>
               <a href={store.maps} target="_blank" rel="noopener" className="btn-wine" style={{

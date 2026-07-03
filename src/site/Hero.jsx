@@ -15,16 +15,18 @@ const ROTATE_MS = 5500;
 const ORANGE = { color: "var(--orange-500)" };
 const SLIDES = [
   {
-    src: "/assets/images/hero-froyo-scene.jpg?v=3",
+    src: "/assets/images/hero-froyo-scene.jpg?v=6",
     alt: "A Deserto frozen yogurt cup topped with strawberries, blueberries, granola and caramel",
-    pos: "right bottom",
+    pos: "right 50%",
+    noSharpen: true,
     head: (<>Where coffee meets<br />creamy <span style={ORANGE}>bliss.</span></>),
     copy: "Self-serve frozen yogurt with curated toppings, caramel drizzle and fresh fruit — swirled exactly your way at the topping wall.",
   },
   {
-    src: "/assets/images/hero-tonics-scene.jpg?v=2",
+    src: "/assets/images/hero-tonics-scene.jpg?v=3",
     alt: "Three Deserto fruit tonics in signature cans over crushed ice with berries and citrus",
     pos: "right 50%",
+    noSharpen: true,
     head: (<>Real fruit.<br /><span style={ORANGE}>Real refreshment.</span></>),
     copy: "Naturally energizing drinks made with real ingredients and vibrant flavors.",
     features: [
@@ -34,14 +36,15 @@ const SLIDES = [
     ],
   },
   {
-    src: "/assets/images/hero-coffee-scene.jpg?v=2",
+    src: "/assets/images/hero-coffee-scene.jpg?v=3",
     alt: "Three Deserto iced coffees — a paper cup, an iced latte and a caramel iced coffee — over a scatter of roasted beans",
     pos: "right 50%",
+    noSharpen: true,
     head: (<>My taste,<br /><span style={ORANGE}>my lifestyle</span></>),
     copy: "Indulge in what makes you happy. From creamy frozen yogurt to energizing coffee, every sip is a moment just for you.",
   },
   {
-    src: "/assets/images/hero-cakejars-scene.jpg?v=3",
+    src: "/assets/images/hero-cakejars-scene.jpg?v=6",
     alt: "Three Deserto layered cake jars — strawberry, Oreo cream and chocolate — against a warm peach studio wall with fresh berries and Oreo cookies",
     pos: "right 50%",
     // Full pre-composed scene (jars already sized + placed on the right, logos
@@ -132,7 +135,7 @@ export function Hero({ onVisit }) {
             without tinting either toward a single flat color. */}
         <div className="r-hero-scrim" style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(90deg, rgba(255,247,240,0.66) 0%, rgba(255,247,240,0.28) 24%, rgba(255,247,240,0) 46%)",
+          background: "linear-gradient(90deg, rgba(255,247,240,0.68) 0%, rgba(255,247,240,0.4) 30%, rgba(255,247,240,0.16) 48%, rgba(255,247,240,0) 60%)",
         }} />
       </div>
 
@@ -143,11 +146,14 @@ export function Hero({ onVisit }) {
       }}>
         {/* ---- Foreground content (left column) ---- */}
         <div className="r-hero-text" style={{ position: "relative", zIndex: 2, maxWidth: 780 }}>
-          <span style={{
-            display: "inline-block", background: "var(--wine-700)", color: "var(--lime-400)",
-            fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", letterSpacing: ".02em",
-            padding: "8px 18px", borderRadius: 999,
-          }}>Open daily 10–10 · River Rd, Tucson</span>
+          {/* store-hours pill — only on the first slide, matching the CTA row below. */}
+          {i === 0 && (
+            <span style={{
+              display: "inline-block", background: "var(--wine-700)", color: "var(--lime-400)",
+              fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", letterSpacing: ".02em",
+              padding: "8px 18px", borderRadius: 999,
+            }}>Open daily 10–10 · River Rd, Tucson</span>
+          )}
 
           {/* keyed so the headline + copy crossfade in step with the photo */}
           <div className="r-hero-copy" key={i}>
@@ -169,18 +175,25 @@ export function Hero({ onVisit }) {
             {/* per-slide feature trio (e.g. tonics): icon chip + label, in the
                 site's own type + palette — same layout as the product art. */}
             {SLIDES[i].features && (
-              <div style={{ display: "flex", gap: "var(--space-4)", marginTop: "var(--space-5)" }}>
+              /* Solid icon coins — each grounded on the photo by its own warm drop
+                 shadow + cream ring, so the trio reads on the light wall OR the
+                 darker counter without an enclosing box. A soft cream halo keeps
+                 the labels legible over either. */
+              <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-5)", marginTop: "var(--space-5)" }}>
                 {SLIDES[i].features.map((f) => (
-                  <div key={f.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", width: 96 }}>
+                  <div key={f.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                     <span style={{
-                      width: 46, height: 46, borderRadius: "50%", marginBottom: 9,
+                      width: 48, height: 48, borderRadius: "50%", marginBottom: 10,
                       display: "inline-flex", alignItems: "center", justifyContent: "center", background: f.tint,
+                      border: "2px solid rgba(255,251,245,0.75)",
+                      boxShadow: "0 9px 20px -8px rgba(42,29,17,0.42), 0 2px 5px -2px rgba(42,29,17,0.24)",
                     }}>
                       <Icon name={f.icon} size={21} color={f.fg} />
                     </span>
                     <span style={{
                       fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "var(--text-xs)",
-                      color: "var(--ink-700)", lineHeight: 1.25,
+                      color: "var(--ink-700)", lineHeight: 1.25, whiteSpace: "nowrap",
+                      textShadow: "0 1px 3px rgba(255,247,240,0.9), 0 0 2px rgba(255,247,240,0.8)",
                     }}>{f.label}</span>
                   </div>
                 ))}
@@ -188,51 +201,59 @@ export function Hero({ onVisit }) {
             )}
           </div>
 
-          <div style={{ display: "flex", gap: "var(--space-3)", marginTop: "var(--space-5)" }}>
-            <Link to="/menu" className="btn-wine" style={{
-              borderRadius: 999, padding: "13px 26px",
-              background: "var(--wine-700)", color: "var(--cream-50)", fontFamily: "var(--font-body)", fontWeight: 800,
-              fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center", gap: 9, boxShadow: "var(--shadow-md)",
-            }}>
-              View menu
-              <Icon name="arrow-right" size={18} color="var(--cream-50)" />
-            </Link>
-            <button onClick={onVisit} style={{
-              cursor: "pointer", borderRadius: 999, padding: "13px 26px", background: "rgba(255,255,255,0.55)",
-              border: "2px solid var(--wine-700)", color: "var(--wine-700)", fontFamily: "var(--font-body)",
-              fontWeight: 800, fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center", gap: 9,
-            }}>
-              Visit us
-              <Icon name="map-pin" size={17} color="var(--wine-700)" />
-            </button>
-          </div>
-
-          {/* carousel controls: play/pause toggle + slide dots */}
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: "var(--space-5)" }}>
-            <button
-              onClick={() => setUserPaused((p) => !p)}
-              aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
-              aria-pressed={userPaused}
-              style={{
-                width: 34, height: 34, borderRadius: 999, cursor: "pointer", padding: 0, flexShrink: 0,
-                border: "2px solid var(--wine-700)", background: "rgba(255,255,255,0.55)",
-                display: "inline-flex", alignItems: "center", justifyContent: "center",
-                transition: "background .2s var(--ease-out, ease)",
-              }}
-            >
-              <Icon name={userPaused ? "play" : "pause"} size={15} color="var(--wine-700)" />
-            </button>
-
-            <div style={{ display: "flex", gap: 8 }}>
-              {SLIDES.map((s, idx) => (
-                <button key={s.src} aria-label={`Show slide ${idx + 1}`} onClick={() => setI(idx)} style={{
-                  width: idx === i ? 26 : 10, height: 10, borderRadius: 999, border: "none", cursor: "pointer", padding: 0,
-                  background: idx === i ? "var(--wine-700)" : "rgba(118,47,53,0.3)", transition: "all .25s var(--ease-out, ease)",
-                }} />
-              ))}
+          {/* CTA row — only on the first slide, so flipping through the carousel
+              doesn't repeat the same buttons under every headline. */}
+          {i === 0 && (
+            <div style={{ display: "flex", gap: "var(--space-3)", marginTop: "var(--space-5)" }}>
+              <Link to="/menu" className="btn-wine" style={{
+                borderRadius: 999, padding: "13px 26px",
+                background: "var(--wine-700)", color: "var(--cream-50)", fontFamily: "var(--font-body)", fontWeight: 800,
+                fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center", boxShadow: "var(--shadow-md)",
+              }}>
+                View menu
+              </Link>
+              <button onClick={onVisit} style={{
+                cursor: "pointer", borderRadius: 999, padding: "13px 26px", background: "rgba(255,255,255,0.55)",
+                border: "2px solid var(--wine-700)", color: "var(--wine-700)", fontFamily: "var(--font-body)",
+                fontWeight: 800, fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center",
+              }}>
+                Visit us
+              </button>
             </div>
-          </div>
+          )}
+
         </div>
+      </div>
+
+      {/* carousel controls — a compact cluster pinned to the bottom-right of the
+          hero: play/pause, then a row of slide ticks (the active one grows into
+          a wine pill). Hidden on narrow screens (see app.css). */}
+      <div className="r-hero-controls" style={{
+        position: "absolute", right: "var(--space-6)", bottom: "var(--space-5)",
+        zIndex: 3, display: "flex", flexDirection: "row", alignItems: "center", gap: 14,
+      }}>
+        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 8 }}>
+          {SLIDES.map((s, idx) => (
+            <button key={s.src} aria-label={`Show slide ${idx + 1}`} aria-current={idx === i} onClick={() => setI(idx)} style={{
+              width: idx === i ? 26 : 10, height: 10, borderRadius: 999, border: "none", cursor: "pointer", padding: 0,
+              background: idx === i ? "var(--wine-700)" : "rgba(118,47,53,0.28)", transition: "all .25s var(--ease-out, ease)",
+            }} />
+          ))}
+        </div>
+
+        <button
+          onClick={() => setUserPaused((p) => !p)}
+          aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
+          aria-pressed={userPaused}
+          style={{
+            width: 38, height: 38, borderRadius: 999, cursor: "pointer", padding: 0, flexShrink: 0,
+            border: "none", background: "var(--wine-700)", boxShadow: "var(--shadow-md)",
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+            transition: "transform .2s var(--ease-out, ease), background .2s var(--ease-out, ease)",
+          }}
+        >
+          <Icon name={userPaused ? "play" : "pause"} size={15} color="var(--cream-50)" />
+        </button>
       </div>
     </section>
   );
