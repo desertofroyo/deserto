@@ -21,3 +21,6 @@ design_download.bin
 # images) are committed here and backed up via the git remote. Nothing heavy is
 # git-ignored anymore except build output and OS cruft.
 .DS_Store
+
+# Local Netlify folder
+.netlify
