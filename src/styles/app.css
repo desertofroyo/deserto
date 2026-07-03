@@ -466,8 +466,14 @@ body { margin: 0; }
 @media (max-width: 860px) {
   .hdr-nav { display: none !important; }
   .hdr-toggle { display: inline-flex !important; align-items: center; justify-content: center; }
-  /* left-gutter carousel rail has no room beside the copy on phones */
-  .r-hero-controls { display: none !important; }
+  /* Phone header: hamburger far-left, logo dead-center. Keep a 3-track grid with
+     a balancing empty track on the right so the logo stays optically centered;
+     drop the toggle into the left track and the logo into the middle. */
+  .site-header-inner { grid-template-columns: 1fr auto 1fr !important; }
+  /* pin both to row 1 — the toggle wants column 1 (left of the logo's column 2),
+     which auto-placement would otherwise bump onto a second row. */
+  .hdr-actions { grid-row: 1 !important; grid-column: 1 !important; justify-self: start !important; }
+  .hdr-logo { grid-row: 1 !important; grid-column: 2 !important; justify-self: center !important; }
 }
 @media (min-width: 861px) { .hdr-mobile-panel { display: none !important; } }
 /* On phones the standalone CTA would crowd out the toggle — fold it into the
@@ -572,6 +578,15 @@ body { margin: 0; }
   display: inline-flex; align-items: center; justify-content: center;
   box-shadow: 0 2px 6px -2px rgba(42,29,17,0.4), inset 0 1px 0 rgba(255,255,255,0.22);
 }
+/* The contact page's delivery chips sit on the soft warm info side (a light
+   surface), so they take the white-chip treatment — clean rim + soft warm lift —
+   rather than the footer's dark-band cream chips. See the contact-card rules. */
+.contact-card-info .dlv-fbtns { margin-top: 6px; }
+.contact-card-info .dlv-fbtn {
+  background: var(--white); border: 1px solid var(--border-default);
+  color: var(--coffee-700, #4a2d1c); box-shadow: var(--shadow-sm);
+}
+.contact-card-info .dlv-fbtn:hover { box-shadow: var(--shadow-md); }
 
 /* Mobile sheet delivery group */
 .dlv-sheet-label {
@@ -613,27 +628,40 @@ body { margin: 0; }
 .r-hero-copy { animation: heroCopyIn 0.6s var(--ease-out-expo, ease) both; }
 @media (prefers-reduced-motion: reduce) { .r-hero-copy { animation: none; } }
 
-/* ---- Hero on phones: copy on top, photo full-bleed behind with a top fade ----
-   The box is too narrow to sit the product beside the text, so the photo stage
-   goes full-width behind the copy and the scrim becomes a top-weighted veil that
-   keeps the headline readable. The right-edge blur is dropped (no side band). */
+/* ---- Hero on phones: copy on top, photo in its own panel below ----
+   The scenes are ~3:1 panoramas with the product in the right ~40% — far too
+   wide to sit beside the headline, and cropping them full-bleed behind the copy
+   hid the product entirely (only the blurry left backdrop showed). So on phones
+   we stack: the copy sits on the plain cream canvas (no photo behind it, so the
+   top of the page is one clean cream with the header — no seam), then the photo
+   drops into a 4:3 panel below, anchored right so the product is in frame. */
 @media (max-width: 760px) {
+  #top { display: flex; flex-direction: column; }
   .r-hero-inner {
-    min-height: auto !important;
+    order: 1; min-height: 0 !important;
     align-items: flex-start !important;
-    padding: var(--space-8) var(--space-6) 280px !important;
+    padding: var(--space-7) var(--space-6) var(--space-5) !important;
   }
   .r-hero-text { max-width: 100% !important; }
-  .r-hero-h1 { font-size: clamp(38px, 10vw, 56px) !important; }
-  .r-hero-stage { width: 100% !important; }
+  .r-hero-h1 { font-size: clamp(38px, 9vw, 54px) !important; }
+  .r-hero-stage {
+    order: 2; position: relative !important;
+    top: auto !important; bottom: auto !important; right: auto !important; left: auto !important;
+    width: 100% !important; height: auto !important; aspect-ratio: 4 / 3;
+  }
   .r-hero-img {
-    object-position: center 40% !important;
-    /* full-bleed behind the copy on phones — no side feather, the top scrim does the work */
+    /* product is right-of-center in the pano — anchor right so it stays in frame */
+    object-position: right center !important;
     -webkit-mask-image: none !important;
     mask-image: none !important;
   }
-  .r-hero-scrim {
-    background: linear-gradient(180deg, rgba(252,238,228,0.96) 0%, rgba(252,238,228,0.86) 40%, rgba(252,238,228,0.45) 66%, rgba(252,238,228,0.1) 86%, rgba(252,238,228,0) 100%) !important;
+  .r-hero-scrim { display: none !important; }
+  /* keep the carousel navigable on phones — the dots + play/pause sit over the
+     bottom-right of the photo panel. */
+  .r-hero-controls {
+    bottom: var(--space-3) !important;
+    right: var(--space-4) !important;
+    left: auto !important;
   }
 }
 
@@ -646,4 +674,139 @@ body { margin: 0; }
   .reveal, .reveal.in, .stagger-item, .reveal.in .stagger-item {
     opacity: 1 !important; transform: none !important; transition: none !important;
   }
+}
+
+/* ============================================================
+   Contact page — "say hello" message form + ways to reach the shop.
+   ============================================================ */
+.contact-intro {
+  max-width: var(--container-xl); margin: 0 auto; text-align: center;
+  padding: var(--space-7) var(--space-6) var(--space-4);
+}
+.contact-title {
+  margin: 8px 0 0; font-size: var(--text-4xl); color: var(--wine-700);
+  line-height: 1; letter-spacing: -0.01em;
+}
+.contact-sub {
+  margin: var(--space-4) auto 0; max-width: 48ch;
+  font-family: var(--font-editorial); font-size: var(--text-md);
+  color: var(--ink-700); line-height: 1.55;
+}
+.contact-grid {
+  max-width: 980px; margin: 0 auto;
+  padding: var(--space-5) var(--space-6) var(--space-9);
+}
+/* One connected card: the message form and the "come see us" side share a single
+   white surface split by a hairline, so the two halves read as one object rather
+   than two floating boxes. */
+.contact-card {
+  display: grid; grid-template-columns: 1.04fr 0.96fr;
+  background: var(--white); border: 1px solid var(--border-default);
+  border-radius: var(--radius-2xl); box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.contact-card-form { padding: var(--space-7); display: flex; flex-direction: column; }
+/* Let the form fill the card's height so the message field stretches and the
+   Send button settles at the bottom, level with the photo side — no dead space. */
+.contact-card-form form { display: flex; flex-direction: column; flex: 1 1 auto; }
+.contact-label {
+  display: block; font-family: var(--font-body); font-weight: 700;
+  font-size: var(--text-sm); color: var(--wine-700);
+  letter-spacing: .01em; margin: var(--space-4) 0 6px;
+}
+.contact-card-form form > .contact-label:first-child { margin-top: 0; }
+.contact-input {
+  width: 100%; box-sizing: border-box;
+  background: var(--white); color: var(--ink-900, #2A1D11);
+  border: 1.5px solid var(--border-default); border-radius: 14px;
+  padding: 12px 14px; font-family: var(--font-body); font-size: var(--text-md);
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+.contact-input::placeholder { color: var(--ink-300); }
+.contact-input:focus {
+  outline: none; border-color: var(--orange-500, #FF9425);
+  box-shadow: 0 0 0 3px rgba(255,148,37,0.18);
+}
+.contact-textarea { resize: vertical; flex: 1 1 auto; min-height: 140px; line-height: 1.5; }
+.contact-btn {
+  margin-top: var(--space-5); width: 100%;
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  background: var(--wine-700); color: var(--cream-50);
+  border: none; border-radius: 999px; padding: 14px 24px;
+  font-family: var(--font-body); font-weight: 800; font-size: var(--text-sm);
+  letter-spacing: .01em; cursor: pointer;
+}
+.contact-btn:disabled { opacity: .55; cursor: not-allowed; }
+.contact-btn:focus-visible { outline: 2px solid var(--orange-500, #FF9425); outline-offset: 2px; }
+.contact-note {
+  margin: var(--space-4) 0 0; font-family: var(--font-body);
+  font-size: var(--text-sm); color: var(--text-muted, #8a6f5c); line-height: 1.5;
+}
+.contact-sent { text-align: center; padding: var(--space-5) 0; }
+.contact-sent-mark {
+  width: 56px; height: 56px; border-radius: 50%; margin: 0 auto var(--space-4);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--olive-600); box-shadow: 0 10px 22px -10px rgba(42,29,17,0.5);
+}
+.contact-sent-title { margin: 0; font-size: var(--text-2xl); color: var(--wine-700); }
+.contact-sent-copy {
+  margin: var(--space-3) auto var(--space-5); max-width: 42ch;
+  font-family: var(--font-editorial); font-size: var(--text-md);
+  color: var(--ink-700); line-height: 1.55;
+}
+.contact-sent .contact-btn { width: auto; margin-top: 0; padding: 12px 26px; }
+
+/* The "ways to reach us" half — a soft, warm side of the same card (a light peach
+   wash, not a heavy color block) led by an arch-framed café photo. The photo box
+   keeps the shot's own portrait ratio so the whole swirl cup shows, not a sliver. */
+.contact-card-info {
+  background: var(--peach-100, #FCEEE4);
+  border-left: 1px solid var(--border-default);
+  padding: var(--space-6);
+  display: flex; flex-direction: column; gap: var(--space-5);
+}
+.contact-photo {
+  width: 100%; max-width: 300px; margin: 0 auto var(--space-1);
+  aspect-ratio: 300 / 300; overflow: hidden;
+  background: var(--sand-100);
+  /* The Arch motif frames the photo. */
+  border-radius: 50% 50% 14px 14px / 34% 34% 14px 14px;
+  box-shadow: 0 10px 24px -14px rgba(42,29,17,0.4);
+}
+.contact-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; display: block; }
+.contact-info-kicker { color: var(--wine-500, var(--wine-700)); margin-bottom: -4px; text-align: center; }
+
+.contact-block { display: flex; gap: 14px; align-items: flex-start; }
+.contact-block-icon {
+  flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--white); border: 1px solid var(--border-default); box-shadow: var(--shadow-sm);
+}
+.contact-block-label {
+  font-family: var(--font-body); font-weight: 700; font-size: var(--text-sm);
+  color: var(--wine-700); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px;
+}
+.contact-block-body {
+  margin: 0; font-family: var(--font-body); font-size: var(--text-md);
+  color: var(--ink-700); line-height: 1.45;
+}
+.contact-link {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 6px;
+  font-family: var(--font-body); font-weight: 700; font-size: var(--text-sm);
+  color: var(--wine-700); text-decoration: none;
+  transition: color .16s ease;
+}
+.contact-link:hover { color: var(--wine-800); }
+.contact-socials { display: flex; gap: 10px; margin-top: 2px; }
+.contact-social {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--white); border: 1px solid var(--border-default);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.contact-social:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+@media (max-width: 860px) {
+  .contact-card { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .contact-card-info { border-left: none; border-top: 1px solid var(--border-default); }
 }

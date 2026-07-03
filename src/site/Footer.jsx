@@ -14,9 +14,7 @@ const MENU_LINKS = [
 ];
 
 const DESERTO_LINKS = [
-  ["Our story", "/#story"],
-  ["Visit us", "/#locations"],
-  ["View menu", "/menu"],
+  ["Contact us", "/contact"],
 ];
 
 const linkStyle = { color: "var(--ink-300)", fontSize: "var(--text-sm)", marginBottom: 9, display: "block", textDecoration: "none", textTransform: "uppercase", letterSpacing: ".04em" };
