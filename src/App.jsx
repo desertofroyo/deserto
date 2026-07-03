@@ -5,6 +5,7 @@ import Menu from "./pages/Menu.jsx";
 import Contact from "./pages/Contact.jsx";
 import AppDemo from "./pages/AppDemo.jsx";
 import Mockups from "./pages/Mockups.jsx";
+import { Privacy, Terms, Accessibility } from "./pages/Legal.jsx";
 
 /* Reset scroll on route change (but preserve in-page anchor scrolling). */
 function ScrollToTop() {
@@ -23,6 +24,9 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         {/* legacy /order links now land on the view-only menu */}
         <Route path="/order" element={<Menu />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/accessibility" element={<Accessibility />} />
         <Route path="/app" element={<AppDemo />} />
         <Route path="/mockups" element={<Mockups />} />
       </Routes>

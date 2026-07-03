@@ -19,6 +19,8 @@ const DESERTO_LINKS = [
 
 const linkStyle = { color: "var(--ink-300)", fontSize: "var(--text-sm)", marginBottom: 9, display: "block", textDecoration: "none", textTransform: "uppercase", letterSpacing: ".04em" };
 
+const legalLinkStyle = { color: "var(--ink-400)", fontSize: "var(--text-xs)", textDecoration: "none", letterSpacing: ".04em" };
+
 /* Footer — coffee-brown band with brand, social links, quick links and ordering. */
 export function Footer() {
   const { store, social } = SITE;
@@ -75,8 +77,13 @@ export function Footer() {
       </div>
 
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div className="r-footer-bottom" style={{ padding: "16px var(--space-6)", maxWidth: "var(--container-xl)", margin: "0 auto", display: "flex", justifyContent: "center", alignItems: "center", color: "var(--ink-400)", fontSize: "var(--text-xs)" }}>
+        <div className="r-footer-bottom" style={{ padding: "16px var(--space-6)", maxWidth: "var(--container-xl)", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 14, color: "var(--ink-400)", fontSize: "var(--text-xs)" }}>
           <span>© 2026 Deserto Group LLC. All rights reserved.</span>
+          <nav className="r-footer-legal" aria-label="Legal">
+            <Link to="/privacy" style={legalLinkStyle}>Privacy</Link>
+            <Link to="/terms" style={legalLinkStyle}>Terms</Link>
+            <Link to="/accessibility" style={legalLinkStyle}>Accessibility</Link>
+          </nav>
         </div>
       </div>
     </footer>
