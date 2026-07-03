@@ -73,11 +73,6 @@ export function Header({ onNav }) {
   return (
     <header className={"site-header" + (scrolled || open ? " scrolled" : "")}>
       <div className="site-header-inner">
-        <a href="#top" aria-label="Deserto — home" className="hdr-logo"
-          onClick={(e) => { e.preventDefault(); handleNav("top"); }}>
-          <img src={LOGO} alt="Deserto — Frozen Yogurt & Café" />
-        </a>
-
         <nav className="hdr-nav" aria-label="Primary">
           {nav.map((n) => (
             <a key={n.id} href={"#" + n.id} onClick={(e) => { e.preventDefault(); handleNav(n.id); }}
@@ -86,8 +81,12 @@ export function Header({ onNav }) {
           ))}
         </nav>
 
+        <a href="#top" aria-label="Deserto — home" className="hdr-logo"
+          onClick={(e) => { e.preventDefault(); handleNav("top"); }}>
+          <img src={LOGO} alt="Deserto — Frozen Yogurt & Café" />
+        </a>
+
         <div className="hdr-actions">
-          <Link to="/menu" className="hdr-menu-link hide-sm">View menu</Link>
           <span className="hide-sm"><DeliveryMenu /></span>
           <button className="hdr-toggle" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}
             onClick={() => setOpen((o) => !o)}>

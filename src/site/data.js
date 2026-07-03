@@ -44,7 +44,7 @@ export const SITE = {
 
   /* ---- Navigation (structural — not owner-edited) ---- */
   nav: [
-    { en: "What We Make", id: "menu" },
+    { en: "Menu", id: "menu" },
     { en: "Our Story", id: "story" },
     { en: "Visit", id: "locations" },
   ],
@@ -54,13 +54,6 @@ export const SITE = {
     { id: "primavera", en: "Spring", accent: "var(--lime-500)", soft: "var(--leaf-100)", hero: "froyo-cup-mauve.jpg", heroPos: "center 38%" },
     { id: "verano", en: "Summer", accent: "var(--orange-500)", soft: "var(--orange-100)", hero: "strawberry-hand.jpg", heroPos: "center 42%" },
     { id: "otono", en: "Autumn", accent: "var(--caramel-500)", soft: "var(--peach-100)", hero: "cans-white-arches.jpg", heroPos: "center 50%" },
-  ],
-
-  /* ---- Hero product trio (legacy data; kept for any reference usage) ---- */
-  heroProducts: [
-    { name: "Cake Jars", note: "Layered froyo, crumble & fruit", img: "/assets/products/hero-cakejars.png", tags: ["Layered", "New"] },
-    { name: "Fruit Tonics", note: "Sparkling fruit, in our signature cans", img: "/assets/products/hero-tonics.png", tags: ["Sparkling", "Real fruit"] },
-    { name: "Café Coffee", note: "Cold brew, lattes & more — hot or iced", img: "/assets/products/hero-coffee.png", tags: ["Espresso", "Iced"] },
   ],
 
   /* ---- Brand personality (design copy — not owner-edited) ---- */

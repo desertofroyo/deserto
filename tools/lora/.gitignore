@@ -1,0 +1,4 @@
+# Local pipeline state and generated artifacts — never commit
+node_modules/
+.state.json
+out/

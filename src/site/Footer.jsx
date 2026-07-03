@@ -19,7 +19,7 @@ const DESERTO_LINKS = [
   ["View menu", "/menu"],
 ];
 
-const linkStyle = { color: "var(--ink-300)", fontSize: "var(--text-sm)", marginBottom: 9, display: "block", textDecoration: "none" };
+const linkStyle = { color: "var(--ink-300)", fontSize: "var(--text-sm)", marginBottom: 9, display: "block", textDecoration: "none", textTransform: "uppercase", letterSpacing: ".04em" };
 
 /* Footer — coffee-brown band with brand, social links, quick links and ordering. */
 export function Footer() {
@@ -70,7 +70,6 @@ export function Footer() {
           {store.nutritionUrl && (
             <a href={store.nutritionUrl} target="_blank" rel="noopener noreferrer" style={linkStyle}>Nutrition &amp; allergens (PDF)</a>
           )}
-          <a href={`tel:${store.phone.replace(/[^0-9+]/g, "")}`} style={linkStyle}>{store.phone}</a>
 
           <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, color: "var(--cream-50)", margin: "var(--space-5) 0 0", fontSize: "var(--text-sm)", letterSpacing: ".08em", textTransform: "uppercase" }}>Order delivery</div>
           <DeliveryButtons />
@@ -78,9 +77,8 @@ export function Footer() {
       </div>
 
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div className="r-footer-bottom" style={{ padding: "16px var(--space-6)", maxWidth: "var(--container-xl)", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", color: "var(--ink-400)", fontSize: "var(--text-xs)" }}>
+        <div className="r-footer-bottom" style={{ padding: "16px var(--space-6)", maxWidth: "var(--container-xl)", margin: "0 auto", display: "flex", justifyContent: "center", alignItems: "center", color: "var(--ink-400)", fontSize: "var(--text-xs)" }}>
           <span>© 2026 Deserto Group LLC. All rights reserved.</span>
-          <span>{store.hours}</span>
         </div>
       </div>
     </footer>

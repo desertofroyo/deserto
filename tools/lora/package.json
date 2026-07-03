@@ -1,0 +1,15 @@
+{
+  "name": "deserto-lora-tools",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Self-contained runner for the Deserto product-cutout LoRA pipeline (fal.ai). Separate from the site's dependencies.",
+  "scripts": {
+    "scaffold": "node run.mjs scaffold",
+    "status": "node run.mjs status",
+    "wire": "node run.mjs wire"
+  },
+  "dependencies": {
+    "@fal-ai/client": "^1.2.0"
+  }
+}

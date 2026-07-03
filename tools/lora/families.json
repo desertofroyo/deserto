@@ -1,0 +1,78 @@
+{
+  "_comment": "Single source of truth for the Deserto product-cutout LoRA pipeline. Container families train one LoRA each; flavors are prompt variations. Labels/logos are NEVER asked of the model — added by hand at the end. See ../../docs/product-lora-guide.md.",
+
+  "basePrompt": "{trigger}, {flavor}, single product centered on a seamless pure-white background, studio product photography, soft even lighting, full product visible, sharp focus, high detail, photorealistic",
+
+  "negativePrompt": "text, letters, words, brand logo, label, watermark, signature, sparkles, star glints, lens flare, glare artifacts, extra objects, duplicate product, hands, people, busy background, reflections, blurry, low quality, cropped",
+
+  "captionTemplates": [
+    "{trigger} on a white background, front view, studio lighting",
+    "{trigger} on a light gray background, three-quarter angle",
+    "{trigger} on a white background, three-quarter view from the right",
+    "{trigger}, slight top-down view, soft even lighting",
+    "{trigger} on a seamless white sweep, front view, product photo"
+  ],
+
+  "families": {
+    "tonic": {
+      "trigger": "dsrttonic",
+      "caption": "a dsrttonic drink",
+      "items": [
+        { "id": "to-blueberry", "file": "tonic-blueberry.png",   "flavor": "deep blue-purple sparkling drink with fresh blueberries" },
+        { "id": "to-kiwi",       "file": "kiwi-tonic.png",        "flavor": "bright green sparkling drink with kiwi slices" },
+        { "id": "to-mango",      "file": "mango-tonic.png",       "flavor": "golden-orange sparkling drink with mango",       "gap": true },
+        { "id": "to-raspberry",  "file": "tonic-raspberry.png",   "flavor": "pink-red sparkling drink with raspberries" },
+        { "id": "to-pineapple",  "file": "pineapple-tonic.png",   "flavor": "pale yellow sparkling drink with pineapple",     "gap": true },
+        { "id": "to-strawberry", "file": "strawberry-tonic.png",  "flavor": "red sparkling drink with a fresh strawberry" },
+        { "id": "to-peach",      "file": "golden-peach-tonic.png","flavor": "warm amber sparkling drink with peach slices" }
+      ]
+    },
+    "hotcup": {
+      "trigger": "dsrthotcup",
+      "caption": "a dsrthotcup of coffee",
+      "items": [
+        { "id": "c-latte", "file": "hot-latte.png",     "flavor": "latte with smooth microfoam, light tan surface" },
+        { "id": "c-macch", "file": "hot-macchiato.png", "flavor": "espresso with a small dollop of foam" },
+        { "id": "c-chai",  "file": "hot-chai-latte.png","flavor": "spiced chai latte, warm amber with foam", "gap": true },
+        { "id": "c-amer",  "file": "americano.png",     "flavor": "black americano, dark surface" },
+        { "id": "c-capp",  "file": "cappuccino.png",    "flavor": "cappuccino with a tall domed foam cap" },
+        { "id": "c-esp",   "file": "espresso.png",      "flavor": "small demitasse of espresso with crema", "gap": true }
+      ]
+    },
+    "icedcup": {
+      "trigger": "dsrticedcup",
+      "caption": "a dsrticedcup iced drink",
+      "items": [
+        { "id": "c-ichai",  "file": "iced-chai-latte.png", "flavor": "iced spiced chai, amber through ice cubes" },
+        { "id": "c-imacch", "file": "iced-macchiato.png",  "flavor": "iced espresso layered over milk and ice" },
+        { "id": "c-ilatte", "file": "iced-latte.png",      "flavor": "iced latte, light coffee color over ice" },
+        { "id": "c-iamer",  "file": "iced-americano.png",  "flavor": "iced black americano over ice cubes" }
+      ]
+    },
+    "jar": {
+      "trigger": "dsrtjar",
+      "caption": "a dsrtjar dessert cake jar",
+      "items": [
+        { "id": "p-gansito", "file": "gansito-cake-jar.png", "flavor": "layers of sponge cake, cream and chocolate, red accents" },
+        { "id": "p-oreo",    "file": "oreo-cake-jar.png",    "flavor": "layers of cookies-and-cream crumble and white cream", "gap": true }
+      ]
+    },
+    "cookie": {
+      "trigger": "dsrtcookie",
+      "caption": "a thick round dsrtcookie NYC-style cookie",
+      "items": [
+        { "id": "p-macad", "file": "white-chocolate-macadamia.png",   "flavor": "pale golden cookie with white chocolate chunks and macadamia" },
+        { "id": "p-redv",  "file": "red-velvet-and-white-chocolate.png","flavor": "deep red velvet cookie with white chocolate chips" },
+        { "id": "p-ccw",   "file": "chocolate-chip-and-walnut.png",   "flavor": "golden brown cookie with chocolate chips and walnuts" }
+      ]
+    },
+    "scone": {
+      "trigger": "dsrtscone",
+      "caption": "a triangular dsrtscone",
+      "items": [
+        { "id": "p-bluelem", "file": "blueberry-lemon.png", "flavor": "triangular scone with blueberries and lemon glaze" },
+        { "id": "p-vanilla", "file": "vanilla-almond.png",  "flavor": "triangular scone with sliced almonds and vanilla glaze", "gap": true }
+      ]
+    }
+  }
+}

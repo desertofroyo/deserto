@@ -14,7 +14,7 @@
       "cat": "swirl",
       "group": "",
       "name": "Vanilla",
-      "desc": "A 32 oz take-home pint of creamy self-serve vanilla froyo.",
+      "desc": "Cool, creamy classic vanilla — our signature swirl, in a 32 oz take-home pint.",
       "img": "/assets/products/swirl-vanilla.png",
       "tags": ["GF"],
       "allergens": ["Dairy"]
@@ -24,7 +24,7 @@
       "cat": "swirl",
       "group": "",
       "name": "Orange",
-      "desc": "A 32 oz take-home pint of bright, tangy orange froyo.",
+      "desc": "Bright, tangy orange with a citrus lift — 32 oz, packed for the freezer.",
       "img": "/assets/products/swirl-orange.png",
       "tags": ["Vegan", "DF", "GF"]
     },
@@ -33,7 +33,7 @@
       "cat": "swirl",
       "group": "",
       "name": "Salted Caramel",
-      "desc": "A 32 oz take-home pint of sweet-and-salty caramel froyo.",
+      "desc": "Deep caramel with a salt-flecked finish — 32 oz of take-home indulgence.",
       "img": "/assets/products/swirl-caramel.png",
       "tags": ["GF"],
       "allergens": ["Dairy"]
@@ -43,7 +43,7 @@
       "cat": "swirl",
       "group": "",
       "name": "Taro",
-      "desc": "A 32 oz take-home pint of smooth, nutty taro froyo.",
+      "desc": "Smooth, nutty taro in a mellow violet swirl — a 32 oz pint for home.",
       "img": "/assets/products/swirl-taro.png",
       "tags": ["GF"],
       "allergens": ["Dairy"]
@@ -53,7 +53,7 @@
       "cat": "swirl",
       "group": "",
       "name": "Guava",
-      "desc": "A 32 oz take-home pint of tropical guava froyo.",
+      "desc": "Tropical guava, sweet with a gentle tartness — 32 oz to take with you.",
       "img": "/assets/products/swirl-guava.png",
       "tags": ["Vegan", "DF", "GF"]
     },
@@ -62,7 +62,7 @@
       "cat": "swirl",
       "group": "",
       "name": "Premium Tarte",
-      "desc": "A 32 oz take-home pint of our tangy premium tarte froyo.",
+      "desc": "Our tangy original tart — clean, bright and refreshing, in a 32 oz pint.",
       "img": "/assets/products/swirl-tarte.png",
       "tags": ["GF"],
       "allergens": ["Dairy"]
@@ -70,6 +70,7 @@
 
     {
       "id": "to-blueberry",
+      "img": "/assets/products/tonics/blueberry.png",
       "cat": "tonics",
       "group": "",
       "name": "Blueberry Tonic",
@@ -78,6 +79,7 @@
     },
     {
       "id": "to-kiwi",
+      "img": "/assets/products/tonics/kiwi.png",
       "cat": "tonics",
       "group": "",
       "name": "Kiwi Tonic",
@@ -86,6 +88,7 @@
     },
     {
       "id": "to-mango",
+      "img": "/assets/products/tonics/mango.png",
       "cat": "tonics",
       "group": "",
       "name": "Mango Tonic",
@@ -94,6 +97,7 @@
     },
     {
       "id": "to-raspberry",
+      "img": "/assets/products/tonics/raspberry.png",
       "cat": "tonics",
       "group": "",
       "name": "Raspberry Tonic",
@@ -102,6 +106,7 @@
     },
     {
       "id": "to-pineapple",
+      "img": "/assets/products/tonics/pineapple.png",
       "cat": "tonics",
       "group": "",
       "name": "Pineapple Tonic",
@@ -110,6 +115,7 @@
     },
     {
       "id": "to-strawberry",
+      "img": "/assets/products/tonics/strawberry.png",
       "cat": "tonics",
       "group": "",
       "name": "Strawberry Tonic",
@@ -118,6 +124,7 @@
     },
     {
       "id": "to-peach",
+      "img": "/assets/products/tonics/peach.png",
       "cat": "tonics",
       "group": "",
       "name": "Golden Peach Tonic",
@@ -127,6 +134,7 @@
 
     {
       "id": "c-latte",
+      "img": "/assets/products/hot-latte.png",
       "cat": "coffee",
       "group": "Hot",
       "name": "Hot Latte",
@@ -136,6 +144,7 @@
     },
     {
       "id": "c-macch",
+      "img": "/assets/products/hot-macchiato.png",
       "cat": "coffee",
       "group": "Hot",
       "name": "Hot Macchiato",
@@ -145,6 +154,7 @@
     },
     {
       "id": "c-chai",
+      "img": "/assets/products/hot-chai-latte.png",
       "cat": "coffee",
       "group": "Hot",
       "name": "Hot Chai Latte",
@@ -154,6 +164,7 @@
     },
     {
       "id": "c-amer",
+      "img": "/assets/products/americano.png",
       "cat": "coffee",
       "group": "Hot",
       "name": "Americano",
@@ -163,6 +174,7 @@
     },
     {
       "id": "c-capp",
+      "img": "/assets/products/cappuccino.png",
       "cat": "coffee",
       "group": "Hot",
       "name": "Cappuccino",
@@ -172,6 +184,7 @@
     },
     {
       "id": "c-esp",
+      "img": "/assets/products/espresso.png",
       "cat": "coffee",
       "group": "Hot",
       "name": "Espresso · Single",
@@ -182,6 +195,7 @@
 
     {
       "id": "c-ichai",
+      "img": "/assets/products/iced-chai-latte.png",
       "cat": "coffee",
       "group": "Iced",
       "name": "Iced Chai Latte",
@@ -191,6 +205,7 @@
     },
     {
       "id": "c-imacch",
+      "img": "/assets/products/iced-macchiato.png",
       "cat": "coffee",
       "group": "Iced",
       "name": "Iced Macchiato",
@@ -200,6 +215,7 @@
     },
     {
       "id": "c-ilatte",
+      "img": "/assets/products/iced-latte.png",
       "cat": "coffee",
       "group": "Iced",
       "name": "Iced Latte",
@@ -209,6 +225,7 @@
     },
     {
       "id": "c-iamer",
+      "img": "/assets/products/iced-americano.png",
       "cat": "coffee",
       "group": "Iced",
       "name": "Iced Americano",
@@ -219,6 +236,7 @@
 
     {
       "id": "p-macad",
+      "img": "/assets/products/white-chocolate-macadamia.png",
       "cat": "pastries",
       "group": "Cookies NYC",
       "name": "White Chocolate Macadamia",
@@ -229,6 +247,7 @@
     },
     {
       "id": "p-redv",
+      "img": "/assets/products/red-velvet-and-white-chocolate.png",
       "cat": "pastries",
       "group": "Cookies NYC",
       "name": "Red Velvet & White Chocolate",
@@ -239,6 +258,7 @@
     },
     {
       "id": "p-ccw",
+      "img": "/assets/products/chocolate-chip-and-walnut.png",
       "cat": "pastries",
       "group": "Cookies NYC",
       "name": "Chocolate Chip & Walnut",
@@ -250,6 +270,7 @@
 
     {
       "id": "p-bluelem",
+      "img": "/assets/products/blueberry-lemon.png",
       "cat": "pastries",
       "group": "Scones",
       "name": "Blueberry Lemon",
@@ -260,6 +281,7 @@
     },
     {
       "id": "p-vanilla",
+      "img": "/assets/products/vanilla-almond.png",
       "cat": "pastries",
       "group": "Scones",
       "name": "Vanilla Almond",
@@ -271,6 +293,7 @@
 
     {
       "id": "p-gansito",
+      "img": "/assets/products/gansito-cake-jar.png",
       "cat": "pastries",
       "group": "Cake jars",
       "name": "Gansito Cake Jar",
@@ -281,6 +304,7 @@
     },
     {
       "id": "p-oreo",
+      "img": "/assets/products/oreo-cake-jar.png",
       "cat": "pastries",
       "group": "Cake jars",
       "name": "Oreo Cake Jar",
