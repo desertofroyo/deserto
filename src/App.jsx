@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Menu from "./pages/Menu.jsx";
+import Contact from "./pages/Contact.jsx";
 import AppDemo from "./pages/AppDemo.jsx";
 import Mockups from "./pages/Mockups.jsx";
 
@@ -19,6 +20,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/contact" element={<Contact />} />
         {/* legacy /order links now land on the view-only menu */}
         <Route path="/order" element={<Menu />} />
         <Route path="/app" element={<AppDemo />} />
