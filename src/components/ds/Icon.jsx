@@ -2,7 +2,7 @@ import {
   Search, ShoppingBag, ArrowRight, ArrowLeft, MapPin, Clock, Phone,
   Instagram, Facebook, Twitter, Plus, IceCreamBowl, CupSoda, Coffee,
   Cookie, Signal, Wifi, BatteryFull, House, Gift, WandSparkles, Trash2,
-  ChevronRight, Check, Star, Sparkles, Cake, Info, Leaf, Snowflake, Zap,
+  ChevronLeft, ChevronRight, Check, Star, Sparkles, Cake, Info, Leaf, Snowflake, Zap,
   Play, Pause, X, Mail,
 } from "lucide-react";
 
@@ -47,6 +47,7 @@ const ICONS = {
   gift: Gift,
   "wand-sparkles": WandSparkles,
   "trash-2": Trash2,
+  "chevron-left": ChevronLeft,
   "chevron-right": ChevronRight,
   check: Check,
   star: Star,

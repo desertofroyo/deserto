@@ -2,264 +2,207 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../components/ds";
 
-const ROTATE_MS = 5500;
-// Each scene is a finished photograph; the product is framed to the right so it
-// sits in the photo stage beside the headline column. pos picks which part of
-// the wide photo stays centered in that stage.
-// pos is right-biased: each scene has the product right-of-center with a soft,
-// out-of-focus café/decoration on the left. Anchoring the crop to the right
-// centers the product in the stage, keeps the right-side badges/splash in frame,
-// and trims away the blurry left edge.
-// Each slide carries its own headline + copy so the words match the photo on
-// screen. The eyebrow (store hours) and the buttons stay fixed beneath.
-const ORANGE = { color: "var(--orange-500)" };
+const ADVANCE_MS = 5000;
+
+// Real brand photography only — one consistent world: the café interior's
+// mauve walls, arches and warm sconces, product centered in every frame.
+// Derivatives live in /assets/images/hero (1600px, ~100-180KB each);
+// the untouched originals stay in /assets/images.
 const SLIDES = [
   {
-    src: "/assets/images/hero-froyo-scene.jpg?v=6",
-    alt: "A Deserto frozen yogurt cup topped with strawberries, blueberries, granola and caramel",
-    pos: "right 50%",
-    noSharpen: true,
-    head: (<>Where coffee meets<br />creamy <span style={ORANGE}>bliss.</span></>),
-    copy: "Self-serve frozen yogurt with curated toppings, caramel drizzle and fresh fruit — swirled exactly your way at the topping wall.",
+    src: "/assets/images/hero/froyo-arches.jpg",
+    alt: "Taro frozen yogurt swirl in a Deserto cup on the café counter, arches glowing behind",
+    tag: "hand-spun froyo",
   },
   {
-    src: "/assets/images/hero-tonics-scene.jpg?v=3",
-    alt: "Three Deserto fruit tonics in signature cans over crushed ice with berries and citrus",
-    pos: "right 50%",
-    noSharpen: true,
-    head: (<>Real fruit.<br /><span style={ORANGE}>Real refreshment.</span></>),
-    copy: "Naturally energizing drinks made with real ingredients and vibrant flavors.",
-    features: [
-      { icon: "leaf", label: "real ingredients", tint: "var(--olive-100)", fg: "var(--olive-600)" },
-      { icon: "snowflake", label: "refreshingly chilled", tint: "var(--rose-200)", fg: "var(--wine-700)" },
-      { icon: "zap", label: "good energy", tint: "var(--peach-200)", fg: "var(--caramel-500)" },
-    ],
+    src: "/assets/images/hero/tonics-table.jpg",
+    alt: "Three Deserto sparkling fruit tonics and an iced latte on a white café table",
+    tag: "sparkling tonics",
   },
   {
-    src: "/assets/images/hero-coffee-scene.jpg?v=3",
-    alt: "Three Deserto iced coffees — a paper cup, an iced latte and a caramel iced coffee — over a scatter of roasted beans",
-    pos: "right 50%",
-    noSharpen: true,
-    head: (<>My taste,<br /><span style={ORANGE}>my lifestyle</span></>),
-    copy: "Indulge in what makes you happy. From creamy frozen yogurt to energizing coffee, every sip is a moment just for you.",
+    src: "/assets/images/hero/tulips-cheers.jpg",
+    alt: "Two friends toasting with a strawberry tonic and an iced latte in front of tulips",
+    tag: "made for sharing",
   },
   {
-    src: "/assets/images/hero-cakejars-scene.jpg?v=6",
-    alt: "Three Deserto layered cake jars — strawberry, Oreo cream and chocolate — against a warm peach studio wall with fresh berries and Oreo cookies",
-    pos: "right 50%",
-    // Full pre-composed scene (jars already sized + placed on the right, logos
-    // wrapped in): no scale-up needed, and it's a clean AI render so skip the
-    // render-time unsharp + contrast/saturate boost that over-cooks it.
-    noSharpen: true,
-    head: (<>Crafted<br /><span style={ORANGE}>to crave.</span></>),
-    copy: "Creamy frozen yogurt, real ingredients and irresistible layers in every jar.",
-    features: [
-      { icon: "leaf", label: "real ingredients", tint: "var(--olive-100)", fg: "var(--olive-600)" },
-      { icon: "clock", label: "crafted fresh daily", tint: "var(--rose-200)", fg: "var(--wine-700)" },
-      { icon: "star", label: "made to satisfy", tint: "var(--peach-200)", fg: "var(--caramel-500)" },
-    ],
+    src: "/assets/images/hero/cone-swirl.jpg",
+    alt: "A two-tone chocolate and vanilla swirl in a waffle cone held up in the café",
+    tag: "waffle cones",
+  },
+  {
+    src: "/assets/images/hero/lineup-shelf.jpg",
+    alt: "The Deserto drink lineup on a lit shelf — strawberry tonic, berry tonic and iced latte",
+    tag: "the lineup",
   },
 ];
 
-/* ---------------- Hero (crossfading composed scenes) ----------------
-   The hero is capped to the site max width and centered. A photo stage sits in
-   the right ~60%, with the product centered inside it; a left color-fade melts
-   the photo into the peach headline column, and a soft blur feathers the right
-   edge. The fixed left column (headline, copy, buttons) overlays on top. */
+/* ---------------- Hero (photography carousel) ----------------
+   Full-bleed brand photos in a snap-scrolling strip — swipe on touch, arrows +
+   dots on desktop — with a quiet centered copy block beneath. The photos carry
+   the story; the copy stays put. Auto-advances gently until the visitor touches
+   the carousel, then hands over control for good. */
 export function Hero({ onVisit }) {
-  const [i, setI] = React.useState(0);
+  const carRef = React.useRef(null);
+  const [active, setActive] = React.useState(0);
+  const activeRef = React.useRef(0);
   const [hovered, setHovered] = React.useState(false);
-  // Explicit, sticky user control — stays paused after the pointer leaves,
-  // unlike the transient hover pause below.
-  const [userPaused, setUserPaused] = React.useState(false);
+  // First real interaction (swipe, wheel, arrow, dot) permanently stops the
+  // auto-advance — nothing is more annoying than a carousel that fights you.
+  const [interacted, setInteracted] = React.useState(false);
   const n = SLIDES.length;
 
-  // Rotation halts while the pointer rests on the hero (so people can read a
-  // slide) OR when the user has explicitly paused it with the control.
-  const rotating = !hovered && !userPaused && n > 1;
+  const nearest = React.useCallback(() => {
+    const car = carRef.current;
+    if (!car) return 0;
+    const mid = car.scrollLeft + car.clientWidth / 2;
+    let best = 0, bd = Infinity;
+    for (let i = 0; i < car.children.length; i++) {
+      const s = car.children[i];
+      const d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - mid);
+      if (d < bd) { bd = d; best = i; }
+    }
+    return best;
+  }, []);
 
+  // Smooth scroll with a settle-check: some browsers cancel smooth scrollTo on
+  // snap containers (or can't animate under reduced motion / throttled frames),
+  // so if we haven't landed shortly after, we land instantly instead.
+  const goTo = React.useCallback((i) => {
+    const car = carRef.current;
+    if (!car) return;
+    const s = car.children[Math.max(0, Math.min(n - 1, i))];
+    const target = s.offsetLeft - (car.clientWidth - s.offsetWidth) / 2;
+    car.scrollTo({ left: target, behavior: "smooth" });
+    clearTimeout(goTo._t);
+    goTo._t = setTimeout(() => {
+      if (Math.abs(car.scrollLeft - target) > 4) car.scrollLeft = target;
+      const at = nearest();
+      activeRef.current = at;
+      setActive(at);
+    }, 500);
+  }, [n, nearest]);
+
+  const onScroll = React.useCallback(() => {
+    const at = nearest();
+    activeRef.current = at;
+    setActive(at);
+  }, [nearest]);
+
+  // Gentle auto-advance (wraps), paused on hover, off after any interaction,
+  // and never under prefers-reduced-motion.
   React.useEffect(() => {
-    if (!rotating) return;
-    const t = setInterval(() => setI((p) => (p + 1) % n), ROTATE_MS);
+    if (hovered || interacted) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => goTo((activeRef.current + 1) % n), ADVANCE_MS);
     return () => clearInterval(t);
-  }, [rotating, n]);
+  }, [hovered, interacted, n, goTo]);
+
+  const stopAuto = () => setInteracted(true);
+  const arrow = (dir) => { stopAuto(); goTo(activeRef.current + dir); };
 
   return (
     <section
       id="top"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      /* bg inherits the page wrapper's cream (#FFF1DE), which is matched to the
-         hero photos' baked cream wall — so the transparent nav band, the hero
-         canvas and the photo wall are all one cream with no seam at the crisp top. */
-      style={{ position: "relative", overflow: "hidden", background: "transparent" }}
+      style={{ position: "relative", background: "transparent" }}
     >
-      {/* unsharp-mask convolution — crisps the in-focus product edges. The kernel
-          sums to 1 (no divisor) so brightness is preserved; mild so soft café
-          background doesn't turn noisy. */}
-      <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden>
-        <filter id="hero-sharpen">
-          <feConvolveMatrix order="3" preserveAlpha="true"
-            kernelMatrix="0 -0.6 0  -0.6 3.4 -0.6  0 -0.6 0" />
-        </filter>
-      </svg>
-      {/* ---- Product photo stage ----
-          Full-bleed: the photo spans the entire hero width (edge to edge) so each
-          scene's own soft backdrop — cream for froyo/tonics, blush-pink for the
-          cake jars — becomes the headline column too. No separate flat color panel
-          beside the photo, so there's no seam where a panel meets the image. The
-          product sits in the right ~40% of every scene; the headline overlays the
-          light left third. */}
-      <div className="r-hero-stage" aria-hidden style={{
-        position: "absolute", top: 0, bottom: 0, right: 0, width: "100%", zIndex: 0, overflow: "hidden",
-      }}>
-        {SLIDES.map((s, idx) => (
-          <img
-            key={s.src}
-            className="r-hero-img"
-            src={s.src}
-            alt={idx === i ? s.alt : ""}
-            style={{
-              position: "absolute", inset: 0, width: "100%", height: "100%",
-              objectFit: "cover", objectPosition: s.pos,
-              transform: s.transform, transformOrigin: s.transformOrigin,
-              filter: s.noSharpen ? "none" : "url(#hero-sharpen) contrast(1.05) saturate(1.04)",
-              // full-bleed — no left feather. Each scene's own backdrop carries the
-              // headline column; the light left scrim below keeps the copy legible.
-              // ease-in-out drives the crossfade quickly through the ~50/50 point so
-              // two dissimilar scenes don't linger as a muddy double-exposure; .85s
-              // matches the headline's clock so photo + copy resolve as one motion.
-              opacity: idx === i ? 1 : 0,
-              transition: "opacity .85s var(--ease-in-out, ease)", willChange: "opacity",
-            }}
-          />
-        ))}
-        {/* light left veil — lifts the copy off the photo's left third for a legible
-            headline on both the cream (froyo/tonics) and pink (cake-jar) scenes,
-            without tinting either toward a single flat color. */}
-        <div className="r-hero-scrim" style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(90deg, rgba(255,247,240,0.68) 0%, rgba(255,247,240,0.4) 30%, rgba(255,247,240,0.16) 48%, rgba(255,247,240,0) 60%)",
-        }} />
-      </div>
+      {/* ---- photo strip ---- */}
+      <div
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Deserto in pictures"
+        style={{ position: "relative", maxWidth: "var(--container-xl)", margin: "0 auto" }}
+      >
+        <button className="r-hc-arrow" aria-label="Previous photo" onClick={() => arrow(-1)}
+          style={{ left: "var(--space-4)" }}>
+          <Icon name="chevron-left" size={20} color="var(--wine-700)" />
+        </button>
+        <button className="r-hc-arrow" aria-label="Next photo" onClick={() => arrow(1)}
+          style={{ right: "var(--space-4)" }}>
+          <Icon name="chevron-right" size={20} color="var(--wine-700)" />
+        </button>
 
-      <div className="r-hero-inner" style={{
-        position: "relative", maxWidth: "var(--container-xl)", margin: "0 auto",
-        padding: "var(--space-6) var(--space-6)", minHeight: "clamp(420px, 42vw, 620px)",
-        display: "flex", alignItems: "center",
-      }}>
-        {/* ---- Foreground content (left column) ---- */}
-        <div className="r-hero-text" style={{ position: "relative", zIndex: 2, maxWidth: 780 }}>
-          {/* Store-hours pill. On desktop it belongs to the first slide only; on
-              phones the carousel reads as one melted composition, so it persists on
-              every slide instead of blinking out when the photo advances. It sits
-              outside the keyed copy below, so it holds still as slides change.
-              Visibility is driven by CSS (.r-hero-hours) per viewport. */}
-          <span className={"r-hero-hours" + (i === 0 ? " is-first" : "")} style={{
-            background: "var(--wine-700)", color: "var(--lime-400)",
-            fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)", letterSpacing: ".02em",
-            padding: "8px 18px", borderRadius: 999,
-          }}>Open daily 10–10 · River Rd, Tucson</span>
-
-          {/* keyed so the headline + copy crossfade in step with the photo */}
-          <div className="r-hero-copy" key={i}>
-            <h1 className="r-hero-h1" style={{
-              fontFamily: "var(--font-display)", fontWeight: 800, textTransform: "uppercase",
-              fontSize: "clamp(40px, 4.4vw, 60px)", lineHeight: 0.92, letterSpacing: "-0.01em",
-              margin: "var(--space-4) 0 0", color: "var(--wine-700)",
-            }}>
-              {SLIDES[i].head}
-            </h1>
-
-            <p style={{
-              fontFamily: "var(--font-editorial)", fontSize: "var(--text-md)", color: "var(--ink-700)",
-              lineHeight: 1.5, margin: "var(--space-4) 0 0", maxWidth: 440,
-            }}>
-              {SLIDES[i].copy}
-            </p>
-
-            {/* per-slide feature trio (e.g. tonics): icon chip + label, in the
-                site's own type + palette — same layout as the product art. */}
-            {SLIDES[i].features && (
-              /* Solid icon coins — each grounded on the photo by its own warm drop
-                 shadow + cream ring, so the trio reads on the light wall OR the
-                 darker counter without an enclosing box. A soft cream halo keeps
-                 the labels legible over either. */
-              <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-5)", marginTop: "var(--space-5)" }}>
-                {SLIDES[i].features.map((f) => (
-                  <div key={f.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                    <span style={{
-                      width: 48, height: 48, borderRadius: "50%", marginBottom: 10,
-                      display: "inline-flex", alignItems: "center", justifyContent: "center", background: f.tint,
-                      border: "2px solid rgba(255,251,245,0.75)",
-                      boxShadow: "0 9px 20px -8px rgba(42,29,17,0.42), 0 2px 5px -2px rgba(42,29,17,0.24)",
-                    }}>
-                      <Icon name={f.icon} size={21} color={f.fg} />
-                    </span>
-                    <span style={{
-                      fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "var(--text-xs)",
-                      color: "var(--ink-700)", lineHeight: 1.25, whiteSpace: "nowrap",
-                      textShadow: "0 1px 3px rgba(255,247,240,0.9), 0 0 2px rgba(255,247,240,0.8)",
-                    }}>{f.label}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* CTA row — only on the first slide, so flipping through the carousel
-              doesn't repeat the same buttons under every headline. */}
-          {i === 0 && (
-            <div style={{ display: "flex", gap: "var(--space-3)", marginTop: "var(--space-5)" }}>
-              <Link to="/menu" className="btn-wine" style={{
-                borderRadius: 999, padding: "13px 26px",
-                background: "var(--wine-700)", color: "var(--cream-50)", fontFamily: "var(--font-body)", fontWeight: 800,
-                fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center", boxShadow: "var(--shadow-md)",
-              }}>
-                View menu
-              </Link>
-              <button onClick={onVisit} style={{
-                cursor: "pointer", borderRadius: 999, padding: "13px 26px", background: "rgba(255,255,255,0.55)",
-                border: "2px solid var(--wine-700)", color: "var(--wine-700)", fontFamily: "var(--font-body)",
-                fontWeight: 800, fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center",
-              }}>
-                Visit us
-              </button>
-            </div>
-          )}
-
-        </div>
-      </div>
-
-      {/* carousel controls — a compact cluster pinned to the bottom-right of the
-          hero: play/pause, then a row of slide ticks (the active one grows into
-          a wine pill). Hidden on narrow screens (see app.css). */}
-      <div className="r-hero-controls" style={{
-        position: "absolute", right: "var(--space-6)", bottom: "var(--space-5)",
-        zIndex: 3, display: "flex", flexDirection: "row", alignItems: "center", gap: 14,
-      }}>
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 8 }}>
+        <div
+          ref={carRef}
+          className="r-hc-scroller"
+          onScroll={onScroll}
+          onPointerDown={stopAuto}
+          onWheel={stopAuto}
+          onTouchStart={stopAuto}
+        >
           {SLIDES.map((s, idx) => (
-            <button key={s.src} aria-label={`Show slide ${idx + 1}`} aria-current={idx === i} onClick={() => setI(idx)} style={{
-              width: idx === i ? 26 : 10, height: 10, borderRadius: 999, border: "none", cursor: "pointer", padding: 0,
-              background: idx === i ? "var(--wine-700)" : "rgba(118,47,53,0.28)", transition: "all .25s var(--ease-out, ease)",
-            }} />
+            <figure className="r-hc-slide" key={s.src}>
+              <img
+                src={s.src}
+                alt={s.alt}
+                loading={idx === 0 ? "eager" : "lazy"}
+                fetchpriority={idx === 0 ? "high" : undefined}
+                draggable={false}
+              />
+              <figcaption className="r-hc-tag">{s.tag}</figcaption>
+            </figure>
           ))}
         </div>
 
-        <button
-          onClick={() => setUserPaused((p) => !p)}
-          aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
-          aria-pressed={userPaused}
-          style={{
-            width: 38, height: 38, borderRadius: 999, cursor: "pointer", padding: 0, flexShrink: 0,
-            border: "none", background: "var(--wine-700)", boxShadow: "var(--shadow-md)",
-            display: "inline-flex", alignItems: "center", justifyContent: "center",
-            transition: "transform .2s var(--ease-out, ease), background .2s var(--ease-out, ease)",
-          }}
-        >
-          <Icon name={userPaused ? "play" : "pause"} size={15} color="var(--cream-50)" />
-        </button>
+        {/* dots */}
+        <div className="r-hc-dots">
+          {SLIDES.map((s, idx) => (
+            <button
+              key={s.src}
+              aria-label={`Show photo ${idx + 1}`}
+              aria-current={idx === active}
+              className={idx === active ? "on" : undefined}
+              onClick={() => { stopAuto(); goTo(idx); }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* ---- copy block — the words hold still while the photos move ---- */}
+      <div style={{
+        maxWidth: 760, margin: "0 auto", textAlign: "center",
+        padding: "var(--space-4) var(--space-6) var(--space-8)",
+      }}>
+        <span style={{
+          display: "inline-block",
+          background: "var(--wine-700)", color: "var(--lime-400)",
+          fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)",
+          letterSpacing: ".02em", padding: "8px 18px", borderRadius: 999,
+        }}>Open daily 10–10 · River Rd, Tucson</span>
+
+        <h1 className="r-hc-h1" style={{
+          fontFamily: "var(--font-display)", fontWeight: 800, textTransform: "uppercase",
+          fontSize: "clamp(34px, 3.6vw, 52px)", lineHeight: 0.96, letterSpacing: "-0.01em",
+          margin: "var(--space-4) 0 0", color: "var(--wine-700)",
+        }}>
+          Where coffee meets <span style={{ color: "var(--orange-500)" }}>creamery.</span>
+        </h1>
+
+        <p style={{
+          fontFamily: "var(--font-editorial)", fontSize: "var(--text-md)", color: "var(--ink-700)",
+          lineHeight: 1.55, margin: "var(--space-4) auto 0", maxWidth: 520,
+        }}>
+          Hand-spun frozen yogurt, sparkling fruit tonics and serious coffee —
+          made fresh behind the arches every day.
+        </p>
+
+        <div style={{ display: "flex", gap: "var(--space-3)", justifyContent: "center", marginTop: "var(--space-5)" }}>
+          <Link to="/menu" className="btn-wine" style={{
+            borderRadius: 999, padding: "13px 26px",
+            background: "var(--wine-700)", color: "var(--cream-50)", fontFamily: "var(--font-body)", fontWeight: 800,
+            fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center", boxShadow: "var(--shadow-md)",
+          }}>
+            View menu
+          </Link>
+          <button onClick={onVisit} style={{
+            cursor: "pointer", borderRadius: 999, padding: "13px 26px", background: "rgba(255,255,255,0.55)",
+            border: "2px solid var(--wine-700)", color: "var(--wine-700)", fontFamily: "var(--font-body)",
+            fontWeight: 800, fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center",
+          }}>
+            Visit us
+          </button>
+        </div>
       </div>
     </section>
   );

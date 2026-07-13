@@ -633,75 +633,68 @@ body { margin: 0; }
   .r-footer-bottom { flex-direction: column !important; gap: 10px; text-align: center; }
 }
 
-/* Hero promo copy fades up on each slide change (re-mounts via key={i}).
-   Disabled under prefers-reduced-motion by the global rule below. */
-.r-hero-promo { animation: fadeUp 0.6s var(--ease-out, ease) both; }
+/* ---- Hero photo carousel ----
+   Real brand photography in a snap-scrolling strip: each slide is a tall photo
+   panel with a caption pill; neighbors peek in from both edges so the strip
+   reads as scrollable. Swipe on touch; arrows + dots on desktop. */
+.r-hc-scroller {
+  display: flex; gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;              /* hide the bar, keep the scroll */
+  padding: 0 10px;
+}
+.r-hc-scroller::-webkit-scrollbar { display: none; }
 
-/* Hero photo runs crisp to the right edge — no feather. The left edge is
-   handled by the (light) color scrim + headline column. */
+.r-hc-slide {
+  position: relative;
+  flex: 0 0 min(76%, 880px);
+  height: clamp(420px, 58vh, 620px);
+  scroll-snap-align: center;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--sand-100);
+  margin: 0;
+}
+.r-hc-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  user-select: none; -webkit-user-drag: none;
+}
+.r-hc-tag {
+  position: absolute; left: 16px; bottom: 16px;
+  background: rgba(251, 241, 232, 0.92);
+  color: var(--wine-700);
+  font-family: var(--font-body); font-weight: 700;
+  font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 8px 15px; border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
 
-/* Per-slide headline + copy fade in as the carousel advances (keyed remount).
-   Shares the photo crossfade's .85s clock so the words and the picture settle
-   together instead of the text snapping in ahead of the dissolve. */
-@keyframes heroCopyIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.r-hero-copy { animation: heroCopyIn 0.85s var(--ease-out-expo, ease) both; }
-@media (prefers-reduced-motion: reduce) { .r-hero-copy { animation: none; } }
+.r-hc-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 5;
+  width: 48px; height: 48px; border-radius: 999px;
+  border: none; cursor: pointer; padding: 0;
+  background: rgba(251, 241, 232, 0.94);
+  box-shadow: var(--shadow-md);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s var(--ease-out, ease);
+}
+.r-hc-arrow:hover { transform: translateY(-50%) scale(1.06); }
 
-/* Store-hours pill: on the first slide only on desktop (where it pairs with the
-   CTA row), but persistent on every slide on phones — the mobile hero reads as one
-   melted composition, so a pill blinking in/out as the photo changes looks broken.
-   The mobile override lives in the max-width:760px block below (later in source,
-   equal specificity → wins there). */
-.r-hero-hours { display: inline-block; }
-.r-hero-hours:not(.is-first) { display: none; }
+.r-hc-dots { display: flex; justify-content: center; gap: 8px; padding: 16px 0 4px; }
+.r-hc-dots button {
+  width: 9px; height: 9px; border-radius: 999px;
+  border: none; cursor: pointer; padding: 0;
+  background: rgba(118, 47, 53, 0.24);
+  transition: all 0.25s var(--ease-out, ease);
+}
+.r-hc-dots button.on { background: var(--wine-700); width: 24px; }
 
-/* ---- Hero on phones: copy melts down into the photo (one composition) ----
-   The scenes are ~3:1 panoramas with the product in the right ~40% — too wide to
-   sit beside the headline, and cropping them full-bleed behind the copy hid the
-   product. Earlier we stacked copy-then-photo, but that left a hard seam between
-   the two rectangles. Instead we blend: the copy sits on a SOLID cream band at
-   the top (so it's always legible), then the copy's own background fades to
-   transparent and the product photo — pulled up beneath it — rises through the
-   fade. Result: headline + copy dissolve into the scene as a single image, and it
-   works on any slide (cream froyo OR the darker tonics/coffee/cake backdrops),
-   because we fade the cream over the photo rather than tinting the photo cream. */
 @media (max-width: 760px) {
-  #top { display: flex; flex-direction: column; }
-  .r-hero-inner {
-    order: 1; position: relative; z-index: 2;
-    min-height: 0 !important;
-    align-items: flex-start !important;
-    /* the deep bottom padding is the "runway" the cream fades across; the
-       negative margin pulls the photo up beneath that runway so they overlap. */
-    margin-bottom: -96px !important;
-    padding: var(--space-7) var(--space-6) 120px !important;
-    background: linear-gradient(180deg,
-      var(--surface-page) 0%, var(--surface-page) 50%,
-      rgba(251, 241, 232, 0.82) 70%, rgba(251, 241, 232, 0) 100%) !important;
-  }
-  .r-hero-text { max-width: 100% !important; }
-  /* keep the hours pill on every slide on phones (see .r-hero-hours above) */
-  .r-hero-hours:not(.is-first) { display: inline-block; }
-  .r-hero-h1 { font-size: clamp(38px, 9vw, 54px) !important; }
-  .r-hero-stage {
-    order: 2; position: relative !important;
-    top: auto !important; bottom: auto !important; right: auto !important; left: auto !important;
-    width: 100% !important; height: auto !important; aspect-ratio: 5 / 4;
-  }
-  .r-hero-img {
-    /* product is right-of-center in the pano — anchor right so it stays in frame */
-    object-position: right center !important;
-    -webkit-mask-image: none !important;
-    mask-image: none !important;
-  }
-  .r-hero-scrim { display: none !important; }
-  /* keep the carousel navigable on phones — the dots + play/pause sit over the
-     bottom-right of the photo panel. */
-  .r-hero-controls {
-    bottom: var(--space-3) !important;
-    right: var(--space-4) !important;
-    left: auto !important;
-  }
+  .r-hc-slide { flex: 0 0 86%; height: clamp(360px, 58vh, 520px); }
+  .r-hc-arrow { display: none; }      /* thumbs do the work on phones */
 }
 
 @media (prefers-reduced-motion: reduce) {
