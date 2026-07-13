@@ -104,11 +104,9 @@ body { margin: 0; }
   transition: transform .42s var(--ease-out-expo, ease);
   will-change: transform;
 }
-/* All four category renders share the same portrait studio composition, so the
-   height cap alone sizes them consistently — no per-product width tuning needed.
-   The squat froyo cup is the one wider shape; ease it down so it doesn't read
-   larger than the tall cans and cup beside it. */
-.showcase-item[data-slug="froyo"] .showcase-photo img { max-width: 70%; }
+/* All four category renders share one studio composition — product centered
+   with flavor-matched fruit hugging the base (Yogen Früz style) — so the
+   height cap alone sizes them consistently; no per-product width tuning. */
 /* The near-clear cans and iced-latte cup want a tighter, denser contact shadow
    than the soft puddle — an offset smear behind translucent bodies floats. */
 .showcase-item[data-slug="tonics"] .showcase-photo img,
