@@ -104,19 +104,16 @@ body { margin: 0; }
   transition: transform .42s var(--ease-out-expo, ease);
   will-change: transform;
 }
-/* Each product has a different aspect ratio, so a single width cap renders them
-   at wildly different heights (the wide 3-up coffee/cake-jar shots come out tiny;
-   the tall froyo comes out largest). Instead, tune each one's width cap so all
-   four land in the same ~182px visual-height band: ease the tall froyo down, and
-   let the wide coffee/cake-jar shots grow wider — bleeding into the 48px column
-   gaps — until they match. Caps are held just short of crowding a neighbor. */
-.showcase-item[data-slug="froyo"] .showcase-photo img { max-width: 74%; }
-.showcase-item[data-slug="coffee"] .showcase-photo img { max-width: 103%; }
-.showcase-item[data-slug="pastries"] .showcase-photo img { max-width: 145%; }
-/* The tall, near-clear tonic can needs a tighter, denser contact shadow than the
-   shared soft puddle — otherwise the offset smears behind the can and it floats
-   while the wider froyo/coffee/cake shots read grounded. */
-.showcase-item[data-slug="tonics"] .showcase-photo img {
+/* All four category renders share the same portrait studio composition, so the
+   height cap alone sizes them consistently — no per-product width tuning needed.
+   The squat froyo cup is the one wider shape; ease it down so it doesn't read
+   larger than the tall cans and cup beside it. */
+.showcase-item[data-slug="froyo"] .showcase-photo img { max-width: 70%; }
+/* The near-clear cans and iced-latte cup want a tighter, denser contact shadow
+   than the soft puddle — an offset smear behind translucent bodies floats. */
+.showcase-item[data-slug="tonics"] .showcase-photo img,
+.showcase-item[data-slug="coffee"] .showcase-photo img,
+.showcase-item[data-slug="pastries"] .showcase-photo img {
   filter: drop-shadow(0 9px 8px rgba(42,29,17,0.26)) drop-shadow(0 3px 4px rgba(42,29,17,0.30));
 }
 .showcase-item:hover .showcase-photo img { transform: translateY(-9px) scale(1.035); }
