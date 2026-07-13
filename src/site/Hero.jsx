@@ -12,27 +12,22 @@ const SLIDES = [
   {
     src: "/assets/images/hero/froyo-arches.jpg",
     alt: "Taro frozen yogurt swirl in a Deserto cup on the café counter, arches glowing behind",
-    tag: "hand-spun froyo",
   },
   {
     src: "/assets/images/hero/tonics-table.jpg",
     alt: "Three Deserto sparkling fruit tonics and an iced latte on a white café table",
-    tag: "sparkling tonics",
   },
   {
     src: "/assets/images/hero/tulips-cheers.jpg",
     alt: "Two friends toasting with a strawberry tonic and an iced latte in front of tulips",
-    tag: "made for sharing",
   },
   {
     src: "/assets/images/hero/cone-swirl.jpg",
     alt: "A two-tone chocolate and vanilla swirl in a waffle cone held up in the café",
-    tag: "waffle cones",
   },
   {
     src: "/assets/images/hero/lineup-shelf.jpg",
     alt: "The Deserto drink lineup on a lit shelf — strawberry tonic, berry tonic and iced latte",
-    tag: "the lineup",
   },
 ];
 
@@ -140,7 +135,6 @@ export function Hero({ onVisit }) {
                 fetchpriority={idx === 0 ? "high" : undefined}
                 draggable={false}
               />
-              <figcaption className="r-hc-tag">{s.tag}</figcaption>
             </figure>
           ))}
         </div>

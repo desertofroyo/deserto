@@ -646,10 +646,12 @@ body { margin: 0; }
 }
 .r-hc-scroller::-webkit-scrollbar { display: none; }
 
+/* Portrait panels, Tea Leaf style — roughly 3:4, three in view on desktop,
+   no text over the photos: the pictures do the talking. */
 .r-hc-slide {
   position: relative;
-  flex: 0 0 min(76%, 880px);
-  height: clamp(420px, 58vh, 620px);
+  flex: 0 0 min(34%, 470px);
+  height: clamp(480px, 62vh, 660px);
   scroll-snap-align: center;
   overflow: hidden;
   border-radius: var(--radius-lg);
@@ -660,15 +662,6 @@ body { margin: 0; }
   width: 100%; height: 100%;
   object-fit: cover; display: block;
   user-select: none; -webkit-user-drag: none;
-}
-.r-hc-tag {
-  position: absolute; left: 16px; bottom: 16px;
-  background: rgba(251, 241, 232, 0.92);
-  color: var(--wine-700);
-  font-family: var(--font-body); font-weight: 700;
-  font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 8px 15px; border-radius: 999px;
-  backdrop-filter: blur(4px);
 }
 
 .r-hc-arrow {
@@ -693,7 +686,7 @@ body { margin: 0; }
 .r-hc-dots button.on { background: var(--wine-700); width: 24px; }
 
 @media (max-width: 760px) {
-  .r-hc-slide { flex: 0 0 86%; height: clamp(360px, 58vh, 520px); }
+  .r-hc-slide { flex: 0 0 76%; height: clamp(400px, 56vh, 540px); }
   .r-hc-arrow { display: none; }      /* thumbs do the work on phones */
 }
 
