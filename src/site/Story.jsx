@@ -27,11 +27,11 @@ export function Story() {
         <div>
           <span className="eyebrow" style={{ color: "var(--lime-400)" }}>Our story</span>
           <h2 style={{ fontSize: "var(--text-5xl)", margin: "12px 0 0", lineHeight: 0.98, color: "var(--cream-50)" }}>
-            <span style={{ display: "block" }}>Dessert,</span>
-            <span style={{ display: "block", color: "var(--lime-400)", fontStyle: "italic", fontFamily: "var(--font-editorial)", fontWeight: 800 }}>meet desierto.</span>
+            <span style={{ display: "block" }}>Where the desert</span>
+            <span style={{ display: "block", color: "var(--lime-400)", fontStyle: "italic", fontFamily: "var(--font-editorial)", fontWeight: 800 }}>meets dessert.</span>
           </h2>
           <p style={{ fontFamily: "var(--font-editorial)", fontSize: "var(--text-lg)", lineHeight: 1.62, color: "rgba(255,255,255,0.84)", maxWidth: 500, marginTop: "var(--space-5)" }}>
-            One invented name, two languages, two meanings — <em>dessert</em> and <em>desierto</em> (desert). It's the promise behind every cup: a warm, softly-lit, arched space where health and indulgence finally sit at the same table — crafted for the way you eat, move and treat yourself.
+            Inspired by the desert. Crafted for every craving. Deserto brings together handcrafted coffee, self-serve frozen yogurt, refreshing drinks and layered desserts in a warm, modern space designed to make every visit feel special.
           </p>
         </div>
 

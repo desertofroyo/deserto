@@ -36,7 +36,7 @@ export default function Contact() {
   };
 
   return (
-    <div style={{ background: "var(--cream-50)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
       <Header />
 
       {/* intro */}

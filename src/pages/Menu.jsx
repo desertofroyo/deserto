@@ -180,7 +180,7 @@ export default function Menu() {
   }, [scrollToCat]);
 
   return (
-    <div style={{ background: "var(--cream-50)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
       <Header />
 
       {/* page intro */}

@@ -30,7 +30,7 @@ const UPDATED = "July 2, 2026";
    language as the Contact page so the legal pages feel part of the site. */
 function LegalPage({ eyebrow, title, intro, children }) {
   return (
-    <div style={{ background: "var(--cream-50)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
       <Header />
 
       <div className="contact-intro">

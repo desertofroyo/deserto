@@ -23,14 +23,14 @@ export default function Home() {
     if (id) requestAnimationFrame(() => scrollTo(id));
   }, []);
 
-  // Page canvas cream is matched to the hero photography's baked wall (#FFF1DE)
-  // so the transparent nav band reads as one continuous cream with the hero
-  // photo — no warm/cool seam at the photo's crisp top edge.
+  // The old #FFF1DE canvas matched the AI hero renders' baked wall; the carousel
+  // is framed cards now, and that peach washed out the photography — use the
+  // cooler shared page surface instead.
   return (
-    <div style={{ background: "#FFF1DE", minHeight: "100vh" }}>
+    <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
       <Header onNav={scrollTo} />
-      <Hero onVisit={() => scrollTo("locations")} />
       <Marquee />
+      <Hero onVisit={() => scrollTo("locations")} />
       <MenuSection sectionRef={menuRef} />
       <Story />
       <Locations />

@@ -82,38 +82,37 @@ body { margin: 0; }
 .showcase {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-8); /* more horizontal air between products */
-  margin: var(--space-9) auto 0;
-  max-width: 1120px;
+  gap: var(--space-10); /* generous horizontal air between products — Yogen Früz spread */
+  margin: var(--space-10) auto 0;
+  max-width: 1200px;
 }
 .showcase-item {
   display: flex; flex-direction: column; align-items: center; text-align: center;
   text-decoration: none; padding: 0 var(--space-3);
 }
 .showcase-photo {
-  height: 232px; width: 100%;
+  height: 210px; width: 100%;
   display: flex; align-items: flex-end; justify-content: center;
 }
 .showcase-photo img {
-  max-height: 100%; max-width: 86%; width: auto; object-fit: contain;
+  max-height: 100%; max-width: 100%; width: auto; object-fit: contain;
   border-radius: 14px; /* softens any non-cutout placeholder; transparent PNGs unaffected */
-  /* One consistent grounded shadow across all four cutouts — a soft ground puddle
-     plus a close darker one — so none of them (esp. the light froyo cup / clear
-     tonic glass) read as floating. */
-  filter: drop-shadow(0 16px 18px rgba(42,29,17,0.22)) drop-shadow(0 5px 7px rgba(42,29,17,0.20));
+  /* No CSS drop shadow — Yogen Früz style: on a clean white stage the products
+     carry only their own baked-in shading; cast shadows read sticker-ish. */
   transition: transform .42s var(--ease-out-expo, ease);
   will-change: transform;
 }
-/* All four category renders share one studio composition — product centered
-   with flavor-matched fruit hugging the base (Yogen Früz style) — so the
-   height cap alone sizes them consistently; no per-product width tuning. */
-/* The near-clear cans and iced-latte cup want a tighter, denser contact shadow
-   than the soft puddle — an offset smear behind translucent bodies floats. */
-.showcase-item[data-slug="tonics"] .showcase-photo img,
-.showcase-item[data-slug="coffee"] .showcase-photo img,
-.showcase-item[data-slug="pastries"] .showcase-photo img {
-  filter: drop-shadow(0 9px 8px rgba(42,29,17,0.26)) drop-shadow(0 3px 4px rgba(42,29,17,0.30));
-}
+/* Real-world scale, Yogen Früz-balanced. The four renders are all near-square,
+   so height (not width) must drive the hierarchy — hence max-width:100% above.
+   The caps are kept modest so each product floats small inside a generous field
+   of whitespace (Yogen Früz reads airy, not packed). On the counter the large
+   coffee cups and the tonic can are tallest and near-equal; the froyo cup +
+   swirl sits a clear step below; the squat cake jars are shortest — the range
+   is gently compressed from life so the row stays even, not lopsided. */
+.showcase-item[data-slug="coffee"]   .showcase-photo img { max-height: 74%; }
+.showcase-item[data-slug="tonics"]   .showcase-photo img { max-height: 72%; }
+.showcase-item[data-slug="froyo"]    .showcase-photo img { max-height: 66%; }
+.showcase-item[data-slug="pastries"] .showcase-photo img { max-height: 57%; }
 .showcase-item:hover .showcase-photo img { transform: translateY(-9px) scale(1.035); }
 .showcase-name {
   margin: var(--space-4) 0 0;
@@ -383,13 +382,13 @@ body { margin: 0; }
    height is constant, so there's no layout thrash on scroll. */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(252, 238, 228, 0);
+  background: rgba(252, 248, 244, 0);
   border-bottom: 1px solid transparent;
   transition: background .32s var(--ease-out-expo, ease), border-color .32s var(--ease-out-expo, ease),
               box-shadow .32s var(--ease-out-expo, ease), backdrop-filter .32s var(--ease-out-expo, ease);
 }
 .site-header.scrolled {
-  background: rgba(252, 238, 228, 0.82);
+  background: rgba(252, 248, 244, 0.82);
   backdrop-filter: blur(14px) saturate(1.08);
   -webkit-backdrop-filter: blur(14px) saturate(1.08);
   border-bottom-color: var(--border-default);

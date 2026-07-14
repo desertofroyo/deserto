@@ -10,8 +10,8 @@ const ADVANCE_MS = 5000;
 // the untouched originals stay in /assets/images.
 const SLIDES = [
   {
-    src: "/assets/images/hero/froyo-arches.jpg",
-    alt: "Taro frozen yogurt swirl in a Deserto cup on the café counter, arches glowing behind",
+    src: "/assets/images/hero/froyo-guava.jpg",
+    alt: "Pink guava frozen yogurt swirl topped with fresh strawberries and chocolate drizzle in a Deserto cup",
   },
   {
     src: "/assets/images/hero/tonics-table.jpg",
@@ -22,12 +22,12 @@ const SLIDES = [
     alt: "Two friends toasting with a strawberry tonic and an iced latte in front of tulips",
   },
   {
-    src: "/assets/images/hero/cone-swirl.jpg",
-    alt: "A two-tone chocolate and vanilla swirl in a waffle cone held up in the café",
+    src: "/assets/images/hero/cone-branded.jpg",
+    alt: "A two-tone chocolate and vanilla swirl in a waffle cone held up under the café's coffee-meets-creamy wall",
   },
   {
-    src: "/assets/images/hero/lineup-shelf.jpg",
-    alt: "The Deserto drink lineup on a lit shelf — strawberry tonic, berry tonic and iced latte",
+    src: "/assets/images/hero/coffee-macchiato.jpg",
+    alt: "A layered iced caramel macchiato in a branded Deserto cup at the café counter",
   },
 ];
 
@@ -100,7 +100,7 @@ export function Hero({ onVisit }) {
       id="top"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ position: "relative", background: "transparent" }}
+      style={{ position: "relative", background: "transparent", paddingTop: "var(--space-6)" }}
     >
       {/* ---- photo strip ---- */}
       <div

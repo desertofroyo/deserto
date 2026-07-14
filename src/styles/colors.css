@@ -103,7 +103,9 @@
   --ink-300: #C6B9AC;
   --sand-200: #E8DCCD;
   --sand-100: #F4ECE1;
-  --cream-50: #FBF1E8; /* default page surface — warm peach-cream (brand bg) */
+  --cream-50: #FBF1E8; /* warm peach-cream (brand bg) — kept for text-on-brand & accents */
+  --cream-25: #FCF8F4; /* page surface — barely-warm off-white; full cream-50 washed out
+                          the hero photography and product cutouts */
   --white: #FFFFFF;
 
   /* ---------- Seasonal "expressive" accents (rotate with the menu) ---------- */
@@ -131,7 +133,7 @@
   --text-link: var(--wine-700);
 
   /* Surfaces */
-  --surface-page: var(--cream-50);
+  --surface-page: var(--cream-25);
   --surface-card: var(--white);
   --surface-sunken: var(--sand-100);
   --surface-inverse: var(--wine-700);

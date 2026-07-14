@@ -91,18 +91,20 @@ export function Marquee() {
   const Row = ({ ariaHidden }) => (
     <div aria-hidden={ariaHidden} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
       {items.map((text, i) => (
-        <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 30, padding: "0 30px", whiteSpace: "nowrap" }}>
+        <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 22, padding: "0 22px", whiteSpace: "nowrap" }}>
           <span style={{
             fontFamily: "var(--font-display)", fontWeight: 800, textTransform: "uppercase",
-            fontSize: "var(--text-md)", letterSpacing: ".03em", color: "var(--lime-400)",
+            fontSize: "var(--text-sm)", letterSpacing: ".03em", color: "var(--lime-400)",
           }}>{text}</span>
-          <span style={{ color: "var(--orange-500)", fontSize: 14, lineHeight: 0 }}>✦</span>
+          <span style={{ color: "var(--orange-500)", fontSize: 11, lineHeight: 0 }}>✦</span>
         </span>
       ))}
     </div>
   );
+  // Thin announcement strip directly under the sticky nav (Dutch Bros / Scented
+  // Leaf pattern): a slim wine band that scrolls away as the hero comes up.
   return (
-    <div style={{ overflow: "hidden", background: "var(--wine-700)", height: 64, display: "flex", alignItems: "center" }}>
+    <div style={{ overflow: "hidden", background: "var(--wine-700)", height: 40, display: "flex", alignItems: "center" }}>
       <div className="ds-marquee" style={{ display: "flex", width: "max-content" }}>
         <Row /><Row ariaHidden />
       </div>
