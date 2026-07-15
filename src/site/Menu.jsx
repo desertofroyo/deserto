@@ -21,37 +21,33 @@ export function MenuSection({ sectionRef }) {
       // past the product row (Yogen Früz / Tea Leaf style) or the warm sand tint
       // washes out the white cup, clear can and milky latte. Warmth only at edges.
       background: "radial-gradient(ellipse 150% 130% at 50% 46%, var(--white) 0%, var(--white) 58%, #FCF4EC 82%, var(--sand-100) 100%)",
-      position: "relative", overflow: "hidden",
+      position: "relative",
     }}>
-      <div ref={reveal} style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
+      {/* The wine story rises up in a swiggly wave at the bottom; the top edge
+          stays clean so the white "What we make" product row reads bright. */}
+      {/* -2px overlap into the wine story below so the two wine surfaces never
+          leave a subpixel hairline seam at the section boundary. */}
+      <div aria-hidden style={{ position: "absolute", bottom: -2, left: 0, width: "100%", lineHeight: 0, zIndex: 0, pointerEvents: "none" }}>
+        <svg width="100%" height="48" viewBox="0 0 1200 48" preserveAspectRatio="none" style={{ display: "block" }}>
+          <path d="M0,48 L1200,48 L1200,26 Q900,8 600,24 T0,26 Z" fill="var(--wine-700)" />
+        </svg>
+      </div>
+
+      <div ref={reveal} style={{ position: "relative", zIndex: 1, maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-9) var(--space-6)" }}>
         <div style={{ textAlign: "center", maxWidth: 560, margin: "0 auto" }}>
           <span className="eyebrow" style={{ color: "var(--wine-500)" }}>The menu</span>
           <h2 style={{ fontSize: "var(--text-4xl)", margin: "8px 0 0", color: "var(--wine-700)" }}>What we make</h2>
         </div>
 
-        {/* Swiggly brand ribbon behind the product row — Tea Leaf & Creamery
-            style: a soft peach band with wavy top and bottom edges, full-bleed
-            behind the cutouts while the names sit on its lower curve. */}
-        <div style={{ position: "relative", marginTop: "var(--space-10)" }}>
-          <div aria-hidden style={{
-            position: "absolute", left: "50%", transform: "translateX(-50%)",
-            width: "100vw", top: -58, bottom: -64, zIndex: 0, pointerEvents: "none",
-          }}>
-            <svg width="100%" height="100%" viewBox="0 0 1200 360" preserveAspectRatio="none" style={{ display: "block" }}>
-              <path d="M0,54 Q300,30 600,54 T1200,54 L1200,306 Q900,330 600,306 T0,306 Z" fill="var(--peach-200)" />
-            </svg>
-          </div>
-
-          <div className="showcase" style={{ position: "relative", zIndex: 1, marginTop: 0 }}>
-            {highlights.map((h, i) => (
-              <Link key={h.slug} to={h.to} data-slug={h.slug} className="showcase-item stagger-item" style={{ "--i": i }}>
-                <div className="showcase-photo">
-                  <img src={srcOf(h.img)} alt={h.name} loading="lazy" />
-                </div>
-                <h3 className="showcase-name">{h.name}</h3>
-              </Link>
-            ))}
-          </div>
+        <div className="showcase">
+          {highlights.map((h, i) => (
+            <Link key={h.slug} to={h.to} data-slug={h.slug} className="showcase-item stagger-item" style={{ "--i": i }}>
+              <div className="showcase-photo">
+                <img src={srcOf(h.img)} alt={h.name} loading="lazy" />
+              </div>
+              <h3 className="showcase-name">{h.name}</h3>
+            </Link>
+          ))}
         </div>
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "var(--space-8)" }}>

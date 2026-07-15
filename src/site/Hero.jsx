@@ -10,24 +10,28 @@ const ADVANCE_MS = 5000;
 // the untouched originals stay in /assets/images.
 const SLIDES = [
   {
-    src: "/assets/images/hero/froyo-guava.jpg",
-    alt: "Pink guava frozen yogurt swirl topped with fresh strawberries and chocolate drizzle in a Deserto cup",
+    src: "/assets/images/hero/froyo-sky.jpg",
+    alt: "An orange-and-vanilla creamsicle frozen yogurt swirl in a Deserto cup, held up against a bright blue cloudy sky",
   },
   {
-    src: "/assets/images/hero/tonics-table.jpg",
-    alt: "Three Deserto sparkling fruit tonics and an iced latte on a white café table",
+    src: "/assets/images/hero/tonics-green-table.jpg",
+    alt: "Three Deserto canned drinks — a mango tonic, a lavender latte and a chai latte — lined up on a green café table",
   },
   {
-    src: "/assets/images/hero/tulips-cheers.jpg",
-    alt: "Two friends toasting with a strawberry tonic and an iced latte in front of tulips",
+    src: "/assets/images/hero/cone-hallway.jpg",
+    alt: "A two-tone chocolate and vanilla swirl in a waffle cone held up in the café's arched hallway",
   },
   {
-    src: "/assets/images/hero/cone-branded.jpg",
-    alt: "A two-tone chocolate and vanilla swirl in a waffle cone held up under the café's coffee-meets-creamy wall",
+    src: "/assets/images/hero/tonics-cheers.jpg",
+    alt: "Two friends toasting with berry Deserto tonics in branded cans inside the warm, sconce-lit café",
   },
   {
-    src: "/assets/images/hero/coffee-macchiato.jpg",
-    alt: "A layered iced caramel macchiato in a branded Deserto cup at the café counter",
+    src: "/assets/images/hero/coffee-iced.jpg",
+    alt: "A layered iced coffee in a branded Deserto cup on the café counter",
+  },
+  {
+    src: "/assets/images/hero/tonics-cans-shelf.jpg",
+    alt: "Three Deserto sparkling fruit tonics in branded cans lined up on a lit shelf against the café's lavender wall",
   },
 ];
 
