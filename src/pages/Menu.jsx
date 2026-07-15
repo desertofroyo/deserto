@@ -63,20 +63,15 @@ function MenuCard({ p, cat, catName, i, onSelect }) {
   );
 }
 
-/* Each group (Hot / Iced, Cookies / Scones / Cake jars) gets a label + grid. */
+/* One grid per category — no group sub-labels, so each section carries a single
+   clean header (the item's group is still kept for the detail modal's subtitle).
+   Items flow in their listed order, which already runs Hot→Iced, cookies→scones
+   →cake jars, so the grouping reads without needing a second labeled line. */
 function CafeCategory({ cat, catName, list, onSelect }) {
-  const groups = [...new Set(list.map((p) => p.group))];
   return (
-    <div className="mcat-groups">
-      {groups.map((g) => (
-        <div key={g} className="mcat-group">
-          {g && <div className="mcat-grouplabel">{g}</div>}
-          <div className="mgrid">
-            {list.filter((p) => p.group === g).map((p, idx) => (
-              <MenuCard key={p.id || `${p.name}-${idx}`} p={p} cat={cat} catName={catName} i={idx} onSelect={onSelect} />
-            ))}
-          </div>
-        </div>
+    <div className="mgrid">
+      {list.map((p, idx) => (
+        <MenuCard key={p.id || `${p.name}-${idx}`} p={p} cat={cat} catName={catName} i={idx} onSelect={onSelect} />
       ))}
     </div>
   );
