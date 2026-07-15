@@ -10,27 +10,27 @@ const ADVANCE_MS = 5000;
 // the untouched originals stay in /assets/images.
 const SLIDES = [
   {
-    src: "/assets/images/hero/froyo-sky.jpg",
+    src: "/assets/images/hero/froyo-sky.webp",
     alt: "An orange-and-vanilla creamsicle frozen yogurt swirl in a Deserto cup, held up against a bright blue cloudy sky",
   },
   {
-    src: "/assets/images/hero/tonics-green-table.jpg",
+    src: "/assets/images/hero/tonics-green-table.webp",
     alt: "Three Deserto canned drinks — a mango tonic, a lavender latte and a chai latte — lined up on a green café table",
   },
   {
-    src: "/assets/images/hero/cone-hallway.jpg",
+    src: "/assets/images/hero/cone-hallway.webp",
     alt: "A two-tone chocolate and vanilla swirl in a waffle cone held up in the café's arched hallway",
   },
   {
-    src: "/assets/images/hero/tonics-cheers.jpg",
+    src: "/assets/images/hero/tonics-cheers.webp",
     alt: "Two friends toasting with berry Deserto tonics in branded cans inside the warm, sconce-lit café",
   },
   {
-    src: "/assets/images/hero/coffee-iced.jpg",
+    src: "/assets/images/hero/coffee-iced.webp",
     alt: "A layered iced coffee in a branded Deserto cup on the café counter",
   },
   {
-    src: "/assets/images/hero/tonics-cans-shelf.jpg",
+    src: "/assets/images/hero/tonics-cans-shelf.webp",
     alt: "Three Deserto sparkling fruit tonics in branded cans lined up on a lit shelf against the café's lavender wall",
   },
 ];

@@ -4,7 +4,7 @@ import { Icon } from "../components/ds";
 import { SITE } from "./data.js";
 import { DeliveryButtons } from "./Delivery.jsx";
 
-const LOGO = "/assets/logos/deserto-lockup-cream.png";
+const LOGO = "/assets/logos/deserto-lockup-cream.webp";
 
 const MENU_LINKS = [
   ["Frozen Yogurt", "/menu"],

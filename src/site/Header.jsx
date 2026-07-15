@@ -4,7 +4,7 @@ import { Icon } from "../components/ds";
 import { SITE } from "./data.js";
 import { DeliveryMenu, DeliveryList } from "./Delivery.jsx";
 
-const LOGO = "/assets/logos/deserto-lockup.png";
+const LOGO = "/assets/logos/deserto-lockup.webp";
 
 /* ---------------- Header (frosted desert-glass nav) ----------------
    Transparent over the hero so the warm photography reads edge-to-edge, then

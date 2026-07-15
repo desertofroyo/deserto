@@ -15,7 +15,7 @@
       "group": "",
       "name": "Vanilla",
       "desc": "Cool, creamy classic vanilla — our signature swirl, in a 32 oz take-home pint.",
-      "img": "/assets/products/swirl-vanilla.png",
+      "img": "/assets/products/swirl-vanilla.webp",
       "tags": ["GF"],
       "allergens": ["Dairy"]
     },
@@ -25,7 +25,7 @@
       "group": "",
       "name": "Orange",
       "desc": "Bright, tangy orange with a citrus lift — 32 oz, packed for the freezer.",
-      "img": "/assets/products/swirl-orange.png",
+      "img": "/assets/products/swirl-orange.webp",
       "tags": ["Vegan", "DF", "GF"]
     },
     {
@@ -34,7 +34,7 @@
       "group": "",
       "name": "Salted Caramel",
       "desc": "Deep caramel with a salt-flecked finish — 32 oz of take-home indulgence.",
-      "img": "/assets/products/swirl-caramel.png",
+      "img": "/assets/products/swirl-caramel.webp",
       "tags": ["GF"],
       "allergens": ["Dairy"]
     },
@@ -44,7 +44,7 @@
       "group": "",
       "name": "Taro",
       "desc": "Smooth, nutty taro in a mellow violet swirl — a 32 oz pint for home.",
-      "img": "/assets/products/swirl-taro.png",
+      "img": "/assets/products/swirl-taro.webp",
       "tags": ["GF"],
       "allergens": ["Dairy"]
     },
@@ -54,7 +54,7 @@
       "group": "",
       "name": "Guava",
       "desc": "Tropical guava, sweet with a gentle tartness — 32 oz to take with you.",
-      "img": "/assets/products/swirl-guava.png",
+      "img": "/assets/products/swirl-guava.webp",
       "tags": ["Vegan", "DF", "GF"]
     },
     {
@@ -63,14 +63,14 @@
       "group": "",
       "name": "Premium Tarte",
       "desc": "Our tangy original tart — clean, bright and refreshing, in a 32 oz pint.",
-      "img": "/assets/products/swirl-tarte.png",
+      "img": "/assets/products/swirl-tarte.webp",
       "tags": ["GF"],
       "allergens": ["Dairy"]
     },
 
     {
       "id": "to-blueberry",
-      "img": "/assets/products/tonics/blueberry.png",
+      "img": "/assets/products/tonics/blueberry.webp",
       "cat": "tonics",
       "group": "",
       "name": "Blueberry Tonic",
@@ -79,7 +79,7 @@
     },
     {
       "id": "to-kiwi",
-      "img": "/assets/products/tonics/kiwi.png",
+      "img": "/assets/products/tonics/kiwi.webp",
       "cat": "tonics",
       "group": "",
       "name": "Kiwi Tonic",
@@ -88,7 +88,7 @@
     },
     {
       "id": "to-mango",
-      "img": "/assets/products/tonics/mango.png",
+      "img": "/assets/products/tonics/mango.webp",
       "cat": "tonics",
       "group": "",
       "name": "Mango Tonic",
@@ -97,7 +97,7 @@
     },
     {
       "id": "to-raspberry",
-      "img": "/assets/products/tonics/raspberry.png",
+      "img": "/assets/products/tonics/raspberry.webp",
       "cat": "tonics",
       "group": "",
       "name": "Raspberry Tonic",
@@ -106,7 +106,7 @@
     },
     {
       "id": "to-pineapple",
-      "img": "/assets/products/tonics/pineapple.png",
+      "img": "/assets/products/tonics/pineapple.webp",
       "cat": "tonics",
       "group": "",
       "name": "Pineapple Tonic",
@@ -115,7 +115,7 @@
     },
     {
       "id": "to-strawberry",
-      "img": "/assets/products/tonics/strawberry.png",
+      "img": "/assets/products/tonics/strawberry.webp",
       "cat": "tonics",
       "group": "",
       "name": "Strawberry Tonic",
@@ -124,7 +124,7 @@
     },
     {
       "id": "to-peach",
-      "img": "/assets/products/tonics/peach.png",
+      "img": "/assets/products/tonics/peach.webp",
       "cat": "tonics",
       "group": "",
       "name": "Golden Peach Tonic",
@@ -134,7 +134,7 @@
 
     {
       "id": "c-latte",
-      "img": "/assets/products/hot-latte.png",
+      "img": "/assets/products/hot-latte.webp",
       "cat": "coffee",
       "group": "Hot",
       "name": "Hot Latte",
@@ -144,7 +144,7 @@
     },
     {
       "id": "c-macch",
-      "img": "/assets/products/hot-macchiato.png",
+      "img": "/assets/products/hot-macchiato.webp",
       "cat": "coffee",
       "group": "Hot",
       "name": "Hot Macchiato",
@@ -154,7 +154,7 @@
     },
     {
       "id": "c-chai",
-      "img": "/assets/products/hot-chai-latte.png",
+      "img": "/assets/products/hot-chai-latte.webp",
       "cat": "coffee",
       "group": "Hot",
       "name": "Hot Chai Latte",
@@ -164,7 +164,7 @@
     },
     {
       "id": "c-amer",
-      "img": "/assets/products/americano.png",
+      "img": "/assets/products/americano.webp",
       "cat": "coffee",
       "group": "Hot",
       "name": "Americano",
@@ -174,7 +174,7 @@
     },
     {
       "id": "c-capp",
-      "img": "/assets/products/cappuccino.png",
+      "img": "/assets/products/cappuccino.webp",
       "cat": "coffee",
       "group": "Hot",
       "name": "Cappuccino",
@@ -184,7 +184,7 @@
     },
     {
       "id": "c-esp",
-      "img": "/assets/products/espresso.png",
+      "img": "/assets/products/espresso.webp",
       "cat": "coffee",
       "group": "Hot",
       "name": "Espresso · Single",
@@ -195,7 +195,7 @@
 
     {
       "id": "c-ichai",
-      "img": "/assets/products/iced-chai-latte.png",
+      "img": "/assets/products/iced-chai-latte.webp",
       "cat": "coffee",
       "group": "Iced",
       "name": "Iced Chai Latte",
@@ -205,7 +205,7 @@
     },
     {
       "id": "c-imacch",
-      "img": "/assets/products/iced-macchiato.png",
+      "img": "/assets/products/iced-macchiato.webp",
       "cat": "coffee",
       "group": "Iced",
       "name": "Iced Macchiato",
@@ -215,7 +215,7 @@
     },
     {
       "id": "c-ilatte",
-      "img": "/assets/products/iced-latte.png",
+      "img": "/assets/products/iced-latte.webp",
       "cat": "coffee",
       "group": "Iced",
       "name": "Iced Latte",
@@ -225,7 +225,7 @@
     },
     {
       "id": "c-iamer",
-      "img": "/assets/products/iced-americano.png",
+      "img": "/assets/products/iced-americano.webp",
       "cat": "coffee",
       "group": "Iced",
       "name": "Iced Americano",
@@ -236,7 +236,7 @@
 
     {
       "id": "p-macad",
-      "img": "/assets/products/white-chocolate-macadamia.png",
+      "img": "/assets/products/white-chocolate-macadamia.webp",
       "cat": "pastries",
       "group": "Cookies NYC",
       "name": "White Chocolate Macadamia",
@@ -247,7 +247,7 @@
     },
     {
       "id": "p-redv",
-      "img": "/assets/products/red-velvet-and-white-chocolate.png",
+      "img": "/assets/products/red-velvet-and-white-chocolate.webp",
       "cat": "pastries",
       "group": "Cookies NYC",
       "name": "Red Velvet & White Chocolate",
@@ -258,7 +258,7 @@
     },
     {
       "id": "p-ccw",
-      "img": "/assets/products/chocolate-chip-and-walnut.png",
+      "img": "/assets/products/chocolate-chip-and-walnut.webp",
       "cat": "pastries",
       "group": "Cookies NYC",
       "name": "Chocolate Chip & Walnut",
@@ -270,7 +270,7 @@
 
     {
       "id": "p-bluelem",
-      "img": "/assets/products/blueberry-lemon.png",
+      "img": "/assets/products/blueberry-lemon.webp",
       "cat": "pastries",
       "group": "Scones",
       "name": "Blueberry Lemon",
@@ -281,7 +281,7 @@
     },
     {
       "id": "p-vanilla",
-      "img": "/assets/products/vanilla-almond.png",
+      "img": "/assets/products/vanilla-almond.webp",
       "cat": "pastries",
       "group": "Scones",
       "name": "Vanilla Almond",
@@ -293,7 +293,7 @@
 
     {
       "id": "p-gansito",
-      "img": "/assets/products/gansito-cake-jar.png",
+      "img": "/assets/products/gansito-cake-jar.webp",
       "cat": "pastries",
       "group": "Cake jars",
       "name": "Gansito Cake Jar",
@@ -304,7 +304,7 @@
     },
     {
       "id": "p-oreo",
-      "img": "/assets/products/oreo-cake-jar.png",
+      "img": "/assets/products/oreo-cake-jar.webp",
       "cat": "pastries",
       "group": "Cake jars",
       "name": "Oreo Cake Jar",
