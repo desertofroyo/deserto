@@ -174,15 +174,15 @@ export function Hero({ onVisit }) {
           fontSize: "clamp(34px, 3.6vw, 52px)", lineHeight: 0.96, letterSpacing: "-0.01em",
           margin: "var(--space-4) 0 0", color: "var(--wine-700)",
         }}>
-          Where coffee meets <span style={{ color: "var(--orange-500)" }}>creamery.</span>
+          Where coffee meets <span style={{ color: "var(--orange-500)" }}>creamy bliss.</span>
         </h1>
 
         <p style={{
           fontFamily: "var(--font-editorial)", fontSize: "var(--text-md)", color: "var(--ink-700)",
           lineHeight: 1.55, margin: "var(--space-4) auto 0", maxWidth: 520,
         }}>
-          Hand-spun frozen yogurt, sparkling fruit tonics and serious coffee —
-          made fresh behind the arches every day.
+          Self-serve frozen yogurt with endless toppings, fresh fruit,
+          premium toppings and rotating seasonal flavors.
         </p>
 
         <div style={{ display: "flex", gap: "var(--space-3)", justifyContent: "center", marginTop: "var(--space-5)" }}>
