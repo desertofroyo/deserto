@@ -28,7 +28,9 @@ export async function handler(event) {
   const params = new URLSearchParams({
     client_id: clientId,
     redirect_uri: redirectUri,
-    scope: "repo,user",
+    // Least privilege: the CMS only edits this one public repo, so public_repo
+    // (not full "repo") is sufficient and avoids granting access to private repos.
+    scope: "public_repo,user",
     state,
     allow_signup: "false",
   });
