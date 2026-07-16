@@ -28,9 +28,10 @@ export const SITE = {
   /* ---- Social profiles (CMS: "Store details") ---- */
   social: site.social || [],
 
-  /* ---- Hero slides (CMS: "Home — Hero") ----
-     Each slide is a transparent product cutout + its own promo copy and CTA. */
-  hero: hero.slides,
+  /* ---- Hero (CMS: "Home — Hero banner") ----
+     The homepage photo carousel + the copy block beneath it (badge, headline,
+     subtext, buttons). `photos` drives the carousel; the rest is the copy. */
+  hero: hero,
 
   /* ---- "What we make" highlight cards (CMS: "Home — What we make") ---- */
   highlights: highlights.items,

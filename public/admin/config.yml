@@ -31,24 +31,25 @@ collections:
     description: "The big rotating banner, the 'What we make' cards, and the story gallery."
     files:
       - name: hero
-        label: "Hero — rotating banner"
+        label: "Hero — homepage banner"
         file: "content/hero.json"
         icon: home
         fields:
-          - label: "Slides"
-            name: slides
+          - { label: "Badge (small pill above the headline)", name: badge, widget: string }
+          - { label: "Headline", name: headline, widget: string, hint: "First part, in wine. e.g. Where coffee meets" }
+          - { label: "Headline accent (colored second part)", name: accent, widget: string, hint: "Shown in orange. e.g. creamy bliss." }
+          - { label: "Subtext", name: subtext, widget: text }
+          - { label: "Primary button label", name: primaryLabel, widget: string }
+          - { label: "Primary button link", name: primaryTo, widget: string, hint: "e.g. /menu" }
+          - { label: "Secondary button label", name: secondaryLabel, widget: string, hint: "This button scrolls down to the Visit-us map." }
+          - label: "Carousel photos"
+            name: photos
             widget: list
-            label_singular: "slide"
-            summary: "{{fields.eyebrow}} — {{fields.title}} {{fields.accent}}"
+            label_singular: "photo"
+            summary: "{{fields.alt}}"
             fields:
-              - { label: "Product image (transparent PNG works best)", name: cut, widget: image }
-              - { label: "Image description (for screen readers)", name: alt, widget: string }
-              - { label: "Eyebrow (small label above the headline)", name: eyebrow, widget: string }
-              - { label: "Headline — line 1", name: title, widget: string }
-              - { label: "Headline — line 2 (colored accent)", name: accent, widget: string }
-              - { label: "Subtext", name: sub, widget: text }
-              - { label: "Button label", name: ctaLabel, widget: string }
-              - { label: "Button link", name: ctaTo, widget: string, hint: "Where the button goes, e.g. /menu#froyo" }
+              - { label: "Photo", name: src, widget: image }
+              - { label: "Description (for screen readers)", name: alt, widget: string }
 
       - name: highlights
         label: "What we make (cards)"
@@ -100,36 +101,22 @@ collections:
               - label: "Category"
                 name: cat
                 widget: select
+                hint: "Which menu section this item appears under."
                 options:
-                  - { label: "Frozen Yogurt", value: froyo }
+                  - { label: "Take-Home Swirl", value: swirl }
                   - { label: "Tonics", value: tonics }
                   - { label: "Coffee", value: coffee }
                   - { label: "Pastries", value: pastries }
-                  - { label: "Extras", value: extras }
-              - { label: "Group / sub-heading", name: group, widget: string, required: false, hint: "e.g. Hot, Iced, Cookies NYC. Leave blank for none." }
+              - { label: "Group / sub-heading", name: group, widget: string, required: false, hint: "Shown as the subtitle in the item's popup. e.g. Hot, Iced, Cookies NYC. Leave blank for none." }
               - { label: "Description", name: desc, widget: text, required: false }
-              - { label: "Photo", name: img, widget: image, required: false }
-              - { label: "Tags", name: tags, widget: list, required: false, hint: "e.g. Vegan, GF, New — one per line" }
-              - { label: "In-store only", name: instore, widget: boolean, required: false, default: false }
-              - { label: "Calories", name: cal, widget: number, required: false, value_type: int, min: 0 }
-              - { label: "Contains (allergens)", name: allergens, widget: list, required: false, hint: "e.g. Dairy, Wheat, Nuts — one per line" }
-              - label: "Nutrition (grams)"
-                name: macros
-                widget: object
-                required: false
-                collapsed: true
-                fields:
-                  - { label: "Fat", name: fat, widget: number, required: false, min: 0 }
-                  - { label: "Carbs", name: carbs, widget: number, required: false, min: 0 }
-                  - { label: "Protein", name: protein, widget: number, required: false, min: 0 }
+              - { label: "Photo", name: img, widget: image, required: false, hint: "Transparent cutout works best. No photo falls back to a category icon." }
+              - { label: "Diet tags", name: tags, widget: list, required: false, hint: "Only Vegan, GF and DF show as badges. One per line." }
               - { label: "Internal id", name: id, widget: string, required: false, hint: "Leave blank for new items." }
-              - { label: "Fallback tile color", name: tint, widget: string, required: false, hint: "Advanced — leave blank to use the category default." }
-              - { label: "Photo focus position", name: pos, widget: string, required: false, hint: "Advanced — e.g. 'center 40%'." }
 
   # ----------------------------------------------------------------- SETTINGS
   - name: settings
     label: "Store details"
-    description: "Address, hours, phone, delivery partners, and menu categories."
+    description: "Address, hours, nutrition PDF, delivery partners, social links, and menu categories."
     files:
       - name: site
         label: "Store details"
@@ -143,10 +130,9 @@ collections:
               - { label: "Name", name: name, widget: string }
               - { label: "Street address", name: addr, widget: string }
               - { label: "City / State / ZIP", name: city, widget: string }
-              - { label: "Phone", name: phone, widget: string }
               - { label: "Hours", name: hours, widget: string }
               - { label: "Google Maps link", name: maps, widget: string }
-              - { label: "Interior photo", name: img, widget: image, required: false }
+              - { label: "Nutrition & allergens PDF", name: nutritionUrl, widget: file, required: false, hint: "Upload the current nutrition/allergens PDF — linked in the footer and every item popup." }
           - label: "Delivery partners"
             name: delivery
             widget: list
@@ -157,6 +143,22 @@ collections:
               - { label: "Order URL", name: url, widget: string }
               - { label: "Brand color", name: brand, widget: string, hint: "e.g. #FF3008" }
               - { label: "Text color", name: fg, widget: string, hint: "e.g. #fff" }
+          - label: "Social links"
+            name: social
+            widget: list
+            label_singular: "link"
+            summary: "{{fields.name}}"
+            hint: "Shown as icons in the footer."
+            fields:
+              - { label: "Name", name: name, widget: string, hint: "Instagram, Facebook or TikTok" }
+              - label: "Icon"
+                name: icon
+                widget: select
+                options:
+                  - { label: "Instagram", value: instagram }
+                  - { label: "Facebook", value: facebook }
+                  - { label: "TikTok", value: tiktok }
+              - { label: "Profile URL", name: url, widget: string }
 
       - name: categories
         label: "Menu categories (advanced)"

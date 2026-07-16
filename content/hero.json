@@ -1,34 +1,35 @@
 {
-  "slides": [
+  "badge": "Open daily 10–10 · River Rd, Tucson",
+  "headline": "Where coffee meets",
+  "accent": "creamy bliss.",
+  "subtext": "Self-serve frozen yogurt with endless toppings, fresh fruit, premium toppings and rotating seasonal flavors.",
+  "primaryLabel": "View menu",
+  "primaryTo": "/menu",
+  "secondaryLabel": "Visit us",
+  "photos": [
     {
-      "cut": "/assets/products/froyo-cutout-v2.webp",
-      "alt": "A Deserto frozen yogurt cup topped with berries, granola and caramel",
-      "eyebrow": "Self-serve froyo",
-      "title": "Pile it",
-      "accent": "high.",
-      "sub": "Frozen yogurt your way — swirl it, stack the toppings, zero limits.",
-      "ctaLabel": "Build yours",
-      "ctaTo": "/menu#froyo"
+      "src": "/assets/images/hero/froyo-sky.webp",
+      "alt": "An orange-and-vanilla creamsicle frozen yogurt swirl in a Deserto cup, held up against a bright blue cloudy sky"
     },
     {
-      "cut": "/assets/products/hero-tonics.webp",
-      "alt": "Three Deserto fruit tonics in our signature cans",
-      "eyebrow": "Signature tonics",
-      "title": "Sip something",
-      "accent": "bright.",
-      "sub": "Sparkling fruit tonics in our signature cans, made fresh every day.",
-      "ctaLabel": "See the tonics",
-      "ctaTo": "/menu#tonics"
+      "src": "/assets/images/hero/tonics-green-table.webp",
+      "alt": "Three Deserto canned drinks — a mango tonic, a lavender latte and a chai latte — lined up on a green café table"
     },
     {
-      "cut": "/assets/products/hero-cakejars.webp",
-      "alt": "Three Deserto layered cake jars with berries and chocolate",
-      "eyebrow": "Cake jars",
-      "title": "Layered to",
-      "accent": "love.",
-      "sub": "Cream, crumb and berries — dessert, stacked in a jar.",
-      "ctaLabel": "Order a jar",
-      "ctaTo": "/menu#pastries"
+      "src": "/assets/images/hero/cone-hallway.webp",
+      "alt": "A two-tone chocolate and vanilla swirl in a waffle cone held up in the café's arched hallway"
+    },
+    {
+      "src": "/assets/images/hero/tonics-cheers.webp",
+      "alt": "Two friends toasting with berry Deserto tonics in branded cans inside the warm, sconce-lit café"
+    },
+    {
+      "src": "/assets/images/hero/coffee-iced.webp",
+      "alt": "A layered iced coffee in a branded Deserto cup on the café counter"
+    },
+    {
+      "src": "/assets/images/hero/tonics-cans-shelf.webp",
+      "alt": "Three Deserto sparkling fruit tonics in branded cans lined up on a lit shelf against the café's lavender wall"
     }
   ]
 }

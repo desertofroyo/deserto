@@ -5,8 +5,7 @@
     "city": "Tucson, AZ 85750",
     "hours": "Open daily · 10 AM – 10 PM",
     "maps": "https://www.google.com/maps/search/?api=1&query=5635%20E%20River%20Rd%20Unit%20101%2C%20Tucson%2C%20AZ%2085750",
-    "nutritionUrl": "/assets/deserto-nutrition-allergens.pdf",
-    "img": "interior-froyo-arches.jpg"
+    "nutritionUrl": "/assets/deserto-nutrition-allergens.pdf"
   },
   "delivery": [
     {

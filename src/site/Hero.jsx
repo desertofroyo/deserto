@@ -1,39 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "../components/ds";
+import { SITE } from "./data.js";
 
 const ADVANCE_MS = 5000;
 
-// Real brand photography only — one consistent world: the café interior's
-// mauve walls, arches and warm sconces, product centered in every frame.
-// Derivatives live in /assets/images/hero (1600px, ~100-180KB each);
-// the untouched originals stay in /assets/images.
-const SLIDES = [
-  {
-    src: "/assets/images/hero/froyo-sky.webp",
-    alt: "An orange-and-vanilla creamsicle frozen yogurt swirl in a Deserto cup, held up against a bright blue cloudy sky",
-  },
-  {
-    src: "/assets/images/hero/tonics-green-table.webp",
-    alt: "Three Deserto canned drinks — a mango tonic, a lavender latte and a chai latte — lined up on a green café table",
-  },
-  {
-    src: "/assets/images/hero/cone-hallway.webp",
-    alt: "A two-tone chocolate and vanilla swirl in a waffle cone held up in the café's arched hallway",
-  },
-  {
-    src: "/assets/images/hero/tonics-cheers.webp",
-    alt: "Two friends toasting with berry Deserto tonics in branded cans inside the warm, sconce-lit café",
-  },
-  {
-    src: "/assets/images/hero/coffee-iced.webp",
-    alt: "A layered iced coffee in a branded Deserto cup on the café counter",
-  },
-  {
-    src: "/assets/images/hero/tonics-cans-shelf.webp",
-    alt: "Three Deserto sparkling fruit tonics in branded cans lined up on a lit shelf against the café's lavender wall",
-  },
-];
+// All hero content — the carousel photos and the copy block beneath — is
+// owner-editable via the CMS ("Home — Hero banner" → content/hero.json).
+// Real brand photography only: derivatives live in /assets/images/hero
+// (1600px, ~100-180KB each); untouched originals stay in /assets/images.
+const HERO = SITE.hero;
+const SLIDES = HERO.photos;
 
 /* ---------------- Hero (photography carousel) ----------------
    Full-bleed brand photos in a snap-scrolling strip — swipe on touch, arrows +
@@ -167,38 +144,37 @@ export function Hero({ onVisit }) {
           background: "var(--wine-700)", color: "var(--lime-400)",
           fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "var(--text-sm)",
           letterSpacing: ".02em", padding: "8px 18px", borderRadius: 999,
-        }}>Open daily 10–10 · River Rd, Tucson</span>
+        }}>{HERO.badge}</span>
 
         <h1 className="r-hc-h1" style={{
           fontFamily: "var(--font-display)", fontWeight: 800, textTransform: "uppercase",
           fontSize: "clamp(34px, 3.6vw, 52px)", lineHeight: 0.96, letterSpacing: "-0.01em",
           margin: "var(--space-4) 0 0", color: "var(--wine-700)",
         }}>
-          Where coffee meets <span style={{ color: "var(--orange-500)" }}>creamy bliss.</span>
+          {HERO.headline} <span style={{ color: "var(--orange-500)" }}>{HERO.accent}</span>
         </h1>
 
         <p style={{
           fontFamily: "var(--font-editorial)", fontSize: "var(--text-md)", color: "var(--ink-700)",
           lineHeight: 1.55, margin: "var(--space-4) auto 0", maxWidth: 520,
         }}>
-          Self-serve frozen yogurt with endless toppings, fresh fruit,
-          premium toppings and rotating seasonal flavors.
+          {HERO.subtext}
         </p>
 
         <div style={{ display: "flex", gap: "var(--space-3)", justifyContent: "center", marginTop: "var(--space-5)" }}>
-          <Link to="/menu" className="btn-wine" style={{
+          <Link to={HERO.primaryTo} className="btn-wine" style={{
             borderRadius: 999, padding: "13px 26px",
             background: "var(--wine-700)", color: "var(--cream-50)", fontFamily: "var(--font-body)", fontWeight: 800,
             fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center", boxShadow: "var(--shadow-md)",
           }}>
-            View menu
+            {HERO.primaryLabel}
           </Link>
           <button onClick={onVisit} style={{
             cursor: "pointer", borderRadius: 999, padding: "13px 26px", background: "rgba(255,255,255,0.55)",
             border: "2px solid var(--wine-700)", color: "var(--wine-700)", fontFamily: "var(--font-body)",
             fontWeight: 800, fontSize: "var(--text-sm)", display: "inline-flex", alignItems: "center",
           }}>
-            Visit us
+            {HERO.secondaryLabel}
           </button>
         </div>
       </div>
