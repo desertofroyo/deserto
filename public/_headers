@@ -1,0 +1,13 @@
+# Security headers for the Deserto site (served by Netlify for every response).
+# These are defense-in-depth for a static marketing SPA + the /admin CMS.
+# They intentionally avoid a strict script-src/style-src CSP: the app uses inline
+# React styles and the CMS runtime, and the CDN supply-chain risk is already
+# closed by pinning + SRI in public/admin/index.html. The directives below are
+# universally safe and never break the app.
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=()
+  Content-Security-Policy: frame-ancestors 'self'; base-uri 'self'; object-src 'none'

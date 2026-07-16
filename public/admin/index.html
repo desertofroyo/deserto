@@ -9,7 +9,19 @@
   <body>
     <!-- Sveltia CMS: a free, modern, git-based content manager. Config lives in
          ./config.yml. Edits are committed to the GitHub repo; Netlify then
-         rebuilds and the live site updates. -->
-    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+         rebuilds and the live site updates.
+
+         Pinned to an exact version + SRI hash (not a floating "latest"): this
+         admin page holds a GitHub token that can write to the repo, so we never
+         auto-run whatever the CDN happens to serve. To upgrade, bump the version
+         AND recompute the integrity hash:
+           curl -sL https://unpkg.com/@sveltia/cms@<VER>/dist/sveltia-cms.js \
+             | openssl dgst -sha384 -binary | openssl base64 -A -->
+    <script
+      src="https://unpkg.com/@sveltia/cms@0.171.0/dist/sveltia-cms.js"
+      type="module"
+      integrity="sha384-aEsk4i4EGTyccnxKrs2PrYEFCXc0HEfPi1vKzGK7voHODwfpziRXbBX1J8zHypqA"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

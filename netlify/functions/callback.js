@@ -30,12 +30,16 @@ function postMessagePage(status, payload) {
 <script>
   (function () {
     var message = ${JSON.stringify(message)};
+    var origin = window.location.origin; // CMS is served same-origin as this callback
     function receive(e) {
-      window.opener && window.opener.postMessage(message, e.origin);
+      // Only ever hand the access token back to our own origin — never echo it
+      // to whatever page happened to message this popup.
+      if (e.origin !== origin) return;
+      window.opener && window.opener.postMessage(message, origin);
       window.removeEventListener("message", receive, false);
     }
     window.addEventListener("message", receive, false);
-    window.opener && window.opener.postMessage("authorizing:${PROVIDER}", "*");
+    window.opener && window.opener.postMessage("authorizing:${PROVIDER}", origin);
   })();
 </script>
 </body></html>`;
