@@ -212,8 +212,11 @@ body { margin: 0; }
 .mcat-byline {
   display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
   padding: 6px 14px 6px 12px; border-radius: 999px;
-  background: var(--wine-700);
+  background: var(--wine-700); cursor: pointer;
+  text-decoration: none; transition: transform .15s ease, box-shadow .15s ease;
 }
+.mcat-byline:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.mcat-byline:focus-visible { outline: 2px solid var(--orange-500); outline-offset: 2px; }
 .mcat-byline-by {
   font-family: var(--font-editorial, serif); font-style: italic;
   font-size: var(--text-sm); color: var(--cream-50); opacity: 0.85;

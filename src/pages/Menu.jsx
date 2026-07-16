@@ -211,10 +211,11 @@ export default function Menu() {
                   <span className="mcat-head-icon"><Icon name={CAT_ICON[c.slug]} size={19} color="var(--cream-50)" /></span>
                   <h2 className="mcat-head-title">{c.name}</h2>
                   {c.slug === "pastries" && (
-                    <span className="mcat-byline">
+                    <a className="mcat-byline" href="https://www.instagram.com/momicookiedough/"
+                      target="_blank" rel="noopener noreferrer" aria-label="Momi on Instagram — @momicookiedough">
                       <span className="mcat-byline-by">by</span>
                       <img className="mcat-byline-logo" src="/assets/logos/momi-wordmark.webp" alt="Momi" />
-                    </span>
+                    </a>
                   )}
                   <span className="mcat-head-rule" />
                 </div>
