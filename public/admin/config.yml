@@ -7,7 +7,7 @@
 
 backend:
   name: github
-  repo: ZahraaSadeqProd/deserto
+  repo: desertofroyo/deserto
   branch: main
   # GitHub login is handled by our own Netlify functions (no third-party needed):
   base_url: https://deserto-cafe.netlify.app
