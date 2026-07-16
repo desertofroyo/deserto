@@ -208,6 +208,22 @@ body { margin: 0; }
 .mcat-head-title { margin: 0; font-size: var(--text-2xl); color: var(--wine-700); line-height: 1; letter-spacing: -0.01em; }
 .mcat-head-rule { flex: 1; height: 1px; background: var(--border-default); }
 
+/* Pastries co-brand: "by momi" — the white Momi wordmark on a wine pill. */
+.mcat-byline {
+  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+  padding: 6px 14px 6px 12px; border-radius: 999px;
+  background: var(--wine-700);
+}
+.mcat-byline-by {
+  font-family: var(--font-editorial, serif); font-style: italic;
+  font-size: var(--text-sm); color: var(--cream-50); opacity: 0.85;
+}
+.mcat-byline-logo { height: 20px; width: auto; display: block; }
+@media (max-width: 480px) {
+  .mcat-byline { padding: 5px 11px 5px 10px; gap: 6px; }
+  .mcat-byline-logo { height: 17px; }
+}
+
 .mcat-groups { display: flex; flex-direction: column; gap: var(--space-6); }
 .mcat-grouplabel {
   font-family: var(--font-display); font-weight: 800; font-size: var(--text-sm);

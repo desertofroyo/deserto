@@ -210,6 +210,12 @@ export default function Menu() {
                 <div className="mcat-head">
                   <span className="mcat-head-icon"><Icon name={CAT_ICON[c.slug]} size={19} color="var(--cream-50)" /></span>
                   <h2 className="mcat-head-title">{c.name}</h2>
+                  {c.slug === "pastries" && (
+                    <span className="mcat-byline">
+                      <span className="mcat-byline-by">by</span>
+                      <img className="mcat-byline-logo" src="/assets/logos/momi-wordmark.webp" alt="Momi" />
+                    </span>
+                  )}
                   <span className="mcat-head-rule" />
                 </div>
                 <CafeCategory cat={c.slug} catName={c.name} list={list} onSelect={setSelected} />

@@ -81,10 +81,12 @@ export function Header({ onNav }) {
           ))}
         </nav>
 
-        <a href="#top" aria-label="Deserto — home" className="hdr-logo"
-          onClick={(e) => { e.preventDefault(); handleNav("top"); }}>
+        {/* Center logo → home. On the home page we intercept to smooth-scroll to
+            the top; on any other route it's a real router link to "/". */}
+        <Link to="/" aria-label="Deserto — home" className="hdr-logo"
+          onClick={(e) => { setOpen(false); if (onHome) { e.preventDefault(); handleNav("top"); } }}>
           <img src={LOGO} alt="Deserto — Frozen Yogurt & Café" />
-        </a>
+        </Link>
 
         <div className="hdr-actions">
           <span className="hide-sm"><DeliveryMenu /></span>
