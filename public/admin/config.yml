@@ -10,7 +10,7 @@ backend:
   repo: desertofroyo/deserto
   branch: main
   # GitHub login is handled by our own Netlify functions (no third-party needed):
-  base_url: https://deserto-cafe.netlify.app
+  base_url: https://deserto-froyo.netlify.app
   auth_endpoint: .netlify/functions/auth
 
 # Uploaded images are committed here and served from /assets/uploads/...
@@ -18,8 +18,8 @@ media_folder: "public/assets/uploads"
 public_folder: "/assets/uploads"
 
 # Friendlier UI copy
-site_url: https://deserto-cafe.netlify.app
-display_url: https://deserto-cafe.netlify.app
+site_url: https://deserto-froyo.netlify.app
+display_url: https://deserto-froyo.netlify.app
 publish_mode: simple
 
 collections:
