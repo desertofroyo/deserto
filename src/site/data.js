@@ -50,13 +50,6 @@ export const SITE = {
     { en: "Visit", id: "locations" },
   ],
 
-  /* ---- Seasonal accent palette (design tokens — not owner-edited) ---- */
-  seasons: [
-    { id: "primavera", en: "Spring", accent: "var(--lime-500)", soft: "var(--leaf-100)", hero: "froyo-cup-mauve.jpg", heroPos: "center 38%" },
-    { id: "verano", en: "Summer", accent: "var(--orange-500)", soft: "var(--orange-100)", hero: "strawberry-hand.jpg", heroPos: "center 42%" },
-    { id: "otono", en: "Autumn", accent: "var(--caramel-500)", soft: "var(--peach-100)", hero: "cans-white-arches.jpg", heroPos: "center 50%" },
-  ],
-
   /* ---- Brand personality (design copy — not owner-edited) ---- */
   personality: [
     ["Cálida", "Warm"],
