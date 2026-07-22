@@ -6,6 +6,7 @@ import { MenuSection } from "../site/Menu.jsx";
 import { Story } from "../site/Story.jsx";
 import { Locations } from "../site/Locations.jsx";
 import { Footer } from "../site/Footer.jsx";
+import { Seo } from "../site/Seo.jsx";
 
 /* Deserto marketing home — browse the menu here, order via a delivery partner. */
 export default function Home() {
@@ -28,6 +29,9 @@ export default function Home() {
   // cooler shared page surface instead.
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
+      <Seo
+        description="Self-serve frozen yogurt, handcrafted coffee, sparkling tonics and layered desserts on River Rd in Tucson. Open daily 10 AM – 10 PM."
+      />
       <Header onNav={scrollTo} />
       <Marquee />
       <Hero onVisit={() => scrollTo("locations")} />

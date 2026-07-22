@@ -4,7 +4,94 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/assets/logos/deserto-mark.svg" />
-    <title>Deserto — Frozen Yogurt & Café</title>
+
+    <!-- Primary meta. Per-route titles/descriptions are set at runtime by <Seo>
+         (src/site/Seo.jsx); these are the defaults crawlers see for the shell. -->
+    <title>Deserto Frozen Yogurt &amp; Café — Tucson, AZ</title>
+    <meta
+      name="description"
+      content="Self-serve frozen yogurt, handcrafted coffee, sparkling tonics and layered desserts on River Rd in Tucson. Open daily 10 AM – 10 PM."
+    />
+    <link rel="canonical" href="https://desertofroyo.com/" />
+    <meta name="theme-color" content="#6B2233" />
+
+    <!-- Open Graph — link previews on Facebook, Instagram, iMessage, WhatsApp.
+         These scrapers do not run JavaScript, so they always read these tags. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Deserto Frozen Yogurt &amp; Café" />
+    <meta property="og:title" content="Deserto Frozen Yogurt &amp; Café — Tucson, AZ" />
+    <meta
+      property="og:description"
+      content="Self-serve frozen yogurt, handcrafted coffee, sparkling tonics and layered desserts on River Rd in Tucson. Open daily 10 AM – 10 PM."
+    />
+    <meta property="og:url" content="https://desertofroyo.com/" />
+    <meta property="og:image" content="https://desertofroyo.com/assets/og/deserto-share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A caramel frozen yogurt swirl in a branded Deserto cup"
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Deserto Frozen Yogurt &amp; Café — Tucson, AZ" />
+    <meta
+      name="twitter:description"
+      content="Self-serve frozen yogurt, handcrafted coffee, sparkling tonics and layered desserts on River Rd in Tucson. Open daily 10 AM – 10 PM."
+    />
+    <meta name="twitter:image" content="https://desertofroyo.com/assets/og/deserto-share.jpg" />
+
+    <!-- Structured data (JSON-LD). This is what powers local search and Google
+         Maps rich results — the single highest-impact SEO item for a café.
+         Values mirror content/site.json; keep them in sync when the CMS changes. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["CafeOrCoffeeShop", "IceCreamShop"],
+        "@id": "https://desertofroyo.com/#business",
+        "name": "Deserto Frozen Yogurt & Café",
+        "url": "https://desertofroyo.com/",
+        "image": "https://desertofroyo.com/assets/og/deserto-share.jpg",
+        "logo": "https://desertofroyo.com/assets/logos/deserto-mark.svg",
+        "email": "hello@desertofroyo.com",
+        "description": "Self-serve frozen yogurt, handcrafted coffee, sparkling tonics and layered desserts in a warm, modern space in Tucson, Arizona.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "5635 E River Rd, Unit 101",
+          "addressLocality": "Tucson",
+          "addressRegion": "AZ",
+          "postalCode": "85750",
+          "addressCountry": "US"
+        },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=5635%20E%20River%20Rd%20Unit%20101%2C%20Tucson%2C%20AZ%2085750",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "10:00",
+            "closes": "22:00"
+          }
+        ],
+        "servesCuisine": ["Frozen Yogurt", "Coffee", "Desserts"],
+        "hasMenu": "https://desertofroyo.com/menu",
+        "acceptsReservations": false,
+        "sameAs": [
+          "https://www.instagram.com/deserto.frozenyogurt/",
+          "https://www.facebook.com/61577031538659/photos/",
+          "https://www.tiktok.com/@deserto.frozenyogurt"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,0 +1,8 @@
+# Deserto Frozen Yogurt & Café — https://desertofroyo.com
+User-agent: *
+Allow: /
+
+# The Sveltia CMS admin panel is not content — keep it out of search results.
+Disallow: /admin
+
+Sitemap: https://desertofroyo.com/sitemap.xml

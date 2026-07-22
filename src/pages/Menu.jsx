@@ -2,6 +2,7 @@ import React from "react";
 import { Icon } from "../components/ds";
 import { Header } from "../site/Header.jsx";
 import { Footer } from "../site/Footer.jsx";
+import { Seo } from "../site/Seo.jsx";
 import { SITE } from "../site/data.js";
 // Menu items are owner-editable via the CMS (content/menu.json → SITE.products).
 // The menu reads like the Dutch Bros menu: a vertical category rail on the
@@ -176,6 +177,10 @@ export default function Menu() {
 
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
+      <Seo
+        title="Menu"
+        description="Self-serve frozen yogurt, take-home swirl pints, sparkling tonics, espresso drinks and fresh pastries at Deserto in Tucson."
+      />
       <Header />
 
       {/* page intro */}

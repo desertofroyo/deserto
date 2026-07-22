@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Header } from "../site/Header.jsx";
 import { Footer } from "../site/Footer.jsx";
+import { Seo } from "../site/Seo.jsx";
 import { SITE } from "../site/data.js";
 
 /* ------------------------------------------------------------------
@@ -31,6 +32,9 @@ const UPDATED = "July 2, 2026";
 function LegalPage({ eyebrow, title, intro, children }) {
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
+      {/* Boilerplate docs: reachable and crawlable for links, but kept out of
+          the index so they never outrank the menu or the homepage. */}
+      <Seo title={title} description={intro} noindex />
       <Header />
 
       <div className="contact-intro">
