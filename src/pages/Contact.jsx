@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Icon } from "../components/ds";
 import { Header } from "../site/Header.jsx";
 import { Footer } from "../site/Footer.jsx";
+import { Seo } from "../site/Seo.jsx";
 import { DeliveryButtons } from "../site/Delivery.jsx";
 import { SITE } from "../site/data.js";
 
@@ -11,10 +12,10 @@ import { SITE } from "../site/data.js";
 //
 // This is a static site with no backend, so "send" composes a pre-filled draft
 // in the visitor's own mail app (mailto:) — no third-party form service, no data
-// leaves the browser until they hit send. Set CONTACT_EMAIL to the business
-// inbox the messages should land in. Left blank on purpose: the owner's personal
-// address is never published here — this waits for a real business email.
-const CONTACT_EMAIL = "";
+// leaves the browser until they hit send. CONTACT_EMAIL is the business inbox
+// the messages land in — the shop's own Microsoft 365 address, never a personal
+// one. Clearing it back to "" disables the form's send button by design.
+const CONTACT_EMAIL = "hello@desertofroyo.com";
 
 export default function Contact() {
   const { store, social } = SITE;
@@ -37,6 +38,10 @@ export default function Contact() {
 
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
+      <Seo
+        title="Contact & Visit"
+        description="Visit Deserto at 5635 E River Rd, Unit 101, Tucson, AZ. Open daily 10 AM – 10 PM. Get directions, follow along, or order for delivery."
+      />
       <Header />
 
       {/* intro */}
