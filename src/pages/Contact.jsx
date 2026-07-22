@@ -10,31 +10,56 @@ import { SITE } from "../site/data.js";
 // Contact us — a warm, on-brand "say hello" page: a message form on the left,
 // the real ways to reach the shop on the right (visit, hours, follow, order).
 //
-// This is a static site with no backend, so "send" composes a pre-filled draft
-// in the visitor's own mail app (mailto:) — no third-party form service, no data
-// leaves the browser until they hit send. CONTACT_EMAIL is the business inbox
-// the messages land in — the shop's own Microsoft 365 address, never a personal
-// one. Clearing it back to "" disables the form's send button by design.
+// Submitting posts to Netlify Forms, so the message is delivered without the
+// visitor ever leaving the page — no mail app, no backend of our own, no
+// third-party form service. Netlify stores each submission and (once the
+// notification is configured in the Netlify UI) emails it to the shop.
+//
+// Netlify discovers forms by parsing the built HTML, and this page is rendered
+// by React at runtime — so index.html carries a hidden static twin of this form
+// declaring the same field names. If you add a field here, add it there too or
+// Netlify will drop it.
+const FORM_NAME = "contact";
+
+// Fallback only: if the POST fails (offline, Netlify hiccup), we offer a plain
+// mailto so a visitor with something to say isn't left at a dead end.
 const CONTACT_EMAIL = "hello@desertofroyo.com";
+
+const encode = (data) =>
+  Object.entries(data)
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .join("&");
 
 export default function Contact() {
   const { store, social } = SITE;
   const [form, setForm] = React.useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = React.useState(false);
-  const configured = CONTACT_EMAIL.length > 0;
+  // idle | sending | sent | error
+  const [status, setStatus] = React.useState("idle");
+  // Honeypot: real people never see this, bots fill it in. Netlify drops those.
+  const [botField, setBotField] = React.useState("");
 
   const onField = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (!configured) return;
-    const subject = `Website message from ${form.name || "a visitor"}`;
-    const body =
-      `${form.message}\n\n— ${form.name}` + (form.email ? ` (${form.email})` : "");
-    window.location.href =
-      `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    setStatus("sending");
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": FORM_NAME, "bot-field": botField, ...form }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   };
+
+  const mailtoFallback =
+    `mailto:${CONTACT_EMAIL}` +
+    `?subject=${encodeURIComponent(`Website message from ${form.name || "a visitor"}`)}` +
+    `&body=${encodeURIComponent(`${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ""}`)}`;
 
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
@@ -58,34 +83,51 @@ export default function Contact() {
        <div className="contact-card">
         {/* message form */}
         <div className="contact-card-form">
-          {sent ? (
+          {status === "sent" ? (
             <div className="contact-sent" role="status">
               <span className="contact-sent-mark"><Icon name="check" size={26} color="var(--cream-50)" /></span>
-              <h2 className="contact-sent-title">Your message is ready.</h2>
+              <h2 className="contact-sent-title">Thanks — message sent.</h2>
               <p className="contact-sent-copy">
-                We've opened a pre-filled email in your mail app — hit send and it's
-                on its way to us. Prefer another way? Reach us on the right.
+                It's on its way to us and we'll get back to you soon. Prefer another
+                way? Reach us on the right.
               </p>
-              <button type="button" className="btn-wine contact-btn" onClick={() => { setSent(false); setForm({ name: "", email: "", message: "" }); }}>
+              <button type="button" className="btn-wine contact-btn"
+                onClick={() => { setStatus("idle"); setForm({ name: "", email: "", message: "" }); }}>
                 Write another
               </button>
             </div>
           ) : (
-            <form onSubmit={onSubmit} noValidate>
+            <form onSubmit={onSubmit} noValidate name={FORM_NAME} data-netlify="true" netlify-honeypot="bot-field">
+              {/* Netlify needs the form name posted alongside the fields. */}
+              <input type="hidden" name="form-name" value={FORM_NAME} />
+              <p hidden>
+                <label>
+                  Don't fill this out
+                  <input name="bot-field" value={botField} onChange={(e) => setBotField(e.target.value)} />
+                </label>
+              </p>
+
               <label className="contact-label" htmlFor="c-name">Your name</label>
-              <input id="c-name" className="contact-input" type="text" required autoComplete="name"
+              <input id="c-name" name="name" className="contact-input" type="text" required autoComplete="name"
                 value={form.name} onChange={onField("name")} placeholder="Jane Doe" />
 
               <label className="contact-label" htmlFor="c-email">Your email</label>
-              <input id="c-email" className="contact-input" type="email" required autoComplete="email"
+              <input id="c-email" name="email" className="contact-input" type="email" required autoComplete="email"
                 value={form.email} onChange={onField("email")} placeholder="you@email.com" />
 
               <label className="contact-label" htmlFor="c-message">Message</label>
-              <textarea id="c-message" className="contact-input contact-textarea" required rows={5}
+              <textarea id="c-message" name="message" className="contact-input contact-textarea" required rows={5}
                 value={form.message} onChange={onField("message")} placeholder="How can we help?" />
 
-              <button type="submit" className="btn-wine contact-btn" disabled={!configured}>
-                Send message
+              {status === "error" && (
+                <p className="contact-error" role="alert">
+                  Something went wrong sending that. Please try again, or{" "}
+                  <a className="legal-link" href={mailtoFallback}>email us directly</a>.
+                </p>
+              )}
+
+              <button type="submit" className="btn-wine contact-btn" disabled={status === "sending"}>
+                {status === "sending" ? "Sending…" : "Send message"}
                 <Icon name="mail" size={17} color="var(--cream-50)" />
               </button>
             </form>

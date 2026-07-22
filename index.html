@@ -51,6 +51,18 @@
     <!--business-jsonld-->
   </head>
   <body>
+    <!-- Netlify Forms registers forms by parsing the built HTML at deploy time.
+         The real contact form is rendered by React at runtime, so it is invisible
+         to that scan — this hidden twin declares the same name and fields so the
+         form exists server-side. Keep the field names in sync with the form in
+         src/pages/Contact.jsx, or submitted values will be dropped. -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

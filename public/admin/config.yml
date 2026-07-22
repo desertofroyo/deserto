@@ -1,16 +1,17 @@
 # Sveltia CMS configuration for Deserto.
 # Docs / setup: docs/CMS-SETUP.md
 #
-# IMPORTANT: replace YOUR-SITE.netlify.app below with the real site address once
-# you know it (and again when the custom domain is attached). It must match the
-# site the CMS is served from, and the GitHub OAuth app's callback URL.
+# IMPORTANT: these URLs must match the address the CMS is actually served from
+# AND the GitHub OAuth app's Homepage/callback URLs. If they drift apart, the
+# /admin login fails. Now that desertofroyo.com is live, the OAuth app must use
+# https://desertofroyo.com and https://desertofroyo.com/.netlify/functions/callback
 
 backend:
   name: github
   repo: desertofroyo/deserto
   branch: main
   # GitHub login is handled by our own Netlify functions (no third-party needed):
-  base_url: https://deserto-froyo.netlify.app
+  base_url: https://desertofroyo.com
   auth_endpoint: .netlify/functions/auth
 
 # Media library scoped to /assets so the CMS can preview ALL existing site
@@ -20,8 +21,8 @@ media_folder: "public/assets"
 public_folder: "/assets"
 
 # Friendlier UI copy
-site_url: https://deserto-froyo.netlify.app
-display_url: https://deserto-froyo.netlify.app
+site_url: https://desertofroyo.com
+display_url: https://desertofroyo.com
 publish_mode: simple
 
 collections:

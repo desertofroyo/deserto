@@ -775,6 +775,14 @@ body { margin: 0; }
   letter-spacing: .01em; cursor: pointer;
 }
 .contact-btn:disabled { opacity: .55; cursor: not-allowed; }
+/* Send failed — sits just above the button, with the mailto escape hatch. */
+.contact-error {
+  margin: var(--space-4) 0 0; padding: 10px 14px;
+  background: var(--wine-50, #FBF0F2); border: 1.5px solid var(--wine-500);
+  border-radius: 14px;
+  font-family: var(--font-body); font-size: var(--text-sm); line-height: 1.5;
+  color: var(--wine-700);
+}
 .contact-btn:focus-visible { outline: 2px solid var(--orange-500, #FF9425); outline-offset: 2px; }
 .contact-note {
   margin: var(--space-4) 0 0; font-family: var(--font-body);
