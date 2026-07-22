@@ -19,11 +19,10 @@ import { SITE } from "../site/data.js";
 // by React at runtime — so index.html carries a hidden static twin of this form
 // declaring the same field names. If you add a field here, add it there too or
 // Netlify will drop it.
+// The shop's address is deliberately NOT rendered anywhere on this page, not
+// even in a mailto: fallback — a plain-text address in the markup gets harvested
+// by scrapers within days. If a send fails we ask the visitor to retry instead.
 const FORM_NAME = "contact";
-
-// Fallback only: if the POST fails (offline, Netlify hiccup), we offer a plain
-// mailto so a visitor with something to say isn't left at a dead end.
-const CONTACT_EMAIL = "hello@desertofroyo.com";
 
 const encode = (data) =>
   Object.entries(data)
@@ -55,11 +54,6 @@ export default function Contact() {
       setStatus("error");
     }
   };
-
-  const mailtoFallback =
-    `mailto:${CONTACT_EMAIL}` +
-    `?subject=${encodeURIComponent(`Website message from ${form.name || "a visitor"}`)}` +
-    `&body=${encodeURIComponent(`${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ""}`)}`;
 
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
@@ -121,8 +115,8 @@ export default function Contact() {
 
               {status === "error" && (
                 <p className="contact-error" role="alert">
-                  Something went wrong sending that. Please try again, or{" "}
-                  <a className="legal-link" href={mailtoFallback}>email us directly</a>.
+                  That didn't go through — your message wasn't sent. Please try
+                  again in a moment, or reach us on Instagram or by stopping in.
                 </p>
               )}
 

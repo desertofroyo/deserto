@@ -7,7 +7,10 @@ import { buildBusinessSchema } from "./tools/business-schema.js";
 export const SITE_ORIGIN = "https://desertofroyo.com";
 const OG_IMAGE = "/assets/og/deserto-share.jpg";
 const LOGO = "/assets/logos/deserto-mark.svg";
-const BUSINESS_EMAIL = "hello@desertofroyo.com";
+// No `email` in the schema on purpose. schema.org allows it and Google ignores
+// it for local results, but it would put the shop's address in plain text in
+// every page's HTML, where address-harvesting bots find it within days.
+// Visitors reach the shop through the contact form, which never exposes it.
 
 /* Injects the LocalBusiness JSON-LD into index.html, derived from
    content/site.json rather than hand-copied. Runs in dev and build, so what you
@@ -19,7 +22,6 @@ function businessSchemaPlugin() {
       const raw = fs.readFileSync(path.resolve("content/site.json"), "utf8");
       const { schema, warnings } = buildBusinessSchema(JSON.parse(raw), {
         origin: SITE_ORIGIN,
-        email: BUSINESS_EMAIL,
         ogImage: OG_IMAGE,
         logo: LOGO,
       });
