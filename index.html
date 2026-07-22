@@ -43,55 +43,12 @@
     />
     <meta name="twitter:image" content="https://desertofroyo.com/assets/og/deserto-share.jpg" />
 
-    <!-- Structured data (JSON-LD). This is what powers local search and Google
-         Maps rich results — the single highest-impact SEO item for a café.
-         Values mirror content/site.json; keep them in sync when the CMS changes. -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": ["CafeOrCoffeeShop", "IceCreamShop"],
-        "@id": "https://desertofroyo.com/#business",
-        "name": "Deserto Frozen Yogurt & Café",
-        "url": "https://desertofroyo.com/",
-        "image": "https://desertofroyo.com/assets/og/deserto-share.jpg",
-        "logo": "https://desertofroyo.com/assets/logos/deserto-mark.svg",
-        "email": "hello@desertofroyo.com",
-        "description": "Self-serve frozen yogurt, handcrafted coffee, sparkling tonics and layered desserts in a warm, modern space in Tucson, Arizona.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "5635 E River Rd, Unit 101",
-          "addressLocality": "Tucson",
-          "addressRegion": "AZ",
-          "postalCode": "85750",
-          "addressCountry": "US"
-        },
-        "hasMap": "https://www.google.com/maps/search/?api=1&query=5635%20E%20River%20Rd%20Unit%20101%2C%20Tucson%2C%20AZ%2085750",
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "opens": "10:00",
-            "closes": "22:00"
-          }
-        ],
-        "servesCuisine": ["Frozen Yogurt", "Coffee", "Desserts"],
-        "hasMenu": "https://desertofroyo.com/menu",
-        "acceptsReservations": false,
-        "sameAs": [
-          "https://www.instagram.com/deserto.frozenyogurt/",
-          "https://www.facebook.com/61577031538659/photos/",
-          "https://www.tiktok.com/@deserto.frozenyogurt"
-        ]
-      }
-    </script>
+    <!-- Structured data (JSON-LD) — what powers local search and Google Maps
+         rich results, the highest-impact SEO item for a café. Generated at
+         build time from content/site.json by the plugin in vite.config.js, so
+         address/hours/socials can't drift from what the owner edits in the CMS.
+         Do not hand-write schema here; change content/site.json instead. -->
+    <!--business-jsonld-->
   </head>
   <body>
     <div id="root"></div>
