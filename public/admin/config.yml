@@ -130,7 +130,16 @@ collections:
               - { label: "Name", name: name, widget: string }
               - { label: "Street address", name: addr, widget: string }
               - { label: "City / State / ZIP", name: city, widget: string }
-              - { label: "Hours", name: hours, widget: string }
+              # Also feeds the Google "opening hours" structured data, so both
+              # ends of a time range need AM/PM — "10–9" is ambiguous and would
+              # be dropped rather than guessed at. The pattern enforces that.
+              - label: "Hours"
+                name: hours
+                widget: string
+                hint: 'Shown on the site and sent to Google. Always write AM/PM on both times. e.g. "Open daily · 10 AM – 10 PM" or "Mon–Thu 10 AM – 9 PM, Fri–Sun 10 AM – 11 PM".'
+                pattern:
+                  - '\d{1,2}(:\d{2})?\s*[AaPp]\.?[Mm]\.?.*\d{1,2}(:\d{2})?\s*[AaPp]\.?[Mm]\.?'
+                  - 'Include AM or PM on both times — e.g. "Open daily · 10 AM – 10 PM"'
               - { label: "Google Maps link", name: maps, widget: string }
               - { label: "Nutrition & allergens PDF", name: nutritionUrl, widget: file, required: false, hint: "Upload the current nutrition/allergens PDF — linked in the footer and every item popup." }
           - label: "Delivery partners"
